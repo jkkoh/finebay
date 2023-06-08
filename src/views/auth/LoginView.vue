@@ -72,7 +72,8 @@ export default defineComponent({
         success: this.GetMe, 
       })
     },
-    GetMe(authObj){
+    GetMe(authObj : object){
+      console.log(authObj)
       window.Kakao.API.request({
         url:'/v2/user/me',
         success: function(response : object){
@@ -112,7 +113,7 @@ export default defineComponent({
       }
     })},
     kakaoLogout(){
-      Kakao.Auth.logout()
+      window.Kakao.Auth.logout()
       try {
         
       } catch (error) {
@@ -122,13 +123,8 @@ export default defineComponent({
       async kakaoGetAddress(){
         await window.Kakao.API.request({
           url:'/v1/user/shipping_address'
-        }).then(function(response){
-          console.log(response)
-        }).catch(function(error){
-          console.log(error)
         })
       },
-      
     }
   })
 

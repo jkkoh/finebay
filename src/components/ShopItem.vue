@@ -30,7 +30,7 @@ export default defineComponent({
         };
     },
     methods: {
-        imageView(index: number, hover: number){
+        imageView(index: number){
             
             const c = index;
             const b = index;
@@ -126,7 +126,8 @@ export default defineComponent({
                 if(this.totalCount !== 0){
                     axios.post("url", DataTransfer).then(function(response) {
                         if(response.status === 200){
-                            this.$cookies.set("test", "testValue", "1d");
+                            console.log('abc')
+                            // this.$cookies.set("test", "testValue", "1d");
                             // let d = new Date();
                             // d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
                             // let expires = "expires=" + d.toUTCString();

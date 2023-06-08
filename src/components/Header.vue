@@ -148,7 +148,7 @@ async function logout(){
     })
 }
 async function kakaoLogout(){
-  await Kakao.Auth.logout().then(console.log('로그아웃됫음'))
+  await window.Kakao.Auth.logout().then(console.log('로그아웃됫음'))
 }
 
 </script>
