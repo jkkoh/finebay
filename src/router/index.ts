@@ -1,0 +1,84 @@
+import { useAuthStore } from '@/stores/auth'
+import { createRouter, createWebHistory } from 'vue-router'
+import { items }  from '@/assets/items'
+import HomePage from '@/views/HomePage.vue'
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: () => import('../views/HomePage.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/auth/LoginView.vue'),
+      meta: {requiresGuest: true}
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/auth/RegisterView.vue'),
+      meta: {requiresGuest: true}
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: () => import('../views/auth/UserView.vue'),
+      meta: {requiresAuth: true}
+    },
+    {
+      path: '/payment',
+      name: 'payment',
+      component: () => import('../views/auth/PaymentView.vue'),
+      meta: {requiresAuth: true}
+    },
+    {
+      path: '/item/:id',
+      name: 'Item',
+      component: () => import('../views/ItemPage.vue'),
+      beforeEnter: (to, _, next) => {
+        const { id } = to.params
+  
+        if (Array.isArray(id)){
+          next ({ path: 'error'})
+          return
+        }
+        // Is a valid index number
+        const index = parseInt(id)
+        if (index < 0 || index >= items.length) {
+          next({ path: '/error'})
+          return
+        }
+  
+        next()
+      }
+    },
+    {
+        path: '/:catchAll(.*)',
+        name: 'PageNotFound',
+        component: () => import('../views/PageNotFound.vue')
+    },
+    {
+      path: '/shop',
+      name: 'ShopList',
+      component: () => import('../views/ShopList.vue')
+    },
+  ]
+})
+
+router.beforeResolve(async (to, from, next)=>{
+  const authStore = useAuthStore()
+
+  if(to.meta.requiresAuth && !authStore.isAuthenticated){   
+    return next({name: 'login', query: {redirect: to.fullPath}})
+  }else if(to.meta.requiresGuest && authStore.isAuthenticated){
+    return next({name: 'home'})
+  }else{
+    return next()
+  }
+})
+
+export default router
