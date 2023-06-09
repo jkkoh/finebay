@@ -1,9 +1,10 @@
 <template>
-  <div class="outer_temp">
+  <div class="wrap">
     <Header />
-    <div class="container my-3">
-     <router-view />
+    <div class="container">
+      <router-view />
     </div>
+    
     <Footer />
   </div>
 </template>
@@ -34,7 +35,7 @@ export default defineComponent({
   font-family: 'Noto_Sans';
   src: url('assets/fonts/Noto_Sans/NotoSansKR-Light.otf') format('truetype');
 }
-.outer_temp{
+.wrap{
   display: flex;
   flex-direction: column;
   justify-content: space-between;

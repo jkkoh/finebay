@@ -27,7 +27,7 @@
                         <p>Follow us</p>
                     </div>
                     <div class="top_bot">
-                        <p>Instagram</p>
+                        <span class="link_tag" @click="goToInstagram()">Instagram</span>
                     </div>
                 </div>
                 <div class="top_inner">
@@ -40,7 +40,7 @@
                         <p>agreement</p>
                         <p>privacy policy</p>
                         <p>shipping & delivery</p>
-                        <p>size guide</p>
+                        <HeaderLink to="sizeGuide"><a>size guide</a></HeaderLink>
                     </div>
                 </div>
             </div>
@@ -48,10 +48,10 @@
                 <div class="bot_inner">
                     <p>COPYRIGHT © FINEBAY ALL RIGHTS RESERVED. HOSTING BY AWS AMPLIFY</p>
                 </div>
-                <div class="bot_inner">
-                    <p>상호명 : 하우스오브코 / 대표자명 : 고수정 / 문의이메일 : shopfinebay@gmail.com</p>
-                    <p>사업장주소 : 경기도 용인시 수지구 풍덕천로 30번길 20 103동 504호 finebay</p>
-                    <p>사업자등록번호 : 524-64-00599</p>
+                <div class="bot_inner bot_inner_a">
+                    <p class="bot_inner_text_a">상호명 : 하우스오브코 / 대표자명 : 고수정 / 문의이메일 : shopfinebay@gmail.com</p>
+                    <p class="bot_inner_text_a">사업장주소 : 경기도 용인시 수지구 풍덕천로 30번길 20 103동 504호 finebay</p>
+                    <p class="bot_inner_text_a">사업자등록번호 : 524-64-00599</p>
                 </div>
             </div>
         </div>
@@ -59,8 +59,14 @@
 </template>
 <script lang="ts">
 import {defineComponent} from 'vue'
+import HeaderLink from './HeaderLink.vue'
 export default defineComponent ({
-
+    components:  { HeaderLink },
+    methods: {
+        goToInstagram(){
+            window.open("https://www.instagram.com/finebay_official/","_blank")
+        }
+    },
 })
 </script>
 <style>
@@ -90,6 +96,11 @@ export default defineComponent ({
     height: 60px;
     color: rgb(100, 100, 100);
 }
+.link_tag{
+    font-style: none;
+    color: black;
+    cursor: pointer;
+}
 /* top end */
 /* bot start */
 .bot_wrap{
@@ -101,6 +112,11 @@ export default defineComponent ({
 .bot_inner{
     width: 50%;
     height: 100%;
+}
+.bot_inner_text_a{
+    width: 100%;
+    display: flex;
+    justify-content: end;
 }
 /* bot end */
 

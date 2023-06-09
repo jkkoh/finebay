@@ -155,8 +155,8 @@ export default defineComponent({
 })
 </script>
 <template>
-    <div class="card">
-        <div class="row g-0 outer_a">
+    <div class="wrap">
+        <div class="outer_a">
             <div class="main_a">
                 <div class="col-auto img_box">
                     <div class="img_layout">
@@ -171,7 +171,7 @@ export default defineComponent({
                     <img v-else-if="hover==4" :src="item.image[4]" class="main_img"/>
                     <img v-else-if="hover==5" :src="item.image[5]" class="main_img"/>
                 </div> 
-                <div class="col-auto text_box">
+                <div class="text_box">
                     <div class="top_text">
                         <div class="t_title">
                             <p>{{ item.text }}</p>
@@ -266,29 +266,35 @@ export default defineComponent({
                     </div>
                 </div>  
                 <div class="b_inner_product_info_img_box">
-                    <div class="b_long_img_box">
-                        <img :src="item.longImage[0]" class="long_image">
-                        <img :src="item.longImage[1]" class="long_image">
+                    <div class="img_position_box">
+                        <div class="b_long_img_box">
+                            <img :src="item.longImage[0]" class="long_image">
+                            <img :src="item.longImage[1]" class="long_image">
+                        </div>
                     </div>
-                    
                 </div>  
             </div>
         </div>
     </div>
 </template>
 <style scoped>
+*{
+    margin:0;
+    padding: 0;
+}
+.wrap{
+    
+}
 .outer_a{
     width: 1400px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    /* background-color: green; */
+    height: 100%;
 }
 /* main_a start */
 .main_a{
     width: 1400px;
     /* background-color: darkblue; */
     display: flex;
+    position: relative;
 
 }
 .img_layout{
@@ -475,6 +481,7 @@ export default defineComponent({
 /* main_b start */
 .main_b{
     width: 1400px;
+    position: relative;
     /* background-color: aqua; */
 }
 .b_inner_text{
@@ -483,15 +490,15 @@ export default defineComponent({
 }
 .b_inner_product_info_img_box{
     width:100%;
-    background-color: blueviolet;
     position: relative;
     margin-top: 200px;
 }
+.img_position_box{
+    display: flex;
+    justify-content: center;
+}
 .b_long_img_box{
-    width: 1000px;
-    position: absolute;
-    left:50%;
-    transform: translateX(-50%);
+    width: 1000px; 
 }
 .long_image{
     width:1000px;

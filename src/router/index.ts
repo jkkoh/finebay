@@ -66,6 +66,11 @@ const router = createRouter({
       name: 'ShopList',
       component: () => import('../views/ShopList.vue')
     },
+    {
+      path: '/sizeGuide',
+      name: 'sizeGuide',
+      component: () => import('../views/SizeGuide.vue')
+    },
   ]
 })
 
