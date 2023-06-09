@@ -1,15 +1,19 @@
 <template>
- <Header />
- <div class="container my-3">
-  <router-view />
- </div>
+  <div class="outer_temp">
+    <Header />
+    <div class="container my-3">
+     <router-view />
+    </div>
+    <Footer />
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 export default defineComponent({
-  components: { Header }
+  components: { Header , Footer }
 })
 </script>
 
@@ -29,6 +33,11 @@ export default defineComponent({
 @font-face {
   font-family: 'Noto_Sans';
   src: url('assets/fonts/Noto_Sans/NotoSansKR-Light.otf') format('truetype');
+}
+.outer_temp{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>
 

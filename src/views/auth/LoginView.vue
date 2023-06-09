@@ -2,25 +2,22 @@
   <div id="login">
     <div class="container">
       <div class="card card-body mt-4">
-        <h5 class="card-title">Login</h5>
+        <h5 class="card-title">로그인</h5>
         <form @submit.prevent="submit">
           <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
+            <label for="email" class="form-label">이메일 주소</label>
             <input v-model="loginData.email" type="email" class="form-control" id="email" autocomplete="off">
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
+            <label for="password" class="form-label">비밀번호</label>
             <input v-model="loginData.password" type="password" class="form-control" id="password">
           </div>
-          <button type="submit" class="btn btn-success">Login</button>
-          <button @click="kakaoLogin()">
-            <img src="@/images/logo/certi_kakao_login.png" width="222">
-          </button>
-          <button @click="kakaoLogout()">카카오로그아웃
-          </button>
-          <button @click="kakaoGetAddress()">
-            
-          </button>
+          <div class="login_outer">
+            <button type="submit" class="login_button">Login</button>
+            <div @click="kakaoLogin()" class="login_button">
+              <img src="@/images/logo/certi_kakao_login.png" class="kakao_img">
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -40,19 +37,38 @@ const loginData = reactive<LoginData>({
   password: "",
 })
 
+const kakaoRegisterData = reactive<KakaoRegisterData>({
+  email: "",
+  name:"",
+  password: "",
+  account_type: 2,
+})
+
+const emailCheck = reactive<emailCheckData>({
+  emailUnique: ""
+})
 
 const errorMessage = ref<string>("")
 
 async function submit(){
   await authStore.login(loginData)
     .then(res => {
-      router.replace({name: "user"})
+      router.replace({name: "home"})
     })
     .catch(err => {
-      errorMessage.value = err
+      alert('이메일 혹은 비밀번호를 확인해주세요')
     })
 }
 
+async function kakaoLogin(){
+    await authStore.kakaoRegister(kakaoRegisterData)
+    .then(res =>{
+      router.replace({name: "home"})
+    })
+    .catch(err =>{
+      errorMessage.value = err
+    })
+}
 </script>
 
 <script lang="ts">
@@ -67,67 +83,6 @@ export default defineComponent({
         document.head.appendChild(recaptchaScript)
     },
   methods: {
-    async kakaoLogin() {
-      await window.Kakao.Auth.login({
-        scope: 'account_email, profile_nickname, phone_number, shipping_address, plusfriends, age_range',
-        success: this.GetMe, 
-      })
-    },
-    GetMe(authObj : object){
-      console.log(authObj)
-      window.Kakao.API.request({
-        url:'/v2/user/me',
-        success: function(response : any){
-          const kakaoRegisterData = reactive<KakaoRegisterData>({
-          email: "",
-          name:"",
-          password: "",
-          account_type: 0,
-          })
-          const emailCheck = reactive<emailCheckData>({
-            emailUnique: ""
-          })
-          console.log(emailCheck)
-          console.log(response)
-          console.log( 'the type of response is '+ response.kakao_account +  ' abc') 
-          
-          const Kaccount = response.kakao_account;
-          const userInfo = {
-            email: Kaccount.email,
-            name: Kaccount.profile.nickname,
-            password: '',
-            account_type: 2,
-          }
-          this.kakaoRegisterData.email = userInfo.email;
-          this.kakaoRegisterData.name = userInfo.name;
-          this.kakaoRegisterData.password = userInfo.password;
-          this.kakaoRegisterData.account_type = userInfo.account_type;
-          const emailUnique = userInfo.email + userInfo.account_type;
-          this.emailCheck.emailUnique = emailUnique;
-
-          try{
-            authStore.kakaoRegister(kakaoRegisterData).then(()=>{
-              router.replace({name:"user"}).catch(err => {
-              errorMessage.value = err;})   
-          })
-          }catch{
-
-          }
-      }
-    })},
-    kakaoLogout(){
-      window.Kakao.Auth.logout()
-      try {
-        
-      } catch (error) {
-        
-      }
-      },
-      async kakaoGetAddress(){
-        await window.Kakao.API.request({
-          url:'/v1/user/shipping_address'
-        })
-      },
     }
   })
 
@@ -135,7 +90,19 @@ export default defineComponent({
 
 <style scoped>
 #login .card{
-  max-width: 40vw;
+  top: 75px;
+  width: 700px;
   margin: auto;
+}
+.login_outer{
+  display: flex;
+}
+.login_button{
+  width: 50%;
+  height: 65px;
+}
+.kakao_img{
+  width: 100%;
+  cursor: pointer;
 }
 </style>

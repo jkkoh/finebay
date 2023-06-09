@@ -54,7 +54,8 @@ export const useAuthStore = defineStore('auth', {
 
   getters: {
     userDetail: (state: State) => state.name,
-    isAuthenticated: (state: State) => state.accessToken ? true : false
+    isAuthenticated: (state: State) => state.accessToken ? true : false,
+    isKakaoAuthenticated: (state: State) => window.Kakao.Auth.getAccessToken() ? true : false,
   },
 
   actions:{
@@ -67,8 +68,6 @@ export const useAuthStore = defineStore('auth', {
       }
       return
     },
-
-
     async login(payload: LoginData){
       try {
         const {data} = await useApi().post(`/api/auth/login`, payload);
@@ -90,8 +89,33 @@ export const useAuthStore = defineStore('auth', {
     },
     async kakaoRegister(payload: KakaoRegisterData){
       try {
-        const {data} = await useApi().post(`/api/auth/register`, payload);
-        return data
+        window.Kakao.Auth.login({
+          scope: 'account_email, profile_nickname, phone_number, shipping_address, plusfriends, age_range',
+          success: function(){
+            window.Kakao.API.request({
+              url:'/v2/user/me',
+              success: function(response: any){
+                const Kaccount = response.kakao_account;
+                console.log('--------------------')
+                console.log(Kaccount);
+                console.log('--------------------')
+
+                const userInfo = {
+                  email: Kaccount.email,
+                  name: Kaccount.profile.nickname,
+                  emailUnique: Kaccount.email + '2',
+                  password: '',
+                  account_type: 2,
+                }
+                console.log('--------------------')
+                console.log(userInfo)
+                console.log('--------------------')
+              }
+            })
+          }
+        })
+        // const {data} = await useApi().post(`/api/auth/register`, userInfo);
+        // return data
       } catch (error: Error | any) {
         throw error.message
       }
@@ -112,6 +136,13 @@ export const useAuthStore = defineStore('auth', {
         this.name = {} as User
         return data
       } catch (error: Error | any) {
+        throw error.message
+      }
+    },
+    async kakaoLogout(){
+      try {
+        return window.Kakao.Auth.logout()
+      } catch (error: Error | any){
         throw error.message
       }
     },

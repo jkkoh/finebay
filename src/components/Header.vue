@@ -7,21 +7,20 @@
       <div class="menu_m">
         <img src="@/images/logo/logo.png" alt="" class="logo">
       </div>
-      <div class="menu_r">
-        <!-- <button>like</button>
-        <button>instagram</button> -->
-        <div v-if="isAuthenticated">
+      <div class="menu_r" v-if="isAuthenticated">
           <span>{{ user.name }} 님 환영합니다</span>
-          <button  @click="logout()">logout</button>
-        </div>
-        <div v-else-if="isKakaoAuthenticated">
+          <button  @click="logout()">로그아웃</button>
+        <button>쇼핑카트</button>
+      </div>
+      <div class="menu_r" v-else-if="isKakaoAuthenticated">
+          <span>{{ user.name }} 님 환영합니다</span>
           <span>카카오로그인 되있음</span>
           <button @click="kakaoLogout()">로그아웃</button>
-        </div>
-        <div v-else>
+        <button>쇼핑카트</button>
+      </div>
+      <div class="menu_r" v-else>
           <HeaderLink to="/register"><button>회원가입</button></HeaderLink>
           <HeaderLink to="/login"><button>로그인</button></HeaderLink>
-        </div>
         <button>쇼핑카트</button>
       </div>
     </div>
@@ -92,7 +91,7 @@
 <script setup lang="ts">
 
 import { useAuthStore } from '@/stores/auth';
-import {computed } from 'vue';
+import {computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore()
@@ -107,10 +106,8 @@ const isAuthenticated = computed(()=>{
   return authStore.isAuthenticated
 })
 const isKakaoAuthenticated = computed(()=>{
-  const authenticated : boolean = window.Kakao.Auth.getAccessToken()
-  return authenticated
+  return authStore.isKakaoAuthenticated
 })
-
 async function logout(){
   await authStore.logout()
     .then( res => {
@@ -121,7 +118,14 @@ async function logout(){
     })
 }
 async function kakaoLogout(){
-  await window.Kakao.Auth.logout().then(console.log('로그아웃됫음'))
+  await authStore.kakaoLogout()
+  .then( res => {
+    router.replace({name: 'home'})
+  })
+  .catch(err => {
+    console.log(err.message)
+  })
+  
 }
 
 </script>
