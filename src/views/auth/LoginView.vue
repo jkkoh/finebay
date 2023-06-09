@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore, type LoginData, type KakaoRegisterData } from '../../stores/auth';
+import { useAuthStore, type LoginData, type KakaoRegisterData, type emailCheckData } from '../../stores/auth';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -58,6 +58,7 @@ async function submit(){
 <script lang="ts">
 import {defineComponent} from "vue";
 import axios from 'axios'
+import { react } from '@babel/types';
 
 export default defineComponent({
   mounted() {
@@ -86,8 +87,9 @@ export default defineComponent({
           const emailCheck = reactive<emailCheckData>({
             emailUnique: ""
           })
+          console.log(emailCheck)
           console.log(response)
-          console.log(response.kakao_account)
+          console.log() 
           const Kaccount = response.kakao_account;
           const userInfo = {
             email: Kaccount.email,

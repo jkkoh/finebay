@@ -38,6 +38,10 @@ export interface KakaoRegisterData {
   account_type : number,
 }
 
+export interface emailCheckData {
+  emailUnique: string
+}
+
 
 export const useAuthStore = defineStore('auth', {
   state: (): State => {
