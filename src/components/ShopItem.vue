@@ -283,7 +283,7 @@ export default defineComponent({
     padding: 0;
 }
 .wrap{
-    
+    height:100%;
 }
 .outer_a{
     width: 1400px;
