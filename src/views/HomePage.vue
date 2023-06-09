@@ -150,7 +150,7 @@ export default defineComponent({
     height:80vh;
 }
 .inner_swimwear_banner{
-    width: 70%;
+    width: 100%;
     height: 100%;
     position: absolute;
     display: flex;
@@ -162,7 +162,6 @@ export default defineComponent({
 }
 .inner_swimwear_banner > img{
     width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 .beachwear_banner{
@@ -173,7 +172,7 @@ export default defineComponent({
 }
 
 .inner_beachwear_banner{
-    width: 70%;
+    width: 100%;
     height: 100%;
     position: absolute;
     display: flex;
@@ -185,6 +184,8 @@ export default defineComponent({
 }
 .inner_beachwear_banner > img{
     width: 100%;
+    
+    object-fit: cover;
 }
 
 </style>

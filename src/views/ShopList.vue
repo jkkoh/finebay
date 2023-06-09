@@ -52,18 +52,18 @@ export default defineComponent({
 </script>
 
 <template>
-    <div class="list-group mainA">
+    <div class="mainA">
         <div 
-        class="list-group-item list-group-item-action mainB"
+        class="mainB"
         v-for="(item, i) in items" 
         :key="i"
         >
-            <div class="row mainC">
-                <div class="col-2 subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
+            <div class="mainC">
+                <div class="subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
                     <div v-if="mouse[i]"><img :src="item.image[4]" class="subImage"/></div>
                     <div v-else><img :src="item.image[0]" class="subImage"/></div>
                 </div>
-                <div class="col-10 align-self-center subB">
+                <div class="subB">
                     <p class="subTextA">{{ item.text }}</p>
                     <p class="subTextB">{{ item.price }} WON</p>
                 </div>

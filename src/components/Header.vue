@@ -25,33 +25,6 @@
         <button>쇼핑카트</button>
       </div>
     </div>
-    <!-- <header>
-      <nav id="nav">
-      <ul class="bot_menu">
-            <li v-for="(x, index) in menu" :key="index">
-                <a :href="x.url"
-                    v-if="!x.children">
-                    {{ x.name }}
-                </a>
-                <span
-                    v-else
-                    @mouseover="m_menu_hover_t()"
-                    @mouseleave="m_menu_hover_f()">
-                    {{ x.name }}
-                    
-                    <ul class=" dropdown"
-                        :class="{ isOpen }">
-                        <li v-for="(y , index) in item.children" :key="index">
-                            <a :href="y.url" class="menu_c">
-                                {{ y.name }}
-                            </a>
-                        </li>
-                    </ul>
-                </span>
-            </li>
-        </ul>
-      </nav>
-    </header> -->
     <div class="bot_menu" @mouseover="m_menu_hover_t()" @mouseleave="m_menu_hover_f()">
         <div class="bot_top_menu">
           <ul class="menu_a">
@@ -205,11 +178,19 @@ export default defineComponent ({
    text-decoration: none;
    text-decoration-line: none;
    font-size: 20px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: absolute;
+   width: 250px;
+   top: 50%;
+   transform: translateY(-50%);
 }
 .menu_r{
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  
 }
 .menu_m{
   text-align: center;
@@ -223,26 +204,26 @@ export default defineComponent ({
     width: 2500px;
     position: relative;
     transform: translate(-50%);
+    height: 50px;
     left:50%;
     display: flex;
     flex-direction: column;
     z-index: 1000;
-    background-color: rgba(255,255,255,0.5);;
+    background-color: rgba(255,255,255,0.5);
 }
 /* bot top menu start */
 .bot_top_menu{
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   text-align: center;
-  
 }
 .menu_a{
   position: relative;
   width: 250px;
   height: 100%;
   list-style: none;
-  
 }
 .menu_a > p {
   font-family: "Open_Sans";
@@ -251,15 +232,23 @@ export default defineComponent ({
     width: 250px;
     height: 50px;
     text-decoration: none;
+    text-align: center;
+    
 }
 .menu_b > a {
   text-decoration: none;
 }
 .menu_c{
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 250px;
+  
 }
 .top_b{
+  margin-left: -33px;
   width: 250px;
   display: flex;
   align-items: center;
@@ -270,7 +259,6 @@ export default defineComponent ({
   text-decoration: none;
   font-size: 20px;
   background-color: rgba(255, 255, 255, 0.7);
-  align-items: center;
   list-style: none;
 }
 .menu_e{
