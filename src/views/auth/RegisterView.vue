@@ -83,16 +83,16 @@ async function submit(){
 
 function sample4_execDaumPostcode() {
     new window.daum.Postcode({
-    oncomplete: (data: string) => {
+    oncomplete: (data: any) => {
       console.log(data);
       const zoneCode : string = data.zonecode;
       const roadAdd : string = data.address;
       const jibunAdd : string = data.jibunAddress;
       const buildingAdd : string = data.buildingName;
-      this.registerData.postCode = zoneCode;
-      this.registerData.address = roadAdd;
-      this.registerData.address1 = jibunAdd;
-      this.registerData.address2 = buildingAdd;
+      registerData.postCode = zoneCode;
+      registerData.address = roadAdd;
+      registerData.address1 = jibunAdd;
+      registerData.address2 = buildingAdd;
 
     }
   }).open(); 
@@ -102,7 +102,6 @@ function sample4_execDaumPostcode() {
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import { useRouter } from "vue-router";
 
 
 

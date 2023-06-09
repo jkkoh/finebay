@@ -77,7 +77,7 @@ export default defineComponent({
       console.log(authObj)
       window.Kakao.API.request({
         url:'/v2/user/me',
-        success: function(response : object){
+        success: function(response : any){
           const kakaoRegisterData = reactive<KakaoRegisterData>({
           email: "",
           name:"",
@@ -89,7 +89,8 @@ export default defineComponent({
           })
           console.log(emailCheck)
           console.log(response)
-          console.log() 
+          console.log( 'the type of response is '+ response.kakao_account +  ' abc') 
+          
           const Kaccount = response.kakao_account;
           const userInfo = {
             email: Kaccount.email,
