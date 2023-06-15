@@ -62,14 +62,49 @@ const router = createRouter({
         component: () => import('../views/PageNotFound.vue')
     },
     {
-      path: '/shop',
-      name: 'ShopList',
-      component: () => import('../views/ShopList.vue')
+      path: '/swimwearAll',
+      name: 'swimwearAll',
+      component: () => import('../views/SwimwearAll.vue')
+    },
+    {
+      path: '/swimwearTop',
+      name: 'swimwearTop',
+      component: () => import('../views/SwimwearTop.vue')
+    },
+    {
+      path: '/swimwearBot',
+      name: 'swimwearBot',
+      component: () => import('../views/SwimwearBot.vue')
+    },
+    {
+      path: '/swimwearMono',
+      name: 'swimwearMono',
+      component: () => import('../views/SwimwearMono.vue')
+    },
+    {
+      path: '/beachwearAll',
+      name: 'beachwearAll',
+      component: () => import('../views/BeachwearAll.vue')
     },
     {
       path: '/sizeGuide',
       name: 'sizeGuide',
       component: () => import('../views/SizeGuide.vue')
+    },
+    {
+      path: '/deliveryGuide',
+      name: 'deliveryGuide',
+      component: () => import('../views/DeliveryGuide.vue')
+    },
+    {
+      path: '/aboutBrand',
+      name: '/aboutBrand',
+      component: () => import ('../views/AboutBrand.vue')
+    },
+    {
+      path: '/cart',
+      name: '/cart',
+      component: () => import('../components/Cart.vue')
     },
   ]
 })

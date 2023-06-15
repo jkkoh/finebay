@@ -5,23 +5,23 @@
         <p>search</p>
       </div>
       <div class="menu_m">
-        <img src="@/images/logo/logo.png" alt="" class="logo">
+        <HeaderLink to="/"><img src="@/images/logo/logo.png" alt="" class="logo"></HeaderLink>
       </div>
       <div class="menu_r" v-if="isAuthenticated">
           <span>{{ user.name }} 님 환영합니다</span>
           <button  @click="logout()">로그아웃</button>
-        <button>쇼핑카트</button>
+          <HeaderLink to="/cart"><button>쇼핑카트</button></HeaderLink>
       </div>
       <div class="menu_r" v-else-if="isKakaoAuthenticated">
           <span>{{ user.name }} 님 환영합니다</span>
           <span>카카오로그인 되있음</span>
           <button @click="kakaoLogout()">로그아웃</button>
-        <button>쇼핑카트</button>
+          <HeaderLink to="/cart"><button>쇼핑카트</button></HeaderLink>
       </div>
       <div class="menu_r" v-else>
           <HeaderLink to="/register"><button>회원가입</button></HeaderLink>
           <HeaderLink to="/login"><button>로그인</button></HeaderLink>
-        <button>쇼핑카트</button>
+          <HeaderLink to="/cart"><button>쇼핑카트</button></HeaderLink>
       </div>
     </div>
     <div class="bot_menu" @mouseover="m_menu_hover_t()" @mouseleave="m_menu_hover_f()">
@@ -37,21 +37,21 @@
           </ul>
           <ul class="menu_a">
             <li class="menu_d">
-              <HeaderLink to="/shop" class="menu_b" exact>
+              <HeaderLink to="/swimwearAll" class="menu_b" exact>
                 <p class="top_m">Swimwear</p>
               </HeaderLink>
               <ul v-if="bot_menu_hover" class="menu_c">
                 <div class="menu_e">
-                  <li class="top_b">Top</li>
-                  <li class="top_b">Bottom</li>
-                  <li class="top_b">Monokini</li>
+                  <HeaderLink to="/swimwearTop"><li class="top_b">Top</li></HeaderLink>
+                  <HeaderLink to="/swimwearBot"><li class="top_b">Bottom</li></HeaderLink>
+                  <HeaderLink to="/swimwearMono"><li class="top_b">Monokini</li></HeaderLink>
                 </div>
               </ul>
             </li>
           </ul>
           <ul class="menu_a">
             <li class="menu_d">
-              <HeaderLink to="/beachwear" class="menu_b" exact>
+              <HeaderLink to="/beachwearAll" class="menu_b" exact>
                 <p class="top_m">Beachwear</p>
               </HeaderLink>
               <ul v-if="bot_menu_hover" class="menu_c">
@@ -62,11 +62,11 @@
           </ul>
           <ul class="menu_a">
             <li class="menu_d">
-              <HeaderLink to="/about" class="menu_b" exact>
+              <HeaderLink to="/aboutBrand" class="menu_b" exact>
                 <p class="top_m">About</p>
               </HeaderLink>
               <ul v-if="bot_menu_hover" class="menu_c">
-                <li class="top_b">Brand</li>
+                <HeaderLink to="/aboutBrand"><li class="top_b">Brand</li> </HeaderLink>
               </ul>
             </li>
           </ul>
@@ -76,9 +76,8 @@
                 <p class="top_m">Customer</p>
               </HeaderLink>
               <ul v-if="bot_menu_hover" class="menu_c">
-                <li class="top_b">Returns</li>
-                <li class="top_b">Size</li>
-                <li class="top_b">Order & Delivery</li>
+                <HeaderLink to="sizeGuide"><li class="top_b">Size</li></HeaderLink>
+                <HeaderLink to="deliveryGuide"><li class="top_b">Order & Delivery</li></HeaderLink>
                 <li class="top_b">Contact</li>
               </ul>
             </li>

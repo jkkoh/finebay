@@ -35,11 +35,11 @@
                         <p>Shop Information</p>
                     </div>
                     <div class="top_bot">
-                        <p>about us</p>
+                        <HeaderLink to="aboutBrand"><a>about us</a></HeaderLink>
                         <p>customer guide</p>
                         <p>agreement</p>
                         <p>privacy policy</p>
-                        <p>shipping & delivery</p>
+                        <HeaderLink to="deliveryGuide"><a>shipping & delivery</a></HeaderLink>
                         <HeaderLink to="sizeGuide"><a>size guide</a></HeaderLink>
                     </div>
                 </div>

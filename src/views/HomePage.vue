@@ -1,6 +1,23 @@
+<script setup lang="ts">
+import { useRouter } from 'vue-router';
+import { computed } from 'vue';
+
+const router = useRouter()
+const toBeachwear = computed(()=>{
+    return router.push({name: 'beachwearAll'})
+})
+
+const toSwimwear = computed(()=>{
+    return router.push({name: 'swimwearAll'})
+})
+
+</script>
+
 <script lang="ts">
 import {defineComponent} from 'vue';
 import SlideShow from "../components/SlideShow.vue";
+
+
 
 export default defineComponent({
     components:{
@@ -44,14 +61,14 @@ export default defineComponent({
                     this.currentId = this.slideCounts;
                 }
             }
-        }
+        },
     },
     created: function() {
         setInterval( ()=> {
             this.startAnime = true;
             this.dir("right");
         },5000)
-    }
+    },
 })
 </script>
 
@@ -87,12 +104,12 @@ export default defineComponent({
     </div>
     <div class="swimwear_banner">
         <div class="inner_swimwear_banner">
-            <img src="@/images/banner/swimwear_banner.jpg" alt="swimwearbanner">
+            <img src="@/images/banner/swimwear_banner.jpg" alt="swimwearbanner" @click="toSwimwear">
         </div>
     </div>
     <div class="beachwear_banner">
         <div class="inner_beachwear_banner">
-            <img src="@/images/banner/beachwear_banner.jpg" alt="beachwearbanner">
+            <img src="@/images/banner/beachwear_banner.jpg" alt="beachwearbanner" @click="toBeachwear">
         </div>
     </div>
 </div>
@@ -162,6 +179,7 @@ export default defineComponent({
 .inner_swimwear_banner > img{
     width: 100%;
     object-fit: cover;
+    cursor: pointer;
 }
 .beachwear_banner{
     width: 100%;
@@ -183,7 +201,7 @@ export default defineComponent({
 }
 .inner_beachwear_banner > img{
     width: 100%;
-    
+    cursor: pointer;
     object-fit: cover;
 }
 

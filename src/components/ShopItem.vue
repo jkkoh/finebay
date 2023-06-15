@@ -1,22 +1,142 @@
-<script lang="ts">
+<script setup lang="ts">
+
+import { onMounted, ref } from 'vue'
+import { useCartStore } from '../stores/cartStore'
+import { storeToRefs } from 'pinia'
 import { computed, defineComponent } from 'vue'
 import { items } from '../assets/items'
 import axios from 'axios'
 
-type ShopItemProps = { itemId : number }
+interface Item {
+  image: string[];
+  longImage: string[];
+  text: string;
+  itemInfo: string[];
+  itemCode: string;
+  color: string;
+  category: string;
+  material: string;
+  part: string;
+  price: number;
+  id: number;
+  stock: number;
+}
 
+
+const props = defineProps<{
+  itemId: number
+}>();
+
+const item = computed(() => items[props.itemId])
+const selectedState = ref({
+    selectedA : false,
+    selectedB : false,
+    sizeSelected : ['',''],
+    quantity : [0,0]
+})
+//size select start
+function selectedSmall(){
+    if(selectedState.value.selectedA == false && selectedState.value.selectedB == false){
+        selectedState.value.selectedA = true
+        selectedState.value.sizeSelected = ['small','']
+        selectedState.value.quantity[0]++
+    }else if(selectedState.value.selectedA == false && selectedState.value.selectedB == true){
+        selectedState.value.selectedA = true
+        selectedState.value.quantity[0]++
+        selectedState.value.sizeSelected = ['small','medium']
+    }else if(selectedState.value.selectedA == true && selectedState.value.selectedB == false){
+        selectedState.value.selectedA = false
+        selectedState.value.quantity[0] = 0
+        selectedState.value.sizeSelected = ['','']
+    }else if(selectedState.value.selectedA == true && selectedState.value.selectedB == true){
+        selectedState.value.selectedA = false
+        selectedState.value.quantity[0] = 0
+        selectedState.value.sizeSelected = ['','medium']
+    }
+}
+function selectedMedium(){
+    if(selectedState.value.selectedA == false && selectedState.value.selectedB == false){
+        selectedState.value.selectedB = true
+        selectedState.value.sizeSelected = ['','medium']
+        selectedState.value.quantity[1]++
+    }else if(selectedState.value.selectedA == false && selectedState.value.selectedB == true){
+        selectedState.value.selectedB = false
+        selectedState.value.sizeSelected = ['','']
+        selectedState.value.quantity[1] = 0
+    }else if(selectedState.value.selectedA == true && selectedState.value.selectedB == false){
+        selectedState.value.selectedB = true
+        selectedState.value.sizeSelected = ['small','medium']
+        selectedState.value.quantity[1]++
+    }else if(selectedState.value.selectedA == true && selectedState.value.selectedB == true){
+        selectedState.value.selectedB = false
+        selectedState.value.sizeSelected = ['small','']
+        selectedState.value.quantity[1] = 0
+    }
+}
+//size select end
+
+//quantity select start
+function smallUp(){
+    selectedState.value.quantity[0]++
+}
+function smallDown(){
+    if(selectedState.value.quantity[0] >= 1){
+        selectedState.value.quantity[0]--
+    }
+    else{
+        selectedState.value.quantity[0] = 0
+    }
+}
+function smallUnselect(){
+    selectedState.value.quantity[0] = 0
+    selectedState.value.selectedA = false
+}
+function mediumUp(){
+    selectedState.value.quantity[1]++
+}
+function mediumDown(){
+    if(selectedState.value.quantity[1] >= 1){
+        selectedState.value.quantity[1]--
+    }
+    else{
+        selectedState.value.quantity[1] = 0
+    }    
+}
+function mediumUnselect(){
+    selectedState.value.quantity[1] = 0
+    selectedState.value.selectedB = false    
+}
+//quantity select end
+const smallPrice = computed(()=>{
+    return item.value.price * selectedState.value.quantity[0] * 0.95
+})
+const mediumPrice = computed(()=>{
+    return item.value.price * selectedState.value.quantity[1] * 0.95
+})
+const totalPrice = computed(()=>{
+    return mediumPrice.value + smallPrice.value
+})
+
+const cartStore = useCartStore()
+const {cart} = storeToRefs(cartStore)
+onMounted(()=>{
+    cartStore.loadCartInstance()
+})
+
+function addToCart(){
+    if(totalPrice.value == 0){
+        alert('상품을 선택을 해주셔야 장바구니에 담을수 있습니다')
+    }else{
+        cartStore.addToCart({id: item.value.id, quantity: selectedState.value.quantity, size:selectedState.value.sizeSelected})
+        console.log("cart", cart.value)
+        alert('장바구니에 물품이 담겼습니다')
+    }
+    
+}   
+</script>
+
+<script lang="ts">
 export default defineComponent({
-    props: {
-        itemId: {
-            type: Number,
-            validator: v => typeof v === 'number' && v >= 0 && v < items.length,
-            required: true
-        },
-    },
-    setup(props: ShopItemProps){
-        const item = computed(() => items[props.itemId])
-        return { item }
-    },
     data: () => {
         return{
             hover : 0,
@@ -40,82 +160,6 @@ export default defineComponent({
             // console.log("current hover value is " + b);
             // console.log("index value is " + c);
             return {c , b }
-        },
-        selectSmall(itemPrice:number){
-            const selectedA = true;
-            const currentItemPrice = itemPrice;
-            this.selected = selectedA;
-            this.selectedSmall = selectedA;
-            if(this.smallCount === 0){
-                this.smallCount = 1;
-                this.totalCount++;
-            }else {
-                this.smallCount === this.smallCount
-            }
-            this.price = currentItemPrice * this.totalCount;
-            return {selectedA}
-        },
-        selectMedium(itemPrice:number){
-            const selectedB = true;
-            const currentItemPrice = itemPrice;
-            this.selected = selectedB;
-            this.selectedMedium = selectedB;
-            if(this.mediumCount === 0) {
-                this.mediumCount = 1;
-                this.totalCount++;
-            }else{
-                this.mediumCount === this.mediumCount
-            }
-            this.price = currentItemPrice * this.totalCount;
-            return {selectedB}
-        },
-        smallUp(itemPrice:number){
-            const currentItemPrice = itemPrice;
-            this.smallCount += 1;
-            this.totalCount += 1;
-            this.price = currentItemPrice * this.totalCount;
-        },
-        smallDown(itemPrice:number){
-            const currentItemPrice = itemPrice;
-            if(this.smallCount >= 1) {
-                this.smallCount -= 1;
-                this.totalCount -= 1;
-            }else{
-                this.smallCount === 0;
-            }   
-            this.price = currentItemPrice * this.totalCount;
-        },
-        smallUnselect(itemPrice:number){
-            const currentItemPrice = itemPrice;
-            this.selectedSmall = false;
-            const CurrentTotalCount = this.totalCount;
-            this.totalCount = CurrentTotalCount - this.smallCount;
-            this.smallCount = 0;
-            this.price = currentItemPrice * this.totalCount;
-        },
-        mediumUp(itemPrice:number){
-            const currentItemPrice = itemPrice;
-            this.mediumCount += 1;
-            this.totalCount += 1;
-            this.price = currentItemPrice * this.totalCount;
-        },
-        mediumDown(itemPrice:number){   
-            const currentItemPrice = itemPrice;
-            if(this.mediumCount >= 1) {
-                this.mediumCount -= 1;
-                this.totalCount -= 1;
-            }else{
-                this.mediumCount === 0;
-            }
-            this.price = currentItemPrice * this.totalCount;
-        },
-        mediumUnselect(itemPrice:number){
-            const currentItemPrice = itemPrice;
-            this.selectedMedium = false;
-            const CurrentTotalCount = this.totalCount;
-            this.totalCount = CurrentTotalCount - this.mediumCount;
-            this.mediumCount = 0;
-            this.price = currentItemPrice * this.totalCount;
         },
         buy(){
             if(this.totalCount === 0){
@@ -141,14 +185,6 @@ export default defineComponent({
                 else{
 
                 }
-            }
-        },
-        cart(){
-            if(this.totalCount === 0){
-                alert('구매항목을 선택해 주세요')
-            }
-            else{
-                console.log('def')
             }
         }
     }
@@ -196,7 +232,8 @@ export default defineComponent({
                                     <span>Price</span>
                                 </th>
                                 <td class="t_body_a">
-                                    <span>{{item.price}}</span>
+                                    <span class="crossed">{{item.price}}</span>
+                                    <span>{{item.price * 0.95}}</span>
                                 </td>
                             </tr>
                             <tr role="Material" >
@@ -215,27 +252,62 @@ export default defineComponent({
                                 <th scope="row" class="t_head">Size</th>
                                 <td>
                                     <ul class="size_ul">
-                                        <li class="size_li" @click="selectSmall(item.price)">S</li>
-                                        <li class="size_li" @click="selectMedium(item.price)">M</li>
+                                        <li class="size_li" :class="{active: selectedState.selectedA }" @click="selectedSmall()">S</li>
+                                        <li class="size_li" :class="{active: selectedState.selectedB }" @click="selectedMedium()">M</li>
                                     </ul>
                                     <span class="t_body_b">[필수] 옵션을 선택해 주세요</span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <table class="selected_size" v-show="selected">
+                    <table class="selected_size" v-show="selectedState.selectedA || selectedState.selectedB">
                         <tbody>
                             <tr rel="selectedSize">
-                                <span v-if="selectedSmall">you have selected Small {{ smallCount }} {{ totalCount }}
-                                    <button @click="smallUp(item.price)">+</button> 
-                                    <button @click="smallDown(item.price)">-</button>
-                                    <button @click="smallUnselect(item.price)">x</button>
-                                </span>
-                                <span v-if="selectedMedium">you have selected medium {{ mediumCount }} {{ totalCount }}
-                                    <button @click="mediumUp(item.price)">+</button>
-                                    <button @click="mediumDown(item.price)">-</button>
-                                    <button @click="mediumUnselect(item.price)">x</button>
-                                </span>
+                                <div v-if="selectedState.selectedA" class="size_selection">
+                                    <div class="size_selection_inner_top">
+                                        <p>{{item.text}}</p>
+                                        <p>Size - Small</p>
+                                    </div>
+                                    <div class="size_selection_inner_mid">
+                                        <div class="size_selection_inner_mid_pos_box">
+                                            <div class="size_quantity_box">
+                                                {{ selectedState.quantity[0] }}
+                                            </div>
+                                            <div class="updown_box">
+                                                <img class="updown_box_inner" src="@/images/etc/button_up.gif" @click="smallUp()" alt="">
+                                                <img class="updown_box_inner" src="@/images/etc/button_down.gif" @click="smallDown()" alt="">
+                                            </div>
+                                            <img class="delete_box" src="@/images/etc/button_delete.gif" @click="smallUnselect()" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="size_selection_inner_bot">
+                                        <p> {{ smallPrice }} 원 </p>
+                                    </div>
+                                    
+                                </div>
+                                <div v-if="selectedState.selectedB" class="size_selection">
+                                    <div class="size_selection_inner_top">
+                                        <p>{{item.text}}</p>
+                                        <p>Size - Medium</p>
+                                    </div>
+                                    <div class="size_selection_inner_mid">
+                                        <div class="size_selection_inner_mid_pos_box">
+                                            <div class="size_quantity_box">
+                                                {{ selectedState.quantity[1] }}
+                                            </div>
+                                            <div class="updown_box">
+                                                <img class="updown_box_inner" src="@/images/etc/button_up.gif" @click="mediumUp()" alt="">
+                                                <img class="updown_box_inner" src="@/images/etc/button_down.gif" @click="mediumDown()" alt="">
+                                            </div>
+                                            <img class="delete_box" src="@/images/etc/button_delete.gif" @click="mediumUnselect()" alt="">
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="size_selection_inner_bot">
+                                        <p> {{ mediumPrice }} 원 </p>
+                                    </div>
+                                    
+                                </div>
                             </tr>
                         </tbody>
                     </table>
@@ -246,7 +318,7 @@ export default defineComponent({
                                     <span class="t_body_c">총 상품금액(수량):</span>
                                 </th>
                                 <td class="t_body_d">
-                                    <span v-if="totalCount != 0">{{ price }} ({{ totalCount }})</span>
+                                    <p> {{ totalPrice }} 원 </p>
                                 </td>
                             </tr>
                         </tbody>
@@ -254,7 +326,7 @@ export default defineComponent({
                     <div class="buy_box">
                         <div class="buy_inner_box">
                             <a href="#none" class="sub_buy" @click="buy()">BUY NOW</a>
-                            <a href="#none" class="sub_cart" @click="cart()">CART</a>
+                            <a href="#none" class="sub_cart" @click="addToCart()">CART</a>
                         </div>
                     </div>
                 </div>
@@ -425,6 +497,84 @@ export default defineComponent({
     align-items: center;
     font-family: "Open_Sans";
 }
+.active{
+    background-color: grey;
+}
+.size_selection{
+    width: 100%;
+    height: 100px;
+    display: flex;
+}
+.size_selection_inner_top{
+    width: 40%;
+    height: 100%;
+    
+}
+.size_selection_inner_mid{
+    width: 30%;
+    height: 100%;
+    
+}
+.size_selection_inner_mid_pos_box{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.size_quantity_box{
+    width:35px;
+    height: 35px;
+    /* background-color: white; */
+    box-sizing: border-box;
+    border: 1px solid black;
+    font-size: 15px;
+    cursor: pointer;
+    margin-right: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Open_Sans";
+}
+.updown_box{
+    width: 20px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+}
+.updown_box_inner{
+    width: 100%;
+    height:15px;
+    cursor: pointer;
+}
+.delete_box{
+    cursor: pointer;
+    margin-left: 2px;
+}
+.size_selection_inner_bot{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.size_li_selected{
+    width:35px;
+    height: 35px;
+    /* background-color: white; */
+    box-sizing: border-box;
+    border: 1px solid black;
+    font-size: 15px;
+    cursor: pointer;
+    margin-right: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Open_Sans";
+    background-color: gray;
+}
 .total_price_box{
     width:500px;
     display: flex;
@@ -503,5 +653,10 @@ export default defineComponent({
 .long_image{
     width:1000px;
     
+}
+.crossed{
+    text-decoration-line: line-through;
+    text-decoration-color: red;
+    margin-right: 10px;
 }
 </style>

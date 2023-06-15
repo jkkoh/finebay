@@ -54,10 +54,10 @@ export default defineComponent({
 <template>
     <div class="mainA">
         <div 
-        class="mainB"
         v-for="(item, i) in items" 
         :key="i"
         >
+        <div class="mainB" v-if="item.part === 'Monokini'">
             <div class="mainC">
                 <div class="subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
                     <div v-if="mouse[i]"><img :src="item.image[4]" class="subImage"/></div>
@@ -65,9 +65,12 @@ export default defineComponent({
                 </div>
                 <div class="subB">
                     <p class="subTextA">{{ item.text }}</p>
-                    <p class="subTextB">{{ item.price }} WON</p>
+                    <div class="subC">
+                        <p class="subTextB crossed">{{ item.price }} </p>  <p class="subTextB">{{ item.price * 0.95 }} </p>
+                    </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </template>
@@ -107,6 +110,11 @@ export default defineComponent({
     min-height: 100px;
     
 }
+.subC{
+    width : 100%;
+    display: flex;
+
+}
 .subTextA {
     margin-top: 7px;
     font-family: "Open_Sans";
@@ -115,6 +123,11 @@ export default defineComponent({
 .subTextB{
     font-family: "Open_Sans";
     font-size: 22px;
+}
+.crossed{
+    text-decoration-line: line-through;
+    text-decoration-color: red;
+    margin-right: 10px;
 }
 .subImage{
     width: 100%;
