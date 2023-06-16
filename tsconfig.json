@@ -8,6 +8,7 @@
       "path": "./tsconfig.app.json"
     }
   ],
+  "strictNullChecks": false,
   "compilerOptions": {
     "composite": true,
     "allowJs": true,
@@ -15,7 +16,6 @@
     "moduleResolution": "node",
     "target": "es2022",
     "baseUrl": ".",
-    "strictNullChecks": false,
     "paths": {
       "@/*": ["./src/*"]
     },

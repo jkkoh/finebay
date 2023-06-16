@@ -114,6 +114,8 @@ import { type DisplayCart } from '../types/interfaces'
 
 const cartStore = useCartStore()
 const {cart, displayCart} = storeToRefs(cartStore)
+const item : any[] = []
+const index : any[] = []
 
 onMounted(()=>{
     cartStore.loadCartInstance()
