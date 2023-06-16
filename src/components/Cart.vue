@@ -37,14 +37,14 @@
                     </div>
                 </div>
             </div>
-            <div v-for="(item, index) in displayCart" :key="index">
+            <div v-for="(item , index) in displayCart" :key="index">
                 <div v-if="item.quantity[0]" class="outer_product">
                     <div class="inner_product">
                         <div class="check_box_pos"> <input type="checkbox" class="check_box"></div>
                         <div class="image_box_pos"> <img :src="item.image" class="inner_img" alt=""> </div>
                         <div class="info_box_pos">
                             <div class="inner_info_box"> 
-                                <div> {{item.name}}</div> 
+                                <div> {{item.name}} </div> 
                             </div>
                             <div> <span> Small </span> </div>
                         </div>
@@ -109,13 +109,23 @@
 <script setup lang="ts">
 import { useCartStore } from '../stores/cartStore'
 import { storeToRefs } from 'pinia'
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, ref } from 'vue'
 import { type DisplayCart } from '../types/interfaces'
 
 const cartStore = useCartStore()
 const {cart, displayCart} = storeToRefs(cartStore)
-const item : any[] = []
-const index : any[] = []
+
+const item = {
+    name: '',
+    price: 0,
+    quantity: [],
+    inStock: false,
+    id: 0,
+    color: '',
+    size: [],
+    image: ''
+}
+let index = 0
 
 onMounted(()=>{
     cartStore.loadCartInstance()

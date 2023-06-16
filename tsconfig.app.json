@@ -4,6 +4,7 @@
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,
+    "noImplicitAny": false,
     "allowJs": true,
     "module": "es2022",
     "moduleResolution": "node",
