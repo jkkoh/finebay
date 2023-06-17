@@ -1,23 +1,8 @@
-<script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { computed } from 'vue';
-
-const router = useRouter()
-const toBeachwear = computed(()=>{
-    return router.push({name: 'beachwearAll'})
-})
-
-const toSwimwear = computed(()=>{
-    return router.push({name: 'swimwearAll'})
-})
-
-</script>
-
 <script lang="ts">
 import {defineComponent} from 'vue';
 import SlideShow from "../components/SlideShow.vue";
-
-
+import { useRouter } from 'vue-router';
+const router = useRouter()
 
 export default defineComponent({
     components:{
@@ -45,7 +30,6 @@ export default defineComponent({
             ]
         }
     },
-
     methods:{
         dir: function(myDir : string){
             if(myDir === "right"){
@@ -62,6 +46,12 @@ export default defineComponent({
                 }
             }
         },
+        toSwimwear(){
+            this.$router.push({name: 'swimwearAll'})
+        },
+        toBeachwear(){
+            this.$router.push({name: 'beachwearAll'})
+        }
     },
     created: function() {
         setInterval( ()=> {
@@ -69,6 +59,8 @@ export default defineComponent({
             this.dir("right");
         },5000)
     },
+
+
 })
 </script>
 
@@ -104,12 +96,12 @@ export default defineComponent({
     </div>
     <div class="swimwear_banner">
         <div class="inner_swimwear_banner">
-            <img src="@/images/banner/swimwear_banner.jpg" alt="swimwearbanner" @click="toSwimwear">
+            <img src="@/images/banner/swimwear_banner.jpg" alt="swimwearbanner" @click="toSwimwear()">
         </div>
     </div>
     <div class="beachwear_banner">
         <div class="inner_beachwear_banner">
-            <img src="@/images/banner/beachwear_banner.jpg" alt="beachwearbanner" @click="toBeachwear">
+            <img src="@/images/banner/beachwear_banner.jpg" alt="beachwearbanner" @click="toBeachwear()">
         </div>
     </div>
 </div>
