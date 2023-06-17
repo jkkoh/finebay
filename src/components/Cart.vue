@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div v-for="(item , index) in displayCart" :key="index">
-                <div v-if="item.quantity[0]" class="outer_product">
+                <div v-if="item['quantity'][0]" class="outer_product">
                     <div class="inner_product">
                         <div class="check_box_pos"> <input type="checkbox" class="check_box"></div>
                         <div class="image_box_pos"> <img :src="item['image']" class="inner_img" alt=""> </div>
@@ -52,13 +52,13 @@
                             <div> {{item['price']}}</div>
                         </div>
                         <div class="quantity_box_pos">
-                            <span>{{item['quantity']}}</span> 
+                            <span>{{item['quantity'][0]}}</span> 
                         </div>
                         <div class="delievery_fee_box_pos">
                             <span>무료</span>
                         </div>
                         <div class="actual_price_box_pos">
-                            <span>{{item['price'] }}</span>
+                            <span>{{item['price'] * item['quantity'][0]}}</span>
                         </div>
                         <div class="choose_box_pos">
                             <div>
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                <div v-if="item.quantity[1]" class="outer_product">
+                <div v-if="item['quantity'][1]" class="outer_product">
                     <div class="inner_product">
                         <div class="check_box_pos"> <input type="checkbox" class="check_box"></div>
                         <div class="image_box_pos"> <img :src="item['image']" class="inner_img" alt=""> </div>
@@ -82,18 +82,18 @@
                             <div> {{item['price']}}</div>
                         </div>
                         <div class="quantity_box_pos">
-                            <span>{{item['quantity']}}</span> 
+                            <span>{{item['quantity'][1]}}</span> 
                         </div>
                         <div class="delievery_fee_box_pos">
                             <span>무료</span>
                         </div>
                         <div class="actual_price_box_pos">
-                            <span>{{item['price']}}</span>
+                            <span>{{item['price'] * item['quantity'][1]}}</span>
                         </div>
                         <div class="choose_box_pos">
                             <div>
                                 <span></span>
-                                <img src="@/images/etc/button_delete.gif" class="delete_box" alt="delete button" @click="removeItem(item.id)">
+                                <img src="@/images/etc/button_delete.gif" class="delete_box" alt="delete button" @click="removeItem(item['id'])">
                             </div>
                         </div>
                     </div>
