@@ -41,29 +41,29 @@
                 <div v-if="item.quantity[0]" class="outer_product">
                     <div class="inner_product">
                         <div class="check_box_pos"> <input type="checkbox" class="check_box"></div>
-                        <div class="image_box_pos"> <img :src="item.image" class="inner_img" alt=""> </div>
+                        <div class="image_box_pos"> <img :src="item['image']" class="inner_img" alt=""> </div>
                         <div class="info_box_pos">
                             <div class="inner_info_box"> 
-                                <div> {{item.name}} </div> 
+                                <div> {{item['name']}} </div> 
                             </div>
                             <div> <span> Small </span> </div>
                         </div>
                         <div class="price_box_pos">
-                            <div> {{item.price}}</div>
+                            <div> {{item['price']}}</div>
                         </div>
                         <div class="quantity_box_pos">
-                            <span>{{item.quantity[0]}}</span> 
+                            <span>{{item['quantity']}}</span> 
                         </div>
                         <div class="delievery_fee_box_pos">
                             <span>무료</span>
                         </div>
                         <div class="actual_price_box_pos">
-                            <span>{{item.price * item.quantity[0]}}</span>
+                            <span>{{item['price'] }}</span>
                         </div>
                         <div class="choose_box_pos">
                             <div>
                                 <span></span>
-                                <img src="@/images/etc/button_delete.gif" class="delete_box" alt="delete button" @click="removeItem(item.id)">
+                                <img src="@/images/etc/button_delete.gif" class="delete_box" alt="delete button" @click="removeItem(item['id'])">
                             </div>
                         </div>
                     </div>
@@ -71,24 +71,24 @@
                 <div v-if="item.quantity[1]" class="outer_product">
                     <div class="inner_product">
                         <div class="check_box_pos"> <input type="checkbox" class="check_box"></div>
-                        <div class="image_box_pos"> <img :src="item.image" class="inner_img" alt=""> </div>
+                        <div class="image_box_pos"> <img :src="item['image']" class="inner_img" alt=""> </div>
                         <div class="info_box_pos">
                             <div class="inner_info_box"> 
-                                <div> {{item.name}}</div> 
+                                <div> {{item['name']}}</div> 
                             </div>
                             <div> <span> Medium </span> </div>
                         </div>
                         <div class="price_box_pos">
-                            <div> {{item.price}}</div>
+                            <div> {{item['price']}}</div>
                         </div>
                         <div class="quantity_box_pos">
-                            <span>{{item.quantity[1]}}</span> 
+                            <span>{{item['quantity']}}</span> 
                         </div>
                         <div class="delievery_fee_box_pos">
                             <span>무료</span>
                         </div>
                         <div class="actual_price_box_pos">
-                            <span>{{item.price * item.quantity[1]}}</span>
+                            <span>{{item['price']}}</span>
                         </div>
                         <div class="choose_box_pos">
                             <div>
@@ -115,15 +115,25 @@ import { type DisplayCart } from '../types/interfaces'
 const cartStore = useCartStore()
 const {cart, displayCart} = storeToRefs(cartStore)
 
-type item = {
+type Item = {
     name: string,
     price: number,
     quantity: number[],
     inStock: boolean,
     id: number,
     color: string,
-    size: string[]
+    size: string[],
     image: string
+}
+const item: Item = {
+    name: '',
+    price: 0,
+    quantity: [],
+    inStock: false,
+    id: 0,
+    color: '',
+    size: [],
+    image: ''
 }
 let index = 0
 
