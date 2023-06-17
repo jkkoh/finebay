@@ -115,15 +115,15 @@ import { type DisplayCart } from '../types/interfaces'
 const cartStore = useCartStore()
 const {cart, displayCart} = storeToRefs(cartStore)
 
-const item = {
-    name: '',
-    price: 0,
-    quantity: [],
-    inStock: false,
-    id: 0,
-    color: '',
-    size: [],
-    image: ''
+type item = {
+    name: string,
+    price: number,
+    quantity: number[],
+    inStock: boolean,
+    id: number,
+    color: string,
+    size: string[]
+    image: string
 }
 let index = 0
 
