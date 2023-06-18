@@ -7,7 +7,7 @@ interface State{
     cart: Cart | {},
     displayCart: DisplayCart [] | {},
     buy: Buy | {},
-    displayBuy: DispalyBuy [] | {}
+    displayBuy: DisplayBuy [] | {}
 }
 
 export const useBuyStore = defineStore('buy',{
