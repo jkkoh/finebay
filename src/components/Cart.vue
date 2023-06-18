@@ -202,12 +202,10 @@ function buyingItem(this:any){
         let ia = checkedItems.value.length
         let i = 0;
         for(i=0; i < ia; i++){
-            console.log(checkedItems.value[i])
-            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-            
-            let cde = checkedItems.value[i]
+            let cde : string = checkedItems.value[i]
             let idIn = parseInt(checkedItems.value[i])
-            let sizeIn:string = checkedItems.value[i].replace(/[0-9]/g, '') as unknown as string;
+            console.log('------------------------')
+            let sizeIn:string = cde.replace(/[0-9]/g, '');
             buyStore.addToBuy({id: idIn, size: sizeIn})
             console.log("buy", buy.value)
         }
