@@ -549,6 +549,7 @@ export default defineComponent({
 }
 .delete_box{
     cursor: pointer;
+    width: 15px;
     margin-left: 2px;
 }
 .size_selection_inner_bot{

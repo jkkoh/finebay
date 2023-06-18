@@ -329,6 +329,7 @@ function buyingItem(this:any){
 }
 .delete_box{
     cursor: pointer;
+    width: 15px;
 }
 .cart_icon{
     margin-left: 10px;

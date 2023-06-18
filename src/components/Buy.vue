@@ -799,6 +799,7 @@ export default defineComponent({
 }
 .delete_btn{
     cursor: pointer;
+    width: 15px;
     margin-left: 3px;
 }
 </style>
