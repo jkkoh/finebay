@@ -7,7 +7,7 @@ export interface Buy{
     buyProducts: Array<BuyProduct>
 }
 
-export interface BuyProduct{id: number, quantity: number[], size: string}
+export interface BuyProduct{id: number, size: string}
 
 export interface Product{id: number, quantity: number[], size: string[]}
 

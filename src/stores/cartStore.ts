@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import {v4 as uuid4} from 'uuid'
-import { type Cart, type Product, type DisplayCart, type Buy, type DisplayBuy} from '../types/interfaces'
+import { type Cart, type Product, type DisplayCart, type Buy, type DisplayBuy, type BuyProduct} from '../types/interfaces'
 import { items } from '../assets/items'
 
 interface State{
@@ -17,7 +17,7 @@ export const useBuyStore = defineStore('buy',{
             const cs = localStorage.getItem('buy')
             if(!cs)
             this.buy = {}
-            this.buy = JSON.parse(cs)
+            this.buy = JSON.parse(cs || '{}')
         },
         addToBuy(buyProduct: BuyProduct){
             const cs = localStorage.getItem('buy')
