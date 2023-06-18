@@ -58,7 +58,7 @@ export const useBuyStore = defineStore('buy',{
             this.displayBuy = (this.buy as Buy).buyProducts.map(ci => {
                 const requiredBuy = items.filter(p => p.id == ci.id)
                 return {
-                    id: ci.id, size: ci.size, price: requiredBuy[0].price, quantity: ci.quantity }
+                    id: ci.id, size: ci.size, price: requiredBuy[0].price }
             })
 
         }
