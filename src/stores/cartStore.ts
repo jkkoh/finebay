@@ -1,12 +1,69 @@
 import { defineStore } from 'pinia'
 import {v4 as uuid4} from 'uuid'
-import { type Cart, type Product, type DisplayCart} from '../types/interfaces'
+import { type Cart, type Product, type DisplayCart, type Buy, type DisplayBuy} from '../types/interfaces'
 import { items } from '../assets/items'
 
 interface State{
     cart: Cart | {},
-    displayCart: DisplayCart [] | {}
+    displayCart: DisplayCart [] | {},
+    buy: Buy | {},
+    displayBuy: DispalyBuy [] | {}
 }
+
+export const useBuyStore = defineStore('buy',{
+    state: ()=>({buy: {}, displayBuy: []} as State),
+    actions:{
+        loadBuyInstance(){
+            const cs = localStorage.getItem('buy')
+            if(!cs)
+            this.buy = {}
+            this.buy = JSON.parse(cs)
+        },
+        addToBuy(buyProduct: BuyProduct){
+            const cs = localStorage.getItem('buy')
+
+            let isAdded = false
+            if(!cs)
+            this.buy = {
+                cid: uuid4(),
+                buyProducts:[
+                    buyProduct
+                ]
+            }
+            else {
+                let buyLocalStorage = JSON.parse(cs)
+                buyLocalStorage.buyProducts = buyLocalStorage.buyProducts.map((ci: BuyProduct) =>{
+                    if(ci.id == buyProduct.id)
+                    {
+                        isAdded = true
+                        return {id: ci.id, size: ci.size, quantity: ci.quantity}
+                    }
+                    
+                    return {id: ci.id, size: ci.size, quantity: ci.quantity}
+                })
+
+                if(!isAdded)
+                buyLocalStorage.buyProducts.push({id: buyProduct.id, size: buyProduct.size , quantity: buyProduct.quantity})
+
+                this.buy = buyLocalStorage
+            }
+            localStorage.setItem('buy', JSON.stringify(this.buy))
+        },
+        removeFromBuy(id:number){
+            (this.buy as Buy).buyProducts = (this.buy as Buy).buyProducts.filter(ci => ci.id != id) 
+            this.displayBuyLoad()
+            localStorage.setItem('buy', JSON.stringify(this.buy))
+        },
+        displayBuyLoad(){
+            this.displayBuy = (this.buy as Buy).buyProducts.map(ci => {
+                const requiredBuy = items.filter(p => p.id == ci.id)
+                return {
+                    id: ci.id, size: ci.size, price: requiredBuy[0].price, quantity: ci.quantity }
+            })
+
+        }
+    }
+})
 
 export const useCartStore = defineStore('cart',{
     state: ()=>({cart: {}, displayCart: []} as State),

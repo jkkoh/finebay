@@ -31,6 +31,27 @@ export interface RegisterData {
   account_type : number,
 }
 
+export interface BuyData {
+  customerName: string,
+  customerEmail: string,
+  customerPhoneNumber: string[],
+  customerPostCode:string,
+  customerAddress:string,
+  customerAddress1:string,
+  deliveryName:string,
+  deliveryPostCode:string,
+  deliveryAddress:string,
+  deliveryAddress1:string,
+  deliveryPhoneNumber:string[],
+  productInfo:string[],
+  salesInfo:string[],
+  priceInfoActualPrice:string[],
+  priceInfoDeliveryFee:number,
+  priceInfoDiscount:number,
+  priceInfoFinalPrice:number,
+  paymentInfoType:string,
+}
+
 export interface KakaoRegisterData {
   email: string,
   name: string,

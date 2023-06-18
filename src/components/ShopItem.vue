@@ -194,7 +194,7 @@ export default defineComponent({
     <div class="wrap">
         <div class="outer_a">
             <div class="main_a">
-                <div class="col-auto img_box">
+                <div class="img_box">
                     <div class="img_layout">
                         <div v-for="(n, index) in item.image" :key="index" class="inner_img" @mouseover="imageView(index)">
                             <img :src="item.image[index]" class="innest_img"/>
@@ -411,7 +411,6 @@ export default defineComponent({
     width:100%;
     height:180px;
     padding-top: 30px;
-    
 }
 .t_title {
     font-size: 29px;

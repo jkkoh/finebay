@@ -103,19 +103,22 @@
                 총 금액 {{ total }}
             </div>
             <div class="buy_box">
-                <span class="buy_btn">구입하기</span>
+                <span class="buy_btn" @click="buyingItem()">구입하기</span>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { useCartStore } from '../stores/cartStore'
+import { useCartStore, useBuyStore } from '../stores/cartStore'
 import { storeToRefs } from 'pinia'
 import { onMounted, computed, ref } from 'vue'
-import { type DisplayCart } from '../types/interfaces'
-
+import { type DisplayCart, type DisplayBuy } from '../types/interfaces'
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const cartStore = useCartStore()
+const buyStore = useBuyStore()
+const { buy } = storeToRefs(buyStore)
 const {cart, displayCart} = storeToRefs(cartStore)
 
 const checkedItems = ref([])
@@ -147,6 +150,7 @@ onMounted(()=>{
     cartStore.loadCartInstance()
     cartStore.displayCartLoad()
 })
+
 
 const total = computed(()=>{
 
@@ -188,6 +192,29 @@ function removeItem(id:number){
 //     //     }
 //     // }
 // }
+
+function buyingItem(this:any){
+    console.log(checkedItems.value.length)
+    console.log(checkedItems.value[1])
+    if(checkedItems.value.length == 0){
+        alert('상품을 선택을 하셔야 합니다')
+    }else{
+        let ia = checkedItems.value.length
+        let i = 0;
+        for(i=0; i < ia; i++){
+            console.log(checkedItems.value[i])
+            console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+            let cde = checkedItems.value[i]
+            let idIn = parseInt(checkedItems.value[i])
+            let sizeIn:string = cde.replace(/[0-9]/g, '');
+            console.log('size is ' + sizeIn + ' id is ' + idIn)
+            buyStore.addToBuy({id: idIn, size: sizeIn})
+            console.log("buy", buy.value)
+        }
+        alert('구매 페이지로 이동합니다')
+    }
+
+}
 
 </script>
 

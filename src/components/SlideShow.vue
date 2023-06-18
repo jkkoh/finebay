@@ -65,6 +65,7 @@ export default {
         left: 50%;
         transform: translate(-50%, -50%);
         height: calc(100vh - 115px);
+        min-height: 800px;
         transition: 1s;
         overflow: hidden;
     }

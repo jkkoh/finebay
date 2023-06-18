@@ -118,12 +118,14 @@ export default defineComponent({
 }
 .slide-show{
     height: calc(100vh - 100px);   
+    min-height: 800px;
 }
 
 .text_area{
     position: relative;
     width: 100%;
     height: 50vh;
+    min-height: 600px;
     align-items: center;
     box-sizing: border-box;
 }
@@ -150,6 +152,7 @@ export default defineComponent({
     width: 100%;
     position: relative;
     height: 50vh;
+    min-height: 500px;
     background-color: aqua;
 }
 .swimwear_banner{
@@ -160,6 +163,7 @@ export default defineComponent({
 .inner_swimwear_banner{
     width: 100%;
     height: 100%;
+    min-height: 500px;
     position: absolute;
     display: flex;
     align-items: center;
@@ -170,6 +174,7 @@ export default defineComponent({
 }
 .inner_swimwear_banner > img{
     width: 100%;
+    min-height: 500px;
     object-fit: cover;
     cursor: pointer;
 }
@@ -183,6 +188,7 @@ export default defineComponent({
 .inner_beachwear_banner{
     width: 100%;
     height: 100%;
+    min-height: 500px;
     position: absolute;
     display: flex;
     align-items: center;
@@ -193,6 +199,7 @@ export default defineComponent({
 }
 .inner_beachwear_banner > img{
     width: 100%;
+    min-height: 500px;
     cursor: pointer;
     object-fit: cover;
 }
