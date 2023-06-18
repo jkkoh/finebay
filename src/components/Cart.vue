@@ -12,7 +12,7 @@
                 </div>
                 <div class="bot_outer_text">
                     <div class="check_box_pos"> 
-                        <input type="checkbox" class="check_box">
+                        <!-- <input type="checkbox" class="check_box" v-model="select_all"> -->
                     </div>
                     <div class="image_box_pos">
                         <span>이미지</span>
@@ -40,7 +40,7 @@
             <div v-for="(item , index) in displayCart" :key="index">
                 <div v-if="item['quantity'][0]" class="outer_product">
                     <div class="inner_product">
-                        <div class="check_box_pos"> <input type="checkbox" class="check_box"></div>
+                        <div class="check_box_pos"> <input type="checkbox" class="check_box" v-bind:value="item['id'] + item['size'][0]" v-model="checkedItems"></div>
                         <div class="image_box_pos"> <img :src="item['image']" class="inner_img" alt=""> </div>
                         <div class="info_box_pos">
                             <div class="inner_info_box"> 
@@ -70,7 +70,7 @@
                 </div>
                 <div v-if="item['quantity'][1]" class="outer_product">
                     <div class="inner_product">
-                        <div class="check_box_pos"> <input type="checkbox" class="check_box"></div>
+                        <div class="check_box_pos"> <input type="checkbox" class="check_box" v-bind:value="item['id'] + item['size'][1]" v-model="checkedItems"></div>
                         <div class="image_box_pos"> <img :src="item['image']" class="inner_img" alt=""> </div>
                         <div class="info_box_pos">
                             <div class="inner_info_box"> 
@@ -99,8 +99,11 @@
                     </div>
                 </div>
             </div>
-            <div>
-                Total {{ total }}
+            <div class="total_box">
+                총 금액 {{ total }}
+            </div>
+            <div class="buy_box">
+                <span class="buy_btn">구입하기</span>
             </div>
         </div>
     </div>
@@ -114,6 +117,9 @@ import { type DisplayCart } from '../types/interfaces'
 
 const cartStore = useCartStore()
 const {cart, displayCart} = storeToRefs(cartStore)
+
+const checkedItems = ref([])
+let select_all = false;
 
 type Item = {
     name: string,
@@ -145,8 +151,15 @@ onMounted(()=>{
 const total = computed(()=>{
 
     let sum = (displayCart.value as DisplayCart[]).reduce((initialSum:number, item:DisplayCart)=>{
-        if(item.inStock)
-        initialSum = initialSum + (item.price * item.quantity[0] + item.price * item.quantity[1])
+        let i = 0
+        for(i = 0; i <= checkedItems.value.length; i++){
+            if(checkedItems.value[i] == item.id+'small'){
+                initialSum = initialSum + (item.price * item.quantity[0])
+            }
+            else if(checkedItems.value[i] == item.id+'medium'){
+                initialSum = initialSum + (item.price * item.quantity[1])
+            }
+        }
         return initialSum
     }, 0);
     return sum
@@ -155,6 +168,26 @@ const total = computed(()=>{
 function removeItem(id:number){
     cartStore.removeFromCart(id)
 }
+// function selectAll(this:any, length:number){
+//     if(select_all){
+//         console.log('it is now false')
+//     }else if(!select_all){
+//         console.log('it is now true')
+//         console.log(displayCart.value.length)
+//         let i = 0;
+//         for(i = 0; i <= displayCart.value.length; i++){
+//             console.log(i);
+//             this.checkedItems.value.push(this.item[i].id)
+//         }
+//     }
+//     console.log(checkedItems.value)
+//     // this.checkedItems.value = [];
+//     // if(!this.select_all){
+//     //     for(let i in this.item){
+//     //         this.checkedItems.value.push(this.item[i].id);
+//     //     }
+//     // }
+// }
 
 </script>
 
@@ -282,5 +315,34 @@ function removeItem(id:number){
     margin-left: 10px;
     display: flex;
     align-items: center;
+}
+.total_box{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+.buy_box{
+    margin-top: 10px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.buy_btn{
+    width: 200px;
+    height: 100px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: grey;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
 }
 </style>
