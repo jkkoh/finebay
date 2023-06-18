@@ -11,7 +11,7 @@ interface State{
 }
 
 export const useBuyStore = defineStore('buy',{
-    state: ()=>({buy: {}, displayBuy: []} as State),
+    state: ()=>({buy: {}, displayBuy: []} as unknown as State),
     actions:{
         loadBuyInstance(){
             const cs = localStorage.getItem('buy')
@@ -36,14 +36,14 @@ export const useBuyStore = defineStore('buy',{
                     if(ci.id == buyProduct.id)
                     {
                         isAdded = true
-                        return {id: ci.id, size: ci.size, quantity: ci.quantity}
+                        return {id: ci.id, size: ci.size}
                     }
                     
-                    return {id: ci.id, size: ci.size, quantity: ci.quantity}
+                    return {id: ci.id, size: ci.size}
                 })
 
                 if(!isAdded)
-                buyLocalStorage.buyProducts.push({id: buyProduct.id, size: buyProduct.size , quantity: buyProduct.quantity})
+                buyLocalStorage.buyProducts.push({id: buyProduct.id, size: buyProduct.size})
 
                 this.buy = buyLocalStorage
             }
@@ -66,7 +66,7 @@ export const useBuyStore = defineStore('buy',{
 })
 
 export const useCartStore = defineStore('cart',{
-    state: ()=>({cart: {}, displayCart: []} as State),
+    state: ()=>({cart: {}, displayCart: []} as unknown as State),
     actions:{
         loadCartInstance()
         {

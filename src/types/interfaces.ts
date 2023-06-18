@@ -25,6 +25,5 @@ export interface DisplayCart {
 export interface DisplayBuy {
     id: number,
     size: string,
-    price: number,
-    quantity: number[],
+    price: number
 }
