@@ -25,7 +25,9 @@ export default defineComponent ({
     width:1000px;
 }
 .img_box{
+    margin-top: -200px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 </style>
