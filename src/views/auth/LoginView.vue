@@ -53,7 +53,7 @@ const errorMessage = ref<string>("")
 
 async function submit(){
   fetch("https://www.shopfineday.com/api/auth/login",{
-    method:'POST',
+    method:'GET',
   });
   // await authStore.login(loginData)
   //   .then(res => {
