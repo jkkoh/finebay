@@ -50,14 +50,18 @@ const emailCheck = reactive<emailCheckData>({
 
 const errorMessage = ref<string>("")
 
+
 async function submit(){
-  await authStore.login(loginData)
-    .then(res => {
-      router.replace({name: "home"})
-    })
-    .catch(err => {
-      alert('이메일 혹은 비밀번호를 확인해주세요')
-    })
+  fetch("https://www.shopfineday.com/api/auth/login",{
+    method:'POST',
+  });
+  // await authStore.login(loginData)
+  //   .then(res => {
+  //     router.replace({name: "home"})
+  //   })
+  //   .catch(err => {
+  //     alert('이메일 혹은 비밀번호를 확인해주세요')
+  //   })
 }
 
 async function kakaoLogin(){

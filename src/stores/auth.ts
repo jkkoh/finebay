@@ -91,17 +91,20 @@ export const useAuthStore = defineStore('auth', {
       return
     },
     async login(payload: LoginData){
-      fetch("https://shopfineday.com/api/auth/login",{
+      try {
+        const {data} = await useApi().post(`/api/auth/login`, payload);
+        this.accessToken = data.access_token
+        await this.getUser()
+        return data
+      } catch (error: Error | any) {
+        throw error.message
+      }
+    },
+    
+    async submit(){
+      fetch("https://www.shopfineday.com/auth/login",{
         method: 'POST',
       });
-      // try {
-      //   const {data} = await useApi().post(`/api/auth/login`, payload);
-      //   this.accessToken = data.access_token
-      //   await this.getUser()
-      //   return data
-      // } catch (error: Error | any) {
-      //   throw error.message
-      // }
     },
 
     async register(payload: RegisterData){
