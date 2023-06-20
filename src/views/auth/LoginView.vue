@@ -53,8 +53,16 @@ const errorMessage = ref<string>("")
 
 async function submit(){
   fetch("https://www.shopfineday.com/api/auth/login",{
-    method:'GET',
-  });
+    method:'PUT',
+    headers: {
+      "Content-Type" : "application/xml",
+    },
+    body: JSON.stringify({
+      email: loginData.email,
+      password: loginData.password
+    })
+  }).then((response) => response.json())
+  .then((data) => console.log(data));
   // await authStore.login(loginData)
   //   .then(res => {
   //     router.replace({name: "home"})
