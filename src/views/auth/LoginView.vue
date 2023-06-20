@@ -53,9 +53,9 @@ const errorMessage = ref<string>("")
 
 async function submit(){
   fetch("https://www.shopfineday.com/api/auth/login",{
-    method:'PUT',
+    method:'POST',
     headers: {
-      "Content-Type" : "application/xml",
+      "Content-Type" : "application/json",
     },
     body: JSON.stringify({
       email: loginData.email,
