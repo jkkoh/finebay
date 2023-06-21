@@ -28,6 +28,8 @@
 import { useAuthStore, type LoginData, type KakaoRegisterData, type emailCheckData } from '../../stores/auth';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import  qs  from 'qs';
+import axios from 'axios';
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -52,9 +54,23 @@ const errorMessage = ref<string>("")
 
 
 async function submit(){
-  fetch("https://www.shopfineday.com/data")
-  .then(res => res.json)
-  .then(data => console.log(data))
+  const axiosConfig = {
+    headers:{
+      "Accept":"application/json",
+      "Content-Type":"application/xml"
+    }
+  }
+  const sendParams =`<?xml version="1.0" encoding="UTF-8"?>
+  <email>${loginData.email}</email> + <password>${loginData.password}</password>
+  `
+
+  await axios.post('https://www.shopfineday.com/aaa', sendParams, 
+    axiosConfig
+  ).then(res => console.log(res))
+  
+  // fetch("http://localhost:443/data")
+  // .then(res => res.json)
+  // .then(data => console.log(data))
   // await authStore.login(loginData)
   //   .then(res => {
   //     router.replace({name: "home"})
@@ -77,7 +93,6 @@ async function kakaoLogin(){
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import axios from 'axios'
 import { react } from '@babel/types';
 
 export default defineComponent({
