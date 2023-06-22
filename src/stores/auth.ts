@@ -2,7 +2,6 @@ import {defineStore} from "pinia"
 import {useApi, useApiPrivate} from "../composables/useApi"
 import  axios  from "axios"
 import { Auth , Hub } from 'aws-amplify'
-import { useUser } from '../stores/userStore'
 
 
 
