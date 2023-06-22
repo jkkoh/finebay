@@ -172,30 +172,8 @@ const total = computed(()=>{
 function removeItem(id:number){
     cartStore.removeFromCart(id)
 }
-// function selectAll(this:any, length:number){
-//     if(select_all){
-//         console.log('it is now false')
-//     }else if(!select_all){
-//         console.log('it is now true')
-//         console.log(displayCart.value.length)
-//         let i = 0;
-//         for(i = 0; i <= displayCart.value.length; i++){
-//             console.log(i);
-//             this.checkedItems.value.push(this.item[i].id)
-//         }
-//     }
-//     console.log(checkedItems.value)
-//     // this.checkedItems.value = [];
-//     // if(!this.select_all){
-//     //     for(let i in this.item){
-//     //         this.checkedItems.value.push(this.item[i].id);
-//     //     }
-//     // }
-// }
 
 function buyingItem(this:any){
-    console.log(checkedItems.value.length)
-    console.log(checkedItems.value[1])
     if(checkedItems.value.length == 0){
         alert('상품을 선택을 하셔야 합니다')
     }else{

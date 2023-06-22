@@ -1,11 +1,14 @@
 <script setup lang="ts">
 
 import { onMounted, ref } from 'vue'
-import { useCartStore } from '../stores/cartStore'
+import { useCartStore, useBuyStore } from '../stores/cartStore'
 import { storeToRefs } from 'pinia'
 import { computed, defineComponent } from 'vue'
 import { items } from '../assets/items'
 import axios from 'axios'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 interface Item {
   image: string[];
@@ -123,6 +126,9 @@ onMounted(()=>{
     cartStore.loadCartInstance()
 })
 
+const buyStore = useBuyStore()
+const { buy } = storeToRefs(buyStore)
+
 function addToCart(){
     if(totalPrice.value == 0){
         alert('상품을 선택을 해주셔야 장바구니에 담을수 있습니다')
@@ -131,8 +137,23 @@ function addToCart(){
         console.log("cart", cart.value)
         alert('장바구니에 물품이 담겼습니다')
     }
-    
-}   
+}  
+function buyNow(){
+    if(totalPrice.value == 0 || null){
+        alert('상품을 선택을 해주셔야 구매하실수 있습니다')
+    }else if(selectedState.value.sizeSelected[0] == 'small' && selectedState.value.sizeSelected[1] == ''){
+        buyStore.addToBuy({id: item.value.id, size: selectedState.value.sizeSelected[0]})
+        router.replace({name: "buy"})
+        alert('구매 페이지로 이동합니다')
+        
+    }else if(selectedState.value.sizeSelected[1] == 'medium' && selectedState.value.sizeSelected[0] == ''){
+        buyStore.addToBuy({id: item.value.id, size: selectedState.value.sizeSelected[1]})
+        router.replace({name: "buy"})
+        alert('구매 페이지로 이동합니다')
+    }else {
+        alert('모든 사이즈를 선택하셨습니다. 확인 부탁드립니다')
+    }
+}
 </script>
 
 <script lang="ts">
@@ -161,32 +182,6 @@ export default defineComponent({
             // console.log("index value is " + c);
             return {c , b }
         },
-        buy(){
-            if(this.totalCount === 0){
-                alert('구매항목을 선택해 주세요')
-            }else{
-                
-                console.log('abc')
-                if(this.totalCount !== 0){
-                    axios.post("url", DataTransfer).then(function(response) {
-                        if(response.status === 200){
-                            console.log('abc')
-                            // this.$cookies.set("test", "testValue", "1d");
-                            // let d = new Date();
-                            // d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
-                            // let expires = "expires=" + d.toUTCString();
-                            // document.cookie = "Token=" + response.data.Token + ";" + expires + ";path=/"; 
-                        }
-                    })
-                    .catch(function(error){
-                        console.log(error)
-                    })
-                }
-                else{
-
-                }
-            }
-        }
     }
 })
 </script>
@@ -325,7 +320,7 @@ export default defineComponent({
                     </table>
                     <div class="buy_box">
                         <div class="buy_inner_box">
-                            <a href="#none" class="sub_buy" @click="buy()">BUY NOW</a>
+                            <a href="#none" class="sub_buy" @click="buyNow()">BUY NOW</a>
                             <a href="#none" class="sub_cart" @click="addToCart()">CART</a>
                         </div>
                     </div>

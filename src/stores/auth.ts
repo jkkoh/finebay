@@ -185,9 +185,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async getUser(){
       try {
-        const {data} = await useApiPrivate().get(`/api/auth/user`);
-        this.name = data
-        return data
+        
       } catch (error: Error | any) {
         throw error.message
       }
@@ -208,9 +206,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async refresh(){
       try {
-        const {data} = await useApi().post(`/api/auth/refresh`);
-        this.accessToken = data.access_token
-        return data
+        
       } catch (error: Error | any) {
         throw error.message
       }
