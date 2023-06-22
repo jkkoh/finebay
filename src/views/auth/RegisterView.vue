@@ -2,32 +2,32 @@
   <div id="register">
     <div class="container">
       <div class="card card-body mt-4">
-        <h5 class="card-title">Register</h5>
-        <form @submit.prevent="submit">
+        <h5 class="card-title">Register</h5> <p>* 필수 항목</p>
+        <div>
           <p v-if="errorMessage" class="error-message text-danger mb-4">{{ errorMessage }}</p>
           <div class="mb-3">
             <label for="email" class="form-label">이메일</label>
-            <input v-model="registerData.email" type="email" class="form-control" id="email" autocomplete="off">
+            <input v-model="registerData.email" type="email" class="form-control" id="email" autocomplete="off" placeholder="*">
           </div>
           <div class="mb-3">
             <label for="name" class="form-label">이름</label>
-            <input v-model="registerData.name" type="text" class="form-control" id="first_name" autocomplete="off">
+            <input v-model="registerData.name" type="text" class="form-control" id="first_name" autocomplete="off" placeholder="*">
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">비밀번호</label>
-            <input v-model="registerData.password" type="password" class="form-control" id="password">
+            <input v-model="registerData.password" type="password" class="form-control" id="password" placeholder="*">
           </div>
           <div class="mb-3">
             <label for="password_confirm" class="form-label">비밀번호 확인</label>
-            <input v-model="registerData.password_confirm" type="password" class="form-control" id="password_confirm">
+            <input v-model="registerData.password_confirm" type="password" class="form-control" id="password_confirm" placeholder="*">
           </div>
           <div class="mb-3">
             <label for="postCode" class="form-label">우편번호</label> <button @click="sample4_execDaumPostcode()">검색</button>
-            <input v-model="registerData.postCode" type="postCode" class="form-control" id="postCode" autocomplete="off">
+            <input v-model="registerData.postCode" type="postCode" class="form-control" id="postCode" autocomplete="off" placeholder="*">
           </div>
           <div class="mb-3">
             <label for="address" class="form-label">도로명 주소</label>
-            <input v-model="registerData.address" type="address" class="form-control" id="address" autocomplete="off" >
+            <input v-model="registerData.address" type="address" class="form-control" id="address" autocomplete="off" placeholder="*" >
           </div>
           <div class="mb-3">
             <label for="address1" class="form-label">지번 주소</label>
@@ -41,8 +41,8 @@
             <label for="address3" class="form-label">참고항목</label>
             <input v-model="registerData.address3" type="address3" class="form-control" id="address3" autocomplete="off">
           </div>
-          <button type="submit" class="btn btn-success">Register</button>
-        </form>
+          <button class="btn btn-success" @click="register()">Register</button>
+        </div>
       </div>
     </div>
   </div>
@@ -71,14 +71,21 @@ const registerData = reactive<RegisterData>({
 
 const errorMessage = ref<string>("")
 
-async function submit(){
-  await authStore.register(registerData)
+async function register(){
+  if(registerData.email !== "" && registerData.name !== "" && registerData.password !== "" &&
+  registerData.password_confirm !== "" && registerData.postCode !== "" && registerData.address !== ""){
+    await authStore.register(registerData)
     .then(res => {
+      alert('회원가입이 정상적으로 성공했습니다')
       router.replace({name: "login"})
     })
     .catch(err => {
       errorMessage.value = err.message
     })
+  } else{
+    alert('필수 항목을 입력해 주세요')
+  }
+  
 }
 
 function sample4_execDaumPostcode() {

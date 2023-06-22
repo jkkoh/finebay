@@ -8,13 +8,12 @@
           <div class="menu_m">
             <HeaderLink to="/"><img src="@/images/logo/logo.png" alt="" class="logo"></HeaderLink>
           </div>
-          <div class="menu_r" v-if="isAuthenticated">
-              <span>{{ user.name }} </span>
+          <div class="menu_r" v-if="isLoggedIn">
               <span  @click="logout()" class="toptoptop">LOGOUT</span>
               <HeaderLink to="/cart"><span class="toptoptop">CART</span></HeaderLink>
           </div>
           <div class="menu_r" v-else-if="isKakaoAuthenticated">
-              <span>{{ user.name }} </span>
+              <span> </span>
               <span> ON KAKAO </span>
               <span @click="kakaoLogout()" class="toptoptop">LOGOUT</span>
               <HeaderLink to="/cart"><span class="toptoptop">CART</span></HeaderLink>
@@ -140,16 +139,63 @@
 <script setup lang="ts">
 
 import { useAuthStore } from '../stores/auth';
-import {computed, watch } from 'vue';
+import {computed, onMounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
+import { Authenticator } from '@aws-amplify/ui-vue';
+import { useUser } from '../stores/loggedAuth'
+import { Hub, Auth } from 'aws-amplify'
+import { storeToRefs } from 'pinia';
+
 
 const authStore = useAuthStore()
 
 const router = useRouter()
 
-const user = computed(()=> {
-  return authStore.name
+const eee = ref({
+  name: '',
+  email: ''
 })
+
+const userStore = useUser()
+const { isLoggedIn } = storeToRefs(userStore)
+
+watch(
+    () => userStore.isLoggedIn,
+    () => {
+  if(userStore.isLoggedIn == true || localStorage.getItem('amplify-signin-with-hostedUI') !== null){
+    getUserInfo()
+  }else{
+    console.log('loggedin')
+  }
+},
+)
+
+onMounted(()=>{
+  if(userStore.isLoggedIn == true){
+    getUserInfo()
+  }else if(localStorage.getItem('amplify-signin-with-hostedUI') !== null && userStore.isLoggedIn == false){
+    userStore.login()
+    getUserInfo
+  }
+  else{
+    console.log('not logged in')
+  }
+})
+
+const uuserInfo = getUserInfo()
+
+
+
+async function getUserInfo(){
+  const Awsuser = await Auth.currentAuthenticatedUser();
+  const attributes = await Auth.userAttributes(Awsuser);
+  const userInfo = {
+        user : attributes[8].Value,
+        name: attributes[2].Value
+  }
+  eee.value.name = userInfo.name
+  eee.value.email = userInfo.user
+}
 
 const isAuthenticated = computed(()=>{
   return authStore.isAuthenticated
@@ -161,6 +207,7 @@ async function logout(){
   await authStore.logout()
     .then( res => {
       router.replace({name: 'home'})
+      userStore.logout()
     })
     .catch(err => {
       console.log(err.message)
@@ -183,6 +230,8 @@ async function kakaoLogout(){
 
 import { defineComponent } from 'vue'
 import HeaderLink from './HeaderLink.vue'
+import { userInfo } from 'os';
+
 export default defineComponent ({ 
     components:  { HeaderLink },
     mounted() {
@@ -248,8 +297,8 @@ export default defineComponent ({
       },
       m_menu_hide(){
         this.mMenuState = false;
-      }
-    },
+      },
+    }
 })
 </script>
 <style>
@@ -369,6 +418,7 @@ export default defineComponent ({
   width: 200px;
 }
 .toptoptop{
+  cursor: pointer;
   margin-right: 10px;
 }
 /* bot top menu end */

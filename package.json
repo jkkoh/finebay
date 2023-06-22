@@ -12,8 +12,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@aws-amplify/ui-vue": "^3.1.19",
     "@popperjs/core": "^2.11.7",
     "@vueuse/core": "^10.1.2",
+    "aws-amplify": "^5.3.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "core-js": "^3.30.2",

@@ -26,12 +26,15 @@
 
 <script setup lang="ts">
 import { useAuthStore, type LoginData, type KakaoRegisterData, type emailCheckData } from '../../stores/auth';
+import { useUser } from '../../stores/loggedAuth'
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { Auth } from 'aws-amplify'
 import  qs  from 'qs';
 import axios from 'axios';
 
 const authStore = useAuthStore()
+const userStore = useUser()
 const router = useRouter()
 
 const loginData = reactive<LoginData>({
@@ -54,30 +57,14 @@ const errorMessage = ref<string>("")
 
 
 async function submit(){
-  const axiosConfig = {
-    headers:{
-      "Accept":"application/json",
-      "Content-Type":"application/xml"
-    }
-  }
-  const sendParams =`<?xml version="1.0" encoding="UTF-8"?>
-  <email>${loginData.email}</email> + <password>${loginData.password}</password>
-  `
-
-  await axios.post('https://www.shopfineday.com/aaa', sendParams, 
-    axiosConfig
-  ).then(res => console.log(res))
-  
-  // fetch("http://localhost:443/data")
-  // .then(res => res.json)
-  // .then(data => console.log(data))
-  // await authStore.login(loginData)
-  //   .then(res => {
-  //     router.replace({name: "home"})
-  //   })
-  //   .catch(err => {
-  //     alert('이메일 혹은 비밀번호를 확인해주세요')
-  //   })
+  await Auth.signIn(loginData.email, loginData.password)
+    .then(res => {
+      userStore.login()
+      router.replace({name: "home"})
+    })
+    .catch(err => {
+      alert('이메일 혹은 비밀번호를 확인해주세요')
+    })
 }
 
 async function kakaoLogin(){

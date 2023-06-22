@@ -13,6 +13,7 @@
     "allowJs": true,
     "module": "es2022",
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "target": "es2022",
     "baseUrl": ".",
     "paths": {

@@ -1,6 +1,10 @@
 import {defineStore} from "pinia"
 import {useApi, useApiPrivate} from "../composables/useApi"
 import  axios  from "axios"
+import { Auth , Hub } from 'aws-amplify'
+import { useUser } from '../stores/userStore'
+
+
 
 export interface User{
   id: number,
@@ -11,7 +15,8 @@ export interface User{
 export interface State{
   name: User,
   accessToken: string,
-  authReady: boolean
+  authReady: boolean,
+  awsAccessToken: string,
 }
 
 export interface LoginData {
@@ -70,7 +75,8 @@ export const useAuthStore = defineStore('auth', {
     return {
       name: {} as User,
       accessToken: "" as string,
-      authReady: false as boolean
+      authReady: false as boolean,
+      awsAccessToken: "" as string,
     }
   },
 
@@ -92,25 +98,55 @@ export const useAuthStore = defineStore('auth', {
     },
     async login(payload: LoginData){
       try {
-        const {data} = await useApi().post(`/api/auth/login`, payload);
-        this.accessToken = data.access_token
-        await this.getUser()
-        return data
+        const username = payload.email
+        const password = payload.password
+        const user = await Auth.signIn(username, password)
       } catch (error: Error | any) {
         throw error.message
       }
     },
-    
-    async submit(){
-      fetch("https://www.shopfineday.com/auth/login",{
-        method: 'POST',
-      });
+    async getUserInfo(){
+      const Awsuser = await Auth.currentAuthenticatedUser();
+      const attributes = await Auth.userAttributes(Awsuser);
+      console.log(attributes)
+      console.log(attributes[2].Value)
+      console.log(typeof(attributes[1]))
+
+      const userInfo = {
+        user : attributes[8].Value,
+        name: attributes[2].Value
+      }
+      return userInfo
     },
 
     async register(payload: RegisterData){
       try {
-        const {data} = await useApi().post(`/api/auth/register`, payload);
-        return data
+        const username = payload.email 
+        const name = payload.name
+        const password = payload.password
+        const email = payload.email
+        const zoneCode = payload.postCode
+        const address = payload.address
+        const address1 = payload.address1
+        const address2 = payload.address2
+        const address3 = payload.address3
+        const { user } = await Auth.signUp({
+          username,
+          password,
+          attributes: {
+            email,
+            'custom:name': `${name}`,
+            'custom:zoneCode': `${zoneCode}`,
+            'custom:address' : `${address}`,
+            'custom:address1' : `${address1}`,
+            'custom:address2' : `${address2}`,
+            'custom:address3' : `${address3}`,
+            'custom:userPoints' : 0,
+          },
+          autoSignIn: {
+            enabled: true,
+          }
+        })
       } catch (error: Error | any) {
         throw error.message
       }
@@ -159,12 +195,9 @@ export const useAuthStore = defineStore('auth', {
     },
     async logout(){
       try {
-        const {data} = await useApiPrivate().post(`/api/auth/logout`);
-        this.accessToken = ""
-        this.name = {} as User
-        return data
+        await Auth.signOut()
       } catch (error: Error | any) {
-        throw error.message
+        console.log('error in sigining out: ', error)
       }
     },
     async kakaoLogout(){
