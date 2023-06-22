@@ -319,14 +319,9 @@ function deliveryCheck1(){
     }
 }
 
-function buyCheck(){
-    console.log(displayBuy.value)
-}
-
 function execDaumPostcode() {
     new window.daum.Postcode({
     oncomplete: (data: any) => {
-      console.log(data);
       const zoneCode : string = data.zonecode;
       const roadAdd : string = data.address;
       const buildingAdd : string = data.buildingName;
@@ -339,7 +334,6 @@ function execDaumPostcode() {
 function execDaumPostcode1() {
     new window.daum.Postcode({
     oncomplete: (data: any) => {
-      console.log(data);
       const zoneCode : string = data.zonecode;
       const roadAdd : string = data.address;
       const buildingAdd : string = data.buildingName;

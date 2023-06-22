@@ -134,22 +134,29 @@ function addToCart(){
         alert('상품을 선택을 해주셔야 장바구니에 담을수 있습니다')
     }else{
         cartStore.addToCart({id: item.value.id, quantity: selectedState.value.quantity, size:selectedState.value.sizeSelected})
-        console.log("cart", cart.value)
         alert('장바구니에 물품이 담겼습니다')
     }
 }  
 function buyNow(){
     if(totalPrice.value == 0 || null){
+        console.log('aaaa')
         alert('상품을 선택을 해주셔야 구매하실수 있습니다')
+        console.log('aaaa')
     }else if(selectedState.value.sizeSelected[0] == 'small' && selectedState.value.sizeSelected[1] == ''){
+        cartStore.addToCart({id: item.value.id, quantity: selectedState.value.quantity, size:selectedState.value.sizeSelected})
         buyStore.addToBuy({id: item.value.id, size: selectedState.value.sizeSelected[0]})
+        alert('111111')
         router.replace({name: "buy"})
         alert('구매 페이지로 이동합니다')
+        console.log('bbb')
         
     }else if(selectedState.value.sizeSelected[1] == 'medium' && selectedState.value.sizeSelected[0] == ''){
+        cartStore.addToCart({id: item.value.id, quantity: selectedState.value.quantity, size:selectedState.value.sizeSelected})
         buyStore.addToBuy({id: item.value.id, size: selectedState.value.sizeSelected[1]})
+        alert('11111')
         router.replace({name: "buy"})
         alert('구매 페이지로 이동합니다')
+        console.log('ccc')
     }else {
         alert('모든 사이즈를 선택하셨습니다. 확인 부탁드립니다')
     }
@@ -320,8 +327,8 @@ export default defineComponent({
                     </table>
                     <div class="buy_box">
                         <div class="buy_inner_box">
-                            <a href="#none" class="sub_buy" @click="buyNow()">BUY NOW</a>
-                            <a href="#none" class="sub_cart" @click="addToCart()">CART</a>
+                            <span class="sub_buy" @click="buyNow()">BUY NOW</span>
+                            <span class="sub_cart" @click="addToCart()">CART</span>
                         </div>
                     </div>
                 </div>
@@ -604,6 +611,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     letter-spacing: 0.3em;
+    cursor: pointer;
 }
 .sub_cart{
     width: 500px;
@@ -620,6 +628,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     letter-spacing: 0.3em;
+    cursor: pointer;
 }
 /* size_box end */
 /* main_a end */
