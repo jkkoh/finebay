@@ -129,7 +129,7 @@
                                                 <span> 수량 : {{item['quantity'][0]}}</span>
                                                 <div> <span>가격 :</span> <span class="crossed"> {{ item['price'] }} </span> <span>-5% 할인 =></span> <span>{{ item['price'] * 0.95 }}</span> </div>
                                             </div>
-                                            <div class="delete_box">
+                                            <div class="deletea_box">
                                                 <span>삭제</span>
                                                 <span @click="removeItem(item['id'])">X</span>
                                             </div>
@@ -148,7 +148,7 @@
                                                 <span> 수량 : {{item['quantity'][1]}}</span>
                                                 <div> <span>가격 :</span> <span class="crossed"> {{ item['price'] }} </span> <span>-5% 할인 =></span> <span>{{ item['price'] * 0.95 }}</span> </div>
                                             </div>
-                                            <div class="delete_box">
+                                            <div class="deletea_box">
                                                 <span>삭제</span>
                                                 <img src="@/images/etc/button_delete.gif" alt="delete_item" @click="removeItem(item['id'])" class="delete_btn">
                                             </div>
@@ -409,6 +409,7 @@ return sum
 
 function buyEvent(){
     alert('구매가 완료되었습니다')
+    router.replace({name: "home"})
 }
 
 
@@ -684,7 +685,7 @@ export default defineComponent({
     flex-direction: column;
     justify-content: space-between;
 }
-.delete_box{
+.deletea_box{
     width: 150px;
     height: 200px;
     margin-top: 10px;

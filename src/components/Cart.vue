@@ -210,6 +210,7 @@ function buyingItem(this:any){
             console.log("buy", buy.value)
         }
         alert('구매 페이지로 이동합니다')
+        router.replace({name: "buy"})
     }
 
 }
@@ -330,6 +331,9 @@ function buyingItem(this:any){
 .delete_box{
     cursor: pointer;
     width: 15px;
+    height: 15px;
+    max-width: 15px;
+    max-height: 15px;
 }
 .cart_icon{
     margin-left: 10px;
