@@ -30,8 +30,6 @@ import { useUser } from '../../stores/loggedAuth'
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Auth } from 'aws-amplify'
-import  qs  from 'qs';
-import axios from 'axios';
 
 const authStore = useAuthStore()
 const userStore = useUser()
@@ -80,7 +78,6 @@ async function kakaoLogin(){
 
 <script lang="ts">
 import {defineComponent} from "vue";
-import { react } from '@babel/types';
 
 export default defineComponent({
   mounted() {
