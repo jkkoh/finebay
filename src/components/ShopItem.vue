@@ -958,11 +958,13 @@ export default defineComponent({
     padding-top: 30px;
 }
 .m_t_title {
+    margin-left: 5px;
     font-size: 1.1rem;
     font-family: "Open_Sans";
 }
 .m_t_t_info{
     margin-top: 10px;
+    margin-left: 5px;
     font-size: 0.9rem;
     font-family: "Noto_Sans";
 }
@@ -984,6 +986,7 @@ export default defineComponent({
     /* background-color: blue; */
 }
 .m_t_head{
+    margin-left: 5px;
     width: 25vw;
     display: flex;
     font-size: 0.9rem;
