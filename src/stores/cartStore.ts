@@ -53,7 +53,7 @@ export const useBuyStore = defineStore('buy',{
             (this.buy as Buy).buyProducts = (this.buy as Buy).buyProducts.filter(ci => ci.id != id) 
             this.displayBuyLoad()
             localStorage.setItem('buy', JSON.stringify(this.buy))
-            const buyCurrentStatus = JSON.parse(localStorage.getItem('buy'))
+            const buyCurrentStatus = JSON.parse(localStorage.getItem('buy') as string)
             if(!buyCurrentStatus.buyProducts[0]){
                 localStorage.removeItem('buy')
             }
@@ -120,7 +120,7 @@ export const useCartStore = defineStore('cart',{
                 (this.cart as Cart).products = (this.cart as Cart).products.filter(ci => ci.id != id) 
                 this.displayCartLoad()
                 localStorage.setItem('cart', JSON.stringify(this.cart))
-                const cartCurrentStatus = JSON.parse(localStorage.getItem('cart'))
+                const cartCurrentStatus = JSON.parse(localStorage.getItem('cart') as string)
                 if(!cartCurrentStatus.products[0]){
                     localStorage.removeItem('cart')
                 }
