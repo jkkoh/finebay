@@ -615,14 +615,14 @@ export default defineComponent ({
   background-color: black;
 }
 .m_menu_inner_mid{
-  width: 100px;
+  width: 40vw;
   height: 50px;
   display: flex;
   align-content: center;
   align-items: center;
 }
 .m_logo{
-  width: 100px;
+  width: 40vw;
 }
 .m_menu_inner_right{
   width: 50px;

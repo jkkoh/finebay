@@ -251,7 +251,7 @@ export default defineComponent ({
 .m_top_top_inner > div {
     padding-left: 7px;
     padding-right: 7px;
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     box-sizing: border;
     border-right: 1px solid #555;
     color: #777
@@ -259,7 +259,7 @@ export default defineComponent ({
 .m_top_top_inner > span{
     padding-left: 7px;
     padding-right: 7px;
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     box-sizing: border;
     border-right: 1px solid #555;
     color: #777
@@ -277,7 +277,10 @@ export default defineComponent ({
 }
 .m_bot_up{
     width: 100%;
-    font-size: 20px;
+    font-size: 1.3rem;
+}
+.m_bot_down{
+    font-size: 0.8rem;
 }
 
 /* mobile end*/
