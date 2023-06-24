@@ -40,5 +40,9 @@ export default defineComponent({
   flex-direction: column;
   justify-content: space-between;
 }
+.container{
+  padding-left: 0;
+  padding-right: 0;
+}
 </style>
 
