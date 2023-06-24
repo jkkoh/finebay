@@ -459,8 +459,6 @@ export default defineComponent ({
 <style>
 .menu {
   width: 100%;
-  min-width: 350px;
-  
 }
 .top_menu{
   position: relative;
@@ -580,8 +578,8 @@ export default defineComponent ({
 
 /*mobile start*/
 .m_menu_top{
-  width: 100%;
-  min-width: 250px;
+  width: 100vw;
+  min-width: 280px;
   height: 100px;
   background-color: green;
 }

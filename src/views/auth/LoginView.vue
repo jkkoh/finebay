@@ -15,9 +15,6 @@
             </div>
             <div class="login_outer">
               <button type="submit" class="login_button">Login</button>
-              <div @click="kakaoLogin()" class="login_button">
-                <img src="@/images/logo/certi_kakao_login.png" class="kakao_img">
-              </div>
             </div>
           </form>
         </div>
@@ -40,7 +37,12 @@
                 </div>
               </div>
               <div class="mob_log_bot">
-                <div></div>
+                <div class="mobile_register" @click="toRegister()">
+                  <span>회원가입</span>
+                </div>
+                <div class="mobile_submit" @click="submit()">
+                  <span>로그인</span>
+                </div>
               </div>
             </div>
             <div class="mob_con_inner_bot_bot">
@@ -104,6 +106,9 @@ async function kakaoLogin(){
       errorMessage.value = err
     })
 }
+function toRegister(){
+  router.replace({name: "register"})
+}
 </script>
 
 <script lang="ts">
@@ -134,8 +139,9 @@ export default defineComponent({
             }else if(window.innerWidth >= mobile){
                 this.mobileState = false;
             }
-      },
     },
+  },
+    
   data: ()=>{
     return {
       mobileState : false,
@@ -169,18 +175,16 @@ export default defineComponent({
 
 .mobile_container{
   width: 100%;
-  background-color: aqua;
+
 }
 .mob_con_inner{
   width: 80%;
   margin-left: 10%;
   margin-top: 50px;
-  background-color: green;
 }
 .mob_con_inner_top{
   width: 100%;
   height: 100px;
-  background-color: aquamarine;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -199,7 +203,6 @@ export default defineComponent({
 .mob_log_top_top{
   width: 100%;
   height: 70px;
-  background-color: green;
   display: flex;
   align-items: center;
 }
@@ -214,7 +217,6 @@ export default defineComponent({
 .mob_log_top_bot{
   width: 100%;
   height: 70px;
-  background-color: blue;
   display: flex;
   align-items: center;
 }
@@ -228,14 +230,33 @@ export default defineComponent({
 .mob_log_bot{
   width: 100%;
   height: 100px;
-  background-color: blanchedalmond;
 }
 .mob_con_inner_bot_bot{
   width: 100%;
   height: 300px;
-  background-color: darkgoldenrod;
 }
-
+.mobile_register{
+  width: 100%;
+  height: 50px;
+  background-color : #874;
+  border: 1px solid #131719;
+  border-bottom: none;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.mobile_submit{
+  width: 100%;
+  height: 50px;
+  background-color : #555;
+  border: 1px solid #131719;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
 /*mob_con_inner_bot end*/
 
 

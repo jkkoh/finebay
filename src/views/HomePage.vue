@@ -186,7 +186,17 @@ export default defineComponent({
     </div>
     <div v-if="mobileState == true">
         <div>
-            <p>mobile home page</p>
+            <div class="m_slide_show">
+                <SlideShow v-for="(data, index) in slideData" 
+                :key="index"
+                :img="slideData[index].img"
+                :myId="index + 1"
+                :currentId="currentId"
+                :count="slideCounts"
+                @direction="dir"
+                :startAnime="startAnime"
+                />
+            </div>
         </div>
     </div>
 </div>
@@ -343,4 +353,14 @@ export default defineComponent({
     justify-content: center;
 }
 
+/*mobile start*/
+.m_slide_show{
+    margin: 0;  
+    width: 100vw;
+    height: 57vw;
+    min-height: 100px;
+}
+
+
+/*mobile end*/
 </style>
