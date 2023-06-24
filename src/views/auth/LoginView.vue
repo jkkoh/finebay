@@ -1,26 +1,56 @@
 <template>
-  <div id="login">
-    <div class="container">
-      <div class="card card-body mt-4">
-        <h5 class="card-title">로그인</h5>
-        <form @submit.prevent="submit">
-          <div class="mb-3">
-            <label for="email" class="form-label">이메일 주소</label>
-            <input v-model="loginData.email" type="email" class="form-control" id="email" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">비밀번호</label>
-            <input v-model="loginData.password" type="password" class="form-control" id="password">
-          </div>
-          <div class="login_outer">
-            <button type="submit" class="login_button">Login</button>
-            <div @click="kakaoLogin()" class="login_button">
-              <img src="@/images/logo/certi_kakao_login.png" class="kakao_img">
+  <div>
+    <div v-if="!mobileState" id="login">
+      <div class="container">
+        <div class="card card-body mt-4">
+          <h5 class="card-title">로그인</h5>
+          <form @submit.prevent="submit">
+            <div class="mb-3">
+              <label for="email" class="form-label">이메일 주소</label>
+              <input v-model="loginData.email" type="email" class="form-control" id="email" autocomplete="off">
             </div>
-          </div>
-        </form>
+            <div class="mb-3">
+              <label for="password" class="form-label">비밀번호</label>
+              <input v-model="loginData.password" type="password" class="form-control" id="password">
+            </div>
+            <div class="login_outer">
+              <button type="submit" class="login_button">Login</button>
+              <div @click="kakaoLogin()" class="login_button">
+                <img src="@/images/logo/certi_kakao_login.png" class="kakao_img">
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
+    <div v-if="mobileState">
+      <div class="mobile_container">
+        <div class="mob_con_inner">
+          <div class="mob_con_inner_top">
+            <h2>Login</h2>
+          </div>
+          <div class="mob_con_inner_bot">
+            <div class="mob_con_inner_bot_top">
+              <div class="mob_log_top">
+                <div class="mob_log_top_top">
+                  <input v-model="loginData.email" type="email" class="mob_email_input" id="email" autocomplete="off" placeholder="아이디">
+                </div>
+                <div class="mob_log_top_bot">
+                  <input v-model="loginData.password" type="password" class="mob_pass_input" id="password" placeholder="비밀번호">
+                </div>
+              </div>
+              <div class="mob_log_bot">
+
+              </div>
+            </div>
+            <div class="mob_con_inner_bot_bot">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -81,12 +111,34 @@ import {defineComponent} from "vue";
 
 export default defineComponent({
   mounted() {
-        let recaptchaScript = document.createElement('script')
-        recaptchaScript.setAttribute('src', 'https://developers.kakao.com/sdk/js/kakao.min.js')
-        document.head.appendChild(recaptchaScript)
-    },
-  methods: {
+    let recaptchaScript = document.createElement('script')
+    recaptchaScript.setAttribute('src', 'https://developers.kakao.com/sdk/js/kakao.min.js')
+    document.head.appendChild(recaptchaScript)
+    window.addEventListener("resize", this.myEventHandler);
+    if(window.innerWidth < 800){
+      this.mobileState = true;
+    }else if(window.innerWidth >= 800){
+      this.mobileState = false;
     }
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.myEventHandler);
+  },
+  methods: {
+    myEventHandler(){
+            const mobile = 800
+            if(window.innerWidth < mobile ){
+                this.mobileState = true;
+            }else if(window.innerWidth >= mobile){
+                this.mobileState = false;
+            }
+      },
+    },
+  data: ()=>{
+    return {
+      mobileState : false,
+    }
+  }
   })
 
 </script>
@@ -108,4 +160,83 @@ export default defineComponent({
   width: 100%;
   cursor: pointer;
 }
+
+
+
+/*mobile css start*/
+
+.mobile_container{
+  width: 100%;
+  background-color: aqua;
+}
+.mob_con_inner{
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 50px;
+  background-color: green;
+}
+.mob_con_inner_top{
+  width: 100%;
+  height: 100px;
+  background-color: aquamarine;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*mob_con_inner_bot start*/
+.mob_con_inner_bot{
+  width: 100%;
+}
+.mob_con_inner_bot_top{
+  width: 100%;
+  height: 300px;
+}
+.mob_log_top{
+  width: 100%;
+}
+.mob_log_top_top{
+  width: 100%;
+  height: 70px;
+  background-color: green;
+  display: flex;
+  align-items: center;
+}
+.mob_email_input{
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  border-radius: 50px;
+  padding-left: 20px;
+}
+
+.mob_log_top_bot{
+  width: 100%;
+  height: 70px;
+  background-color: blue;
+  display: flex;
+  align-items: center;
+}
+.mob_pass_input{
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+  border-radius: 50px;
+  padding-left: 20px;
+}
+.mob_log_bot{
+  width: 100%;
+  height: 100px;
+  background-color: blanchedalmond;
+}
+.mob_con_inner_bot_bot{
+  width: 100%;
+  height: 300px;
+  background-color: darkgoldenrod;
+}
+
+/*mob_con_inner_bot end*/
+
+
+
+/*mobile css end*/
 </style>

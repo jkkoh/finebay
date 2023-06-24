@@ -110,21 +110,107 @@
 
           </div>
           <div class="m_main_menu">
-            <div class="m_top_main_menu">
-              <HeaderLink to="/"><span class="m_main_header" @click="m_menu_hide()">Finebay</span></HeaderLink>
-            </div>
-            <div class="m_mid_main_menu">
-              <div class="m_mid_btn_main">
-                <HeaderLink to="/login"><span class="m_lc_btn" @click="m_menu_hide()">LOGIN</span></HeaderLink>
+            <div class="m_main_margin_m">
+              <div class="m_top_main_menu">
+                <HeaderLink to="/"><span class="m_main_header" @click="m_menu_hide()">Finebay</span></HeaderLink>
               </div>
-              <div class="m_mid_btn_main">
-                <HeaderLink to="/register"><span class="m_lc_btn" style="backgroundColor : yellow" @click="m_menu_hide()">CREATE ACCOUNT</span></HeaderLink>
-                
+              <div class="m_mid_main_menu">
+                <div class="m_mid_btn_main">
+                  <HeaderLink to="/login"><span class="m_lc_btn" @click="m_menu_hide()">LOGIN</span></HeaderLink>
+                </div>
+                <div class="m_mid_btn_main">
+                  <HeaderLink to="/register"><span class="m_lc_btn" style="backgroundColor : yellow" @click="m_menu_hide()">CREATE ACCOUNT</span></HeaderLink>
+                  
+                </div>
               </div>
-            </div>
-            <div class="m_bot_main_menu">
-              <div class="m_bot_main_menu_sub_start">
-
+              <div class="m_bot_main_menu">
+                <div class="m_bot_main_menu_sub_start">
+                  <div class="m_bot_main_menu_sub_top">
+                    <span>CATEGORY</span>
+                  </div>
+                  <div class="m_bot_main_menu_sub_bot">
+                    <ul class="m_bot_main_menu_sub_bot_catList">
+                      <div class="m_bot_main_menu_sub_bot_catList_inner" @click="mob_menu_click_0()">
+                        <div class="m_bot_main_menu_sub_bot_catList_inner_state_box">
+                          <span class="cartList_top_span" v-bind:style="{ transform : `rotate(${mm_0_top}deg)` }"></span>
+                          <span class="cartList_bot_span" v-bind:style="{ transform : `rotate(${mm_0_bot}deg)` }"></span>
+                        </div>
+                        <li class="m_mm_list">Swimwear</li>
+                      </div>
+                      <div class="m_bot_main_menu_sub_bot_catList_innest" v-if="mobile_menu_click_0">
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/swimwearAll" @click="m_menu_hide()">ALL</HeaderLink>
+                        </div>
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/swimwearTop" @click="m_menu_hide()">TOP</HeaderLink>
+                        </div>
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/swimwearBot" @click="m_menu_hide()">BOTTOM</HeaderLink>
+                        </div>
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/swimwearMono" @click="m_menu_hide()">MONOKINI</HeaderLink>
+                        </div>
+                      </div>
+                    </ul>
+                    <ul class="m_bot_main_menu_sub_bot_catList">
+                      <div class="m_bot_main_menu_sub_bot_catList_inner" @click="mob_menu_click_1()">
+                        <div class="m_bot_main_menu_sub_bot_catList_inner_state_box">
+                          <span class="cartList_top_span" v-bind:style="{ transform : `rotate(${mm_1_top}deg)` }"></span>
+                          <span class="cartList_bot_span" v-bind:style="{ transform : `rotate(${mm_1_bot}deg)` }"></span>
+                        </div>
+                        <li class="m_mm_list">Beachwear</li>
+                      </div>    
+                      <div class="m_bot_main_menu_sub_bot_catList_innest" v-if="mobile_menu_click_1">
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/beachwearAll" @click="m_menu_hide()">ALL</HeaderLink>
+                        </div>
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/beachwearTop" @click="m_menu_hide()">TOP</HeaderLink>
+                        </div>
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/beachwearBot" @click="m_menu_hide()">BOTTOM</HeaderLink>
+                        </div>
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/beachwearMono" @click="m_menu_hide()">MONOKINI</HeaderLink>
+                        </div>
+                      </div>                  
+                    </ul>
+                    <ul class="m_bot_main_menu_sub_bot_catList">
+                      <div class="m_bot_main_menu_sub_bot_catList_inner" @click="mob_menu_click_2()">
+                        <div class="m_bot_main_menu_sub_bot_catList_inner_state_box">
+                          <span class="cartList_top_span" v-bind:style="{ transform : `rotate(${mm_2_top}deg)` }"></span>
+                          <span class="cartList_bot_span" v-bind:style="{ transform : `rotate(${mm_2_bot}deg)` }"></span>
+                        </div>
+                        <li class="m_mm_list">About</li>
+                      </div>    
+                      <div class="m_bot_main_menu_sub_bot_catList_innest" v-if="mobile_menu_click_2">
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/aboutBrand" @click="m_menu_hide()">BRAND</HeaderLink>
+                        </div>
+                      </div>                  
+                    </ul>
+                    <ul class="m_bot_main_menu_sub_bot_catList">
+                      <div class="m_bot_main_menu_sub_bot_catList_inner" @click="mob_menu_click_3()">
+                        <div class="m_bot_main_menu_sub_bot_catList_inner_state_box">
+                          <span class="cartList_top_span" v-bind:style="{ transform : `rotate(${mm_3_top}deg)` }"></span>
+                          <span class="cartList_bot_span" v-bind:style="{ transform : `rotate(${mm_3_bot}deg)` }"></span>
+                        </div>
+                        <li class="m_mm_list">Customer</li>
+                      </div>       
+                      <div class="m_bot_main_menu_sub_bot_catList_innest" v-if="mobile_menu_click_3">
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/sizeGuide" @click="m_menu_hide()">SIZE</HeaderLink>
+                        </div>
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/deliveryGuide" @click="m_menu_hide()">ORDER & DELIVERY</HeaderLink>
+                        </div>
+                        <div class="m_bot_main_menu_sub_bot_catList_innest_in">
+                          <HeaderLink to="/contactGuide" @click="m_menu_hide()">CONTACT</HeaderLink>
+                        </div>
+                      </div>               
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -254,6 +340,18 @@ export default defineComponent ({
         bot_menu_hover_1 : false,
         bot_menu_hover_2 : false,
         bot_menu_hover_3 : false,
+        mobile_menu_click_0 : false,
+        mobile_menu_click_1 : false,
+        mobile_menu_click_2 : false,
+        mobile_menu_click_3 : false,
+        mm_0_top : 0,
+        mm_0_bot : 90,
+        mm_1_top : 0,
+        mm_1_bot : 90,
+        mm_2_top : 0,
+        mm_2_bot : 90,
+        mm_3_top : 0,
+        mm_3_bot : 90,
         mobileState : false,
         mMenuState : false,
       }
@@ -283,6 +381,50 @@ export default defineComponent ({
       m_menu_hover_f_3() {
         this.bot_menu_hover_3 = false;
       },
+      mob_menu_click_0(){
+        if(this.mobile_menu_click_0 == false){
+          this.mobile_menu_click_0 = true;
+          this.mm_0_top = 45;
+          this.mm_0_bot = 135;
+        }else if(this.mobile_menu_click_0 == true){
+          this.mobile_menu_click_0 = false;
+          this.mm_0_top = 0;
+          this.mm_0_bot = 90;
+        }
+      },
+      mob_menu_click_1(){
+        if(this.mobile_menu_click_1 == false){
+          this.mobile_menu_click_1 = true;
+          this.mm_1_top = 45;
+          this.mm_1_bot = 135;
+        }else if(this.mobile_menu_click_1 == true){
+          this.mobile_menu_click_1 = false;
+          this.mm_1_top = 0;
+          this.mm_1_bot = 90;
+        }
+      },
+      mob_menu_click_2(){
+        if(this.mobile_menu_click_2 == false){
+          this.mobile_menu_click_2 = true;
+          this.mm_2_top = 45;
+          this.mm_2_bot = 135;
+        }else if(this.mobile_menu_click_2 == true){
+          this.mobile_menu_click_2 = false;
+          this.mm_2_top = 0;
+          this.mm_2_bot = 90;
+        }
+      },
+      mob_menu_click_3(){
+        if(this.mobile_menu_click_3 == false){
+          this.mobile_menu_click_3 = true;
+          this.mm_3_top = 45;
+          this.mm_3_bot = 135;
+        }else if(this.mobile_menu_click_3 == true){
+          this.mobile_menu_click_3 = false;
+          this.mm_3_top = 0;
+          this.mm_3_bot = 90;
+        }
+      },
       myEventHandler(){
             const mobile = 800
             if(window.innerWidth < mobile ){
@@ -297,6 +439,18 @@ export default defineComponent ({
       },
       m_menu_hide(){
         this.mMenuState = false;
+        if(this.mobile_menu_click_0){
+          this.mob_menu_click_0()
+        }
+        if(this.mobile_menu_click_1){
+          this.mob_menu_click_1()
+        }
+        if(this.mobile_menu_click_2){
+          this.mob_menu_click_2()
+        }
+        if(this.mobile_menu_click_3){
+          this.mob_menu_click_3()
+        }
       },
     }
 })
@@ -502,6 +656,8 @@ export default defineComponent ({
 }
 .m_main_menu{
   position: absolute;
+  display: flex;
+  justify-content: center;
   top: 50%;
   transform: translateY(-50%);
   width: 70vw;
@@ -509,6 +665,10 @@ export default defineComponent ({
   height: 100vh;
   background-color: aliceblue;
   z-index: 80;
+}
+.m_main_margin_m{
+  width: 95%;
+  height: 100%;
 }
 .m_main_close_bar{
   position: absolute;
@@ -528,7 +688,6 @@ export default defineComponent ({
 .m_top_main_menu{
   width: 100%;
   height: 100px;
-  background-color: green;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -585,5 +744,89 @@ export default defineComponent ({
   justify-content: center;
   font-size: 13px;
   cursor: pointer;
+}
+.m_bot_main_menu{
+  width:100%;
+  height:600px;
+}
+.m_bot_main_menu_sub_top{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: end;
+  box-sizing: border-box;
+  border-bottom: 1px solid black;
+}
+.m_bot_main_menu_sub_top > span{
+  font-size: 24px;
+  margin-left: 10px;
+  margin-bottom:10px;
+}
+.m_bot_main_menu_sub_bot{
+  width: 100%;
+}
+.m_mm_list{
+  margin-left: 5px;
+  list-style: none;
+  font-size: 15px;
+}
+.m_bot_main_menu_sub_bot_catList{
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+.m_bot_main_menu_sub_bot_catList_inner{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  cursor: pointer;
+}
+.m_bot_main_menu_sub_bot_catList_inner_state_box{
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.m_bot_main_menu_sub_bot_catList_innest{
+  display: block;
+  width: 100%;
+}
+.m_bot_main_menu_sub_bot_catList_innest_in{
+  display: block;
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  border-bottom: 0.2px solid rgba(0, 0, 0, 0.2);
+}
+.m_bot_main_menu_sub_bot_catList_innest_in > div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.m_bot_main_menu_sub_bot_catList_innest_in > div > a {
+  margin-left: 30px;
+}
+.cartList_top_span{
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  transition-duration: 0.5s;
+  width: 12px;
+  height: 1px;
+  background-color: black;
+}
+.cartList_bot_span{
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%) rotate(90deg);
+  transition-duration: 0.5s;
+  width: 12px;
+  height: 1px;
+  background-color: black;
 }
 </style>
