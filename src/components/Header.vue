@@ -231,6 +231,7 @@ import { Authenticator } from '@aws-amplify/ui-vue';
 import { useUser } from '../stores/loggedAuth'
 import { Hub, Auth } from 'aws-amplify'
 import { storeToRefs } from 'pinia';
+import MobileDetect from 'mobile-detect'
 
 
 const authStore = useAuthStore()
@@ -316,7 +317,6 @@ async function kakaoLogout(){
 
 import { defineComponent } from 'vue'
 import HeaderLink from './HeaderLink.vue'
-import { userInfo } from 'os';
 
 export default defineComponent ({ 
     components:  { HeaderLink },
@@ -325,7 +325,8 @@ export default defineComponent ({
       recaptchaScript.setAttribute('src', 'https://developers.kakao.com/sdk/js/kakao.min.js')
       document.head.appendChild(recaptchaScript)
       window.addEventListener("resize", this.myEventHandler);
-      if(window.innerWidth < 800){
+      const md = new MobileDetect(window.navigator.userAgent)
+      if(window.innerWidth < 800 || md.mobile() || md.tablet()){
         this.mobileState = true;
       }else if(window.innerWidth >= 800){
         this.mobileState = false;
