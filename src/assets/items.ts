@@ -32,7 +32,7 @@ export const items = [
     {
         image:[new URL("@/images/productInfo/FDSM001_YELLOW_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_YELLOW_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_YELLOW_3.jpg", import.meta.url).href, 
         new URL("@/images/productInfo/FDSM001_YELLOW_4.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_YELLOW_5.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_YELLOW_6.jpg", import.meta.url).href ],
-        longImage:[new URL("@/images/productDetail/FDSM001Y_YELLOW_DETAIL.jpg", import.meta.url).href, new URL("@/images/productDetail/FOOTER_DETAIL.jpg", import.meta.url).href],
+        longImage:[new URL("@/images/productDetail/FDSM001_YELLOW_DETAIL.jpg", import.meta.url).href, new URL("@/images/productDetail/FOOTER_DETAIL.jpg", import.meta.url).href],
         text: "TIE BACK MONOKINI YELLOW",
         itemInfo: ["안정감있게 가슴을 감싸는 타이백 디자인의", "브이넥 비키니 탑입니다."],
         itemCode: "FDSM001Y",
