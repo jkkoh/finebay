@@ -133,7 +133,7 @@ export default defineComponent({
                             </div>
                             <div class="inner_text_box">
                                 <div class="botbot_top"> {{items[14].text}} </div>
-                                <div class="botbot_bot"> {{items[14].price}} </div>
+                                <div class="botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[14].price}}</p><p>{{items[14].price * 0.95}}</p></div>
                             </div>
                         </div>
                     </div>
@@ -144,7 +144,7 @@ export default defineComponent({
                             </div>
                             <div class="inner_text_box">
                                 <div class="botbot_top"> {{items[0].text}} </div>
-                                <div class="botbot_bot"> {{items[0].price}} </div>
+                                <div class="botbot_bot"> <p style="color:#555; textDecorationLine : line-through;">{{items[0].price}}</p> <p>{{items[0].price * 0.95}}</p>  </div>
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,7 @@ export default defineComponent({
                             </div>
                             <div class="inner_text_box">
                                 <div class="botbot_top"> {{items[7].text}} </div>
-                                <div class="botbot_bot"> {{items[7].price}} </div>
+                                <div class="botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[7].price}}</p><p>{{items[7].price * 0.95}}</p></div>
                             </div>
                         </div>
                     </div>
@@ -166,7 +166,7 @@ export default defineComponent({
                             </div>
                             <div class="inner_text_box">
                                 <span class="botbot_top"> {{items[9].text}}</span>
-                                <span class="botbot_bot"> {{items[9].price}}</span>
+                                <span class="botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[9].price}}</p><p>{{items[9].price * 0.95}}</p></span>
                             </div>
                         </div>
                     </div>
@@ -224,7 +224,7 @@ export default defineComponent({
                                 </div>
                                 <div class="m_inner_text_box">
                                     <div class="m_botbot_top"> {{items[14].text}} </div>
-                                    <div class="m_botbot_bot"> {{items[14].price}} </div>
+                                    <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[14].price}}</p><p>{{items[14].price * 0.95}}</p></span>
                                 </div>
                             </div>
                         </div>
@@ -235,7 +235,7 @@ export default defineComponent({
                                 </div>
                                 <div class="m_inner_text_box">
                                     <div class="m_botbot_top"> {{items[0].text}} </div>
-                                    <div class="m_botbot_bot"> {{items[0].price}} </div>
+                                    <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[0].price}}</p><p>{{items[0].price * 0.95}}</p></span>
                                 </div>
                             </div>
                         </div>
@@ -246,7 +246,7 @@ export default defineComponent({
                                 </div>
                                 <div class="m_inner_text_box">
                                     <div class="m_botbot_top"> {{items[7].text}} </div>
-                                    <div class="m_botbot_bot"> {{items[7].price}} </div>
+                                    <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[7].price}}</p><p>{{items[7].price * 0.95}}</p></span>
                                 </div>
                             </div>
                         </div>
@@ -257,7 +257,7 @@ export default defineComponent({
                                 </div>
                                 <div class="m_inner_text_box">
                                     <div class="m_botbot_top"> {{items[9].text}} </div>
-                                    <div class="m_botbot_bot"> {{items[9].price}} </div>
+                                    <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[9].price}}</p><p>{{items[9].price * 0.95}}</p></span>
                                 </div>
                             </div>
                         </div>
@@ -419,6 +419,9 @@ export default defineComponent({
     align-items: center;
     justify-content: center;
 }
+.botbot_bot > p{
+    margin-right: 10px;
+}
 
 /*mobile start*/
 .m_slide_show{
@@ -481,6 +484,15 @@ export default defineComponent({
 .m_best_bot_inner{
     margin-top: 20px;
     margin-bottom: 20px;
+}
+.m_botbot_bot{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+}
+.m_botbot_bot > p{
+    margin-right: 10px;
 }
 
 /*mobile end*/

@@ -213,7 +213,7 @@ export const items = [
         image:[new URL("@/images/productInfo/FDSM001_BLUE_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_BLUE_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_BLUE_3.jpg", import.meta.url).href, 
         new URL("@/images/productInfo/FDSM001_BLUE_4.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_BLUE_5.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_BLUE_6.jpg", import.meta.url).href ],
         longImage:[new URL("@/images/productDetail/FDSM001_BLUE_DETAIL.jpg", import.meta.url).href, new URL("@/images/productDetail/FOOTER_DETAIL.jpg", import.meta.url).href],
-        text: "TIME BACK MONOKINI BLUE",
+        text: "TIE BACK MONOKINI BLUE",
         itemInfo: ["안정감있게 가슴을 감싸는 타이백 디자인의", "브이넥 비키니 탑입니다."],
         itemCode: "FDSM001B",
         price: 149000,
