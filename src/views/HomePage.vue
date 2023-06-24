@@ -214,10 +214,53 @@ export default defineComponent({
             <div class="m_best_area">
                 <div class="m_inner_best_area">
                     <div class="m_best_top">
-                        <span>BEST</span>
+                        <h2>Best</h2>
                     </div>
                     <div class="m_best_bot">
-                        
+                        <div class="m_best_bot_inner">
+                            <div class="m_best_bot_inner_inner">
+                                <div class="m_inner_img_box">
+                                    <img :src="items[14].image[0]" alt="" class="inner_img" @click="goToItem(14)">
+                                </div>
+                                <div class="m_inner_text_box">
+                                    <div class="m_botbot_top"> {{items[14].text}} </div>
+                                    <div class="m_botbot_bot"> {{items[14].price}} </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m_best_bot_inner">
+                            <div class="m_best_bot_inner_inner">
+                                <div class="m_inner_img_box">
+                                    <img :src="items[0].image[0]" alt="" class="inner_img" @click="goToItem(0)">
+                                </div>
+                                <div class="m_inner_text_box">
+                                    <div class="m_botbot_top"> {{items[0].text}} </div>
+                                    <div class="m_botbot_bot"> {{items[0].price}} </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m_best_bot_inner">
+                            <div class="m_best_bot_inner_inner">
+                                <div class="m_inner_img_box">
+                                    <img :src="items[7].image[0]" alt="" class="inner_img" @click="goToItem(7)">
+                                </div>
+                                <div class="m_inner_text_box">
+                                    <div class="m_botbot_top"> {{items[7].text}} </div>
+                                    <div class="m_botbot_bot"> {{items[7].price}} </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m_best_bot_inner">
+                            <div class="m_best_bot_inner_inner">
+                                <div class="m_inner_img_box">
+                                    <img :src="items[9].image[0]" alt="" class="inner_img" @click="goToItem(14)">
+                                </div>
+                                <div class="m_inner_text_box">
+                                    <div class="m_botbot_top"> {{items[9].text}} </div>
+                                    <div class="m_botbot_bot"> {{items[9].price}} </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -414,7 +457,6 @@ export default defineComponent({
     width: 100%;
     position: relative;
     min-height: 500px;
-    background-color: green;
 }
 .m_inner_best_area{
     width: 100%;
@@ -422,7 +464,23 @@ export default defineComponent({
 .m_best_top{
     width: 100%;
     height: 70px;
-    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.m_best_top > h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+.m_best_bot{
+    width: 100%;
+    
+}
+.m_best_bot_inner{
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /*mobile end*/
