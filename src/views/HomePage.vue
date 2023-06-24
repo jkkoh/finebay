@@ -197,6 +197,30 @@ export default defineComponent({
                 :startAnime="startAnime"
                 />
             </div>
+            <div class="m_text_area">
+                <div class="m_inner_text_area">
+                <h2>Sustainable Swimwear</h2>
+                <h2></h2>
+                <br>
+                <p>아름다운 바다를 위한 fine 스윔웨어 Fine Bay.</p>
+                <br>
+                <p>산업 폐기물을 재활용한 리사이를 소재를 중심으로</p>
+                <p>사람과 자연에 편안한 스윔웨어를 만듭니다.</p>
+                <br>
+                <p>원자재부터 포장재까지 친환경 제품을 사용하며</p>
+                <p>자연과 함께 더불어 지속가능한 패션을 추구합니다.</p>
+                </div>
+            </div>
+            <div class="m_best_area">
+                <div class="m_inner_best_area">
+                    <div class="m_best_top">
+                        <span>BEST</span>
+                    </div>
+                    <div class="m_best_bot">
+                        
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -360,7 +384,46 @@ export default defineComponent({
     height: 57vw;
     min-height: 100px;
 }
-
+.m_text_area{
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    align-items: center;
+}
+.m_inner_text_area{
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.m_inner_text_area > h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+.m_inner_text_area > p{
+    font-size: 0.6rem;
+} 
+.m_best_area {
+    width: 100%;
+    position: relative;
+    min-height: 500px;
+    background-color: green;
+}
+.m_inner_best_area{
+    width: 100%;
+}
+.m_best_top{
+    width: 100%;
+    height: 70px;
+    background-color: aqua;
+}
 
 /*mobile end*/
 </style>
