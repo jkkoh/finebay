@@ -103,8 +103,7 @@ export default defineComponent({
             >
                 <div class="m_mainC">
                     <div class="m_subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
-                        <div v-if="mouse[i]"><img :src="item.image[4]" class="m_subImage"/></div>
-                        <div v-else><img :src="item.image[0]" class="m_subImage"/></div>
+                        <div><img :src="item.image[0]" class="m_subImage"/></div>
                     </div>
                     <div class="m_subB">
                         <p class="m_subTextA">{{ item.text }}</p>
