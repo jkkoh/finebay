@@ -67,11 +67,13 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
 import HeaderLink from './HeaderLink.vue'
+import MobileDetect from 'mobile-detect'
 export default defineComponent ({
     components:  { HeaderLink },
     mounted(){
         window.addEventListener("resize", this.myEventHandler);
-        if(window.innerWidth < 800){
+        const md = new MobileDetect(window.navigator.userAgent)
+        if(window.innerWidth < 800  || md.mobile() || md.tablet()){
         this.mobileState = true;
         }else if(window.innerWidth >= 800){
         this.mobileState = false;

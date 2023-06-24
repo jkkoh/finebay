@@ -3,7 +3,7 @@
       <div v-if="!mobileState">
         <div class="top_menu">
           <div class="menu_l">
-            <p>search</p>
+            
           </div>
           <div class="menu_m">
             <HeaderLink to="/"><img src="@/images/logo/logo.png" alt="" class="logo"></HeaderLink>

@@ -3,6 +3,7 @@ import {defineComponent} from 'vue';
 import SlideShow from "../components/SlideShow.vue";
 import { useRouter } from 'vue-router';
 import { items } from '../assets/items'
+import MobileDetect from 'mobile-detect'
 
 
 export default defineComponent({
@@ -78,7 +79,8 @@ export default defineComponent({
     },
     mounted(){
         window.addEventListener("resize", this.myEventHandler);
-        if(window.innerWidth < 800){
+        const md = new MobileDetect(window.navigator.userAgent)
+        if(window.innerWidth < 800   || md.mobile() || md.tablet()){
         this.mobileState = true;
         }else if(window.innerWidth >= 800){
             this.mobileState = false;

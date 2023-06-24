@@ -40,7 +40,7 @@
                 </div>
               </div>
               <div class="mob_log_bot">
-
+                <div></div>
               </div>
             </div>
             <div class="mob_con_inner_bot_bot">
@@ -108,6 +108,7 @@ async function kakaoLogin(){
 
 <script lang="ts">
 import {defineComponent} from "vue";
+import MobileDetect from 'mobile-detect'
 
 export default defineComponent({
   mounted() {
@@ -115,7 +116,8 @@ export default defineComponent({
     recaptchaScript.setAttribute('src', 'https://developers.kakao.com/sdk/js/kakao.min.js')
     document.head.appendChild(recaptchaScript)
     window.addEventListener("resize", this.myEventHandler);
-    if(window.innerWidth < 800){
+    const md = new MobileDetect(window.navigator.userAgent)
+    if(window.innerWidth < 800 || md.mobile() || md.tablet()){
       this.mobileState = true;
     }else if(window.innerWidth >= 800){
       this.mobileState = false;
