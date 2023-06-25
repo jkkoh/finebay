@@ -650,7 +650,7 @@ font-size: 16px;
 }
 .m_blur_bar{
 position: absolute;
-top: -60px;
+top: 0px;
 width: 100vw;
 height: 100vh;
 background-color: black;
