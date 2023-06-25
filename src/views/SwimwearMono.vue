@@ -83,13 +83,14 @@ export default defineComponent({
             <div class="mainB" v-if="item.part === 'Monokini'">
                 <div class="mainC">
                     <div class="subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
+                        <div class="discount_box">-{{ item.discount }}%</div>
                         <div v-if="mouse[i]"><img :src="item.image[4]" class="subImage"/></div>
                         <div v-else><img :src="item.image[0]" class="subImage"/></div>
                     </div>
                     <div class="subB">
                         <p class="subTextA">{{ item.text }}</p>
                         <div class="subC">
-                            <p class="subTextB crossed">{{ item.price }} </p>  <p class="subTextB">{{ item.price * 0.95 }} </p>
+                            <p class="subTextB crossed">{{ item.price }}원 </p>  <p class="subTextB" style="color: #d44511;">{{ item.price * 0.95 }}원 </p>
                         </div>
                     </div>
                 </div>
@@ -104,12 +105,13 @@ export default defineComponent({
                 <div class="m_mainB" v-if="item.part === 'Monokini'">
                     <div class="m_mainC">
                         <div class="m_subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
+                            <div class="m_discount_box">-{{ item.discount }}%</div>
                             <div><img :src="item.image[0]" class="m_subImage"/></div>
                         </div>
                         <div class="m_subB">
                             <p class="m_subTextA">{{ item.text }}</p>
                             <div class="m_subC">
-                                <p class="m_subTextB crossed">{{ item.price }} </p>  <p class="m_subTextB">{{ item.price * 0.95 }} </p>
+                                <p class="m_subTextB crossed">{{ item.price }}원 </p>  <p class="m_subTextB" style="color: #d44511;">{{ item.price * 0.95 }}원 </p>
                             </div>
                         </div>
                     </div>
@@ -146,7 +148,19 @@ export default defineComponent({
     height: 100%;
     min-height: 600px;
     cursor: pointer;
-    
+    position: relative;
+}
+.discount_box{
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    right: 15px;
+    top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    font-weight: 700;
 }
 .subB {
     width: 100%;
@@ -170,7 +184,7 @@ export default defineComponent({
 }
 .crossed{
     text-decoration-line: line-through;
-    text-decoration-color: red;
+    text-decoration-color: black;
     margin-right: 10px;
 }
 .subImage{
@@ -185,19 +199,32 @@ export default defineComponent({
 }
 .m_mainB {
     width: 50%;
+    height: 80vw;
     box-sizing: border-box;
     padding: 3px;
     float: left;
 }
 .m_mainC {
     width: 100%;
-    height: 100%;
 }
 .m_subA {
     width: 100%;
     height: 100%;
     cursor: pointer;
-    
+    position: relative;
+}
+.m_discount_box{
+    position: absolute;
+    width: 30px;
+    height: 18px;
+    right: 5px;
+    top: 5px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    font-weight: 700;
 }
 .m_subB {
     width: 100%;
@@ -206,7 +233,8 @@ export default defineComponent({
 .m_subTextA {
     margin-top: 5px;
     font-family: "Open_Sans";
-    font-size: 15px;
+    margin-bottom: 0;
+    font-size: 13px;
 }
 .m_subC{
     width : 100%;
@@ -215,11 +243,11 @@ export default defineComponent({
 }
 .m_subTextB{
     font-family: "Open_Sans";
-    font-size: 10px;
+    font-size: 13px;
 }
 .m_crossed{
     text-decoration-line: line-through;
-    text-decoration-color: red;
+    text-decoration-color: black;
     margin-right: 10px;
 }
 .m_subImage{

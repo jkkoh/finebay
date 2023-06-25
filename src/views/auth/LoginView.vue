@@ -154,14 +154,15 @@ export default defineComponent({
 <style scoped>
 #login .card{
   top: 75px;
-  width: 700px;
+  width: 400px;
   margin: auto;
+  border: none;
 }
 .login_outer{
   display: flex;
 }
 .login_button{
-  width: 50%;
+  width: 100%;
   height: 65px;
 }
 .kakao_img{

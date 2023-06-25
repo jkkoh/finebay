@@ -13,6 +13,7 @@ export const items = [
         part: "Top",
         id: 0,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSB002_YELLOW_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB002_YELLOW_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB002_YELLOW_3.jpg", import.meta.url).href, 
@@ -28,6 +29,7 @@ export const items = [
         part: "Bottom",
         id: 1,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSM001_YELLOW_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_YELLOW_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_YELLOW_3.jpg", import.meta.url).href, 
@@ -43,6 +45,7 @@ export const items = [
         part: "Monokini",
         id: 2,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDST003_YELLOW_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST003_YELLOW_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST003_YELLOW_3.jpg", import.meta.url).href, 
@@ -58,6 +61,7 @@ export const items = [
         part: "Top",
         id: 3,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSB001_YELLOW_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB001_YELLOW_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB001_YELLOW_3.jpg", import.meta.url).href, 
@@ -73,6 +77,7 @@ export const items = [
         part: "Bottom",
         id: 4,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSB003_YELLOW_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB003_YELLOW_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB003_YELLOW_3.jpg", import.meta.url).href, 
@@ -88,6 +93,7 @@ export const items = [
         part: "Bottom",
         id: 5,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDST002_YELLOW_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST002_YELLOW_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST002_YELLOW_3.jpg", import.meta.url).href, 
@@ -103,6 +109,7 @@ export const items = [
         part: "Top",
         id: 6,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSB003_GREEN_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB003_GREEN_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB003_GREEN_3.jpg", import.meta.url).href, 
@@ -118,6 +125,7 @@ export const items = [
         part: "Bottom",
         id: 7,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDST002_GREEN_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST002_GREEN_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST002_GREEN_3.jpg", import.meta.url).href, 
@@ -133,6 +141,7 @@ export const items = [
         part: "Top",
         id: 8,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSM001_GREEN_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_GREEN_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_GREEN_3.jpg", import.meta.url).href, 
@@ -148,6 +157,7 @@ export const items = [
         part: "Monokini",
         id: 9,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSB002_GREEN_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB002_GREEN_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB002_GREEN_3.jpg", import.meta.url).href, 
@@ -163,6 +173,7 @@ export const items = [
         part: "Bottom",
         id: 10,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDST003_GREEN_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST003_GREEN_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST003_GREEN_3.jpg", import.meta.url).href, 
@@ -178,6 +189,7 @@ export const items = [
         part: "Top",
         id: 11,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSB001_GREEN_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB001_GREEN_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB001_GREEN_3.jpg", import.meta.url).href, 
@@ -193,6 +205,7 @@ export const items = [
         part: "Bottom",
         id: 12,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDST001_GREEN_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST001_GREEN_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST001_GREEN_3.jpg", import.meta.url).href, 
@@ -208,6 +221,7 @@ export const items = [
         part: "Top",
         id: 13,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSM001_BLUE_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_BLUE_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSM001_BLUE_3.jpg", import.meta.url).href, 
@@ -223,6 +237,7 @@ export const items = [
         part: "Monokini",
         id: 14,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDST003_BLUE_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST003_BLUE_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST003_BLUE_3.jpg", import.meta.url).href, 
@@ -238,6 +253,7 @@ export const items = [
         part: "Top",
         id: 15,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDST001_BLUE_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST001_BLUE_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST001_BLUE_3.jpg", import.meta.url).href, 
@@ -253,6 +269,7 @@ export const items = [
         part: "Top",
         id: 16,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSB002_BLUE_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB002_BLUE_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB002_BLUE_3.jpg", import.meta.url).href, 
@@ -268,6 +285,7 @@ export const items = [
         part: "Bottom",
         id: 17,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSB001_BLUE_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB001_BLUE_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB001_BLUE_3.jpg", import.meta.url).href, 
@@ -283,6 +301,7 @@ export const items = [
         part: "Bottom",
         id: 18,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDST002_BLUE_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST002_BLUE_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDST002_BLUE_3.jpg", import.meta.url).href, 
@@ -298,6 +317,7 @@ export const items = [
         part: "Top",
         id: 19,
         stock: 25,
+        discount: 5,
     },
     {
         image:[new URL("@/images/productInfo/FDSB003_BLUE_1.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB003_BLUE_2.jpg", import.meta.url).href, new URL("@/images/productInfo/FDSB003_BLUE_3.jpg", import.meta.url).href, 
@@ -313,5 +333,6 @@ export const items = [
         part: "Bottom",
         id: 20,
         stock: 25,
+        discount: 5,
     }
 ]
