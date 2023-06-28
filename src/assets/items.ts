@@ -6,7 +6,7 @@ export const items = [
         text: "TIE BACK BIKINI TOP YELLOW",
         itemInfo: ["안정감있게 가슴을 감싸는 타이백 디자인의", "브이넥 비키니 탑입니다."],
         itemCode: "FDST001Y",
-        price: 89000,
+        price: 1500,
         color: "Yellow",
         category: "Swimwear",
         material:"SHELL RECYCLED POLYAMIDE 80%, ELASTANE 20% / LINING RECYCLED POLYAMIDE 87%, ELASTANE 13%",

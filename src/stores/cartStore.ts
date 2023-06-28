@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia'
 import {v4 as uuid4} from 'uuid'
-import { type Cart, type Product, type DisplayCart, type Buy, type DisplayBuy, type BuyProduct} from '../types/interfaces'
+import { type Cart, type Product, type DisplayCart, type Buy, type DisplayBuy, type BuyProduct, type Inicis, type InicisProduct,type DisplayInicis} from '../types/interfaces'
 import { items } from '../assets/items'
 
 interface State{
     cart: Cart | {},
     displayCart: DisplayCart [] | {},
     buy: Buy | {},
-    displayBuy: DisplayBuy [] | {}
+    displayBuy: DisplayBuy [] | {},
+    inicis: Inicis | {},
+    displayInicis: DisplayInicis [] | {}
 }
 
 export const useBuyStore = defineStore('buy',{
@@ -136,5 +138,65 @@ export const useCartStore = defineStore('cart',{
 
         }
 
+    }
+})
+
+export const useInicisStore = defineStore('inicis',{
+    state: ()=>({inicis: {}, displayInicis: []} as unknown as State),
+    actions:{
+        loadInicisInstance()
+        {
+            const cs = localStorage.getItem('inicis')
+            if(!cs)
+            this.inicis = {}
+            else
+            this.inicis = JSON.parse(cs)
+        },
+        addToInicis(inicisProduct: InicisProduct){
+            const cs = localStorage.getItem('inicis')
+
+            let isAdded = false
+
+            if(!cs)
+            this.inicis = {
+                cid: uuid4(),
+                products:[
+                    inicisProduct
+                ]
+            }
+            else {
+                let inicisLocalStorage = JSON.parse(cs)
+                inicisLocalStorage.products = inicisLocalStorage.products.map((ci : InicisProduct) => {
+                    if(ci.goodname == inicisProduct.goodname)
+                    {
+                        isAdded = true
+                        return {goodname: ci.goodname, buyername: ci.buyername, buyertel: ci.buyertel, buyeremail: ci.buyeremail, price: ci.price}
+                    }
+
+                    return {goodname: ci.goodname, buyername: ci.buyername, buyertel: ci.buyertel, buyeremail: ci.buyeremail, price: ci.price}
+                })
+
+                if(!isAdded)
+                inicisLocalStorage.inicisProducts.push({goodname: inicisProduct.goodname, buyername: inicisProduct.buyername, buyertel: inicisProduct.buyertel, buyeremail: inicisProduct.buyeremail, price:inicisProduct.price})
+
+                this.inicis = inicisLocalStorage
+               
+
+            }
+
+            localStorage.setItem('inicis', JSON.stringify(this.inicis))
+
+        },
+        displayInicisLoad(){
+            this.displayInicis = (this.inicis as Inicis).InicisProducts.map(ci => {
+                return {
+                    goodname: ci.goodname, buyername: ci.buyername, price: ci.price, buyertel : ci.buyertel, buyeremail:ci.buyeremail }
+            })
+
+        },
+        
+        removeFromCart(){
+            localStorage.removeItem('inicis')
+        }
     }
 })

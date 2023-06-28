@@ -28,7 +28,7 @@
                                 <span>전화번호</span>
                             </div>
                             <div class="phone_number_bot_right">
-                                <input type="tel" class="left_phone" pattern="[0-9]{3}" v-model="buyData['customerPhoneNumber'][0]"> <span class="dash_box"> - </span> <input type="tel" class="mid_phone" pattern="[0-9]{4}" v-model="buyData['customerPhoneNumber'][1]"> <span class="dash_box"> - </span> <input type="tel" class="right_phone" pattern="[0-9]{4}" v-model="buyData['customerPhoneNumber'][2]">
+                                <input type="tel" class="phone" pattern="[0-9]" v-model="buyData['customerPhoneNumber']">
                             </div>
                         </div>
                         <div class="large_size_box">
@@ -105,7 +105,7 @@
                                 <span>전화번호</span>
                             </div>
                             <div class="phone_number_bot_right">
-                                <input type="tel" class="left_phone" pattern="[0-9]{3}" v-model="buyData['deliveryPhoneNumber'][0]"> <span class="dash_box"> - </span> <input type="tel" class="mid_phone" pattern="[0-9]{4}" v-model="buyData['deliveryPhoneNumber'][1]"> <span class="dash_box"> - </span> <input type="tel" class="right_phone" pattern="[0-9]{4}" v-model="buyData['deliveryPhoneNumber'][2]">
+                                <input type="tel" class="phone" pattern="[0-9]" v-model="buyData['deliveryPhoneNumber']">
                             </div>
                         </div>
                     </div>
@@ -245,15 +245,17 @@
 import { useAuthStore, type BuyData } from '../stores/auth';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useBuyStore, useCartStore } from '../stores/cartStore'
+import { useBuyStore, useCartStore, useInicisStore } from '../stores/cartStore'
 import { storeToRefs } from 'pinia'
 import { onMounted, computed } from 'vue'
 import { type DisplayCart, type DisplayBuy} from '../types/interfaces'
+import { items } from '../assets/items'
 
 const authStore = useAuthStore()
 const router = useRouter()
 const cartStore = useCartStore()
 const buyStore = useBuyStore()
+const inicisStore = useInicisStore()
 const {buy, displayBuy } = storeToRefs(buyStore)
 const {cart, displayCart} = storeToRefs(cartStore)
 
@@ -262,6 +264,7 @@ onMounted(()=>{
     cartStore.displayCartLoad()
     buyStore.loadBuyInstance()
     buyStore.displayBuyLoad()
+    inicisStore.loadInicisInstance()
 })
 
 function removeItem(id:number){
@@ -272,16 +275,17 @@ function removeItem(id:number){
 const buyData = reactive<BuyData>({
     customerName: "",
     customerEmail: "",
-    customerPhoneNumber: [],
+    customerPhoneNumber: "",
     customerPostCode:"",
     customerAddress:"",
     customerAddress1:"",
+    deliveryEmail: "",
     deliveryName:"",
     deliveryPostCode:"",
     deliveryAddress:"",
     deliveryAddress1:"",
-    deliveryPhoneNumber:[],
-    productInfo:[],
+    deliveryPhoneNumber:"",
+    productInfo:"",
     salesInfo:[],
     priceInfoActualPrice:[],
     priceInfoDeliveryFee:0,
@@ -299,6 +303,7 @@ function deliveryCheck(){
         console.log('1234')
         deliveryChecked1 = false;
         buyData.deliveryPostCode = buyData.customerPostCode 
+        buyData.deliveryEmail = buyData.customerEmail 
         buyData.deliveryAddress = buyData.customerAddress
         buyData.deliveryAddress1 = buyData.customerAddress1
         buyData.deliveryName = buyData.customerName
@@ -312,10 +317,11 @@ function deliveryCheck1(){
         console.log('5678')
         deliveryChecked = false;
         buyData.deliveryPostCode = ""
+        buyData.deliveryEmail = ""
         buyData.deliveryAddress = ""
         buyData.deliveryAddress1 = ""
         buyData.deliveryName = ""
-        buyData.deliveryPhoneNumber = []
+        buyData.deliveryPhoneNumber = ""
     }
 }
 
@@ -401,9 +407,25 @@ let sum = (displayCart.value as DisplayCart[]).reduce((initialSum: number, item:
 return sum
 })
 
-function buyEvent(){
-    alert('구매가 완료되었습니다')
-    router.replace({name: "home"})
+async function buyEvent(){
+    buyData.priceInfoFinalPrice = total.value
+    const sendPrice = total.value.toString()
+    let aitem = displayBuy.value as DisplayBuy[]
+    let i = 0;
+    for(i = 0; i < aitem.length; i++){
+        console.log(aitem[i].id)
+        console.log(items[aitem[i].id].text)
+        buyData.productInfo = buyData.productInfo + items[aitem[i].id].text + ' '
+        console.log(buyData.productInfo)
+    }
+    inicisStore.addToInicis({goodname: buyData.productInfo, buyername: buyData.deliveryName, buyertel: buyData.deliveryPhoneNumber, buyeremail: buyData.deliveryEmail, price: sendPrice})
+    
+    router.push({name: "/inicis/pay/page"})
+
+
+
+    // alert('구매가 완료되었습니다')
+    // router.replace({name: "home"})
 }
 
 

@@ -2,6 +2,10 @@ import {defineStore} from "pinia"
 import {useApi, useApiPrivate} from "../composables/useApi"
 import  axios  from "axios"
 import { Auth , Hub } from 'aws-amplify'
+import CryptoJs from 'crypto-js'
+import dayjs from 'dayjs'
+import {useRouter} from 'vue-router'
+const router = useRouter()
 
 
 
@@ -39,16 +43,17 @@ export interface RegisterData {
 export interface BuyData {
   customerName: string,
   customerEmail: string,
-  customerPhoneNumber: string[],
+  customerPhoneNumber: string,
   customerPostCode:string,
   customerAddress:string,
   customerAddress1:string,
   deliveryName:string,
   deliveryPostCode:string,
+  deliveryEmail:string,
   deliveryAddress:string,
   deliveryAddress1:string,
-  deliveryPhoneNumber:string[],
-  productInfo:string[],
+  deliveryPhoneNumber:string,
+  productInfo:string,
   salesInfo:string[],
   priceInfoActualPrice:string[],
   priceInfoDeliveryFee:number,
@@ -209,6 +214,58 @@ export const useAuthStore = defineStore('auth', {
         
       } catch (error: Error | any) {
         throw error.message
+      }
+    },
+    async buyWithPG(payload: BuyData){
+      try{
+        console.log('1111111111111111')
+
+        console.log('22222222222')
+        const version = '1.0'
+        const gopaymethod = 'VBank'
+        const mid = import.meta.env.VITE_PG_MID
+        const oid = '12532512612342152136324'
+        const timestamp = dayjs().valueOf();
+        const price = payload.priceInfoFinalPrice
+        const signature = CryptoJs.SHA256(`oid=${oid}&price=${price}&timestamp=${timestamp}`).toString();
+        const mKey = CryptoJs.SHA256(import.meta.env.VITE_PG_SIGN_KEY).toString();
+        const currency = 'WON'
+        const goodname = 'Sample'
+        const buyername = '동동이'
+        const buyertel = '01011112222'
+        const buyeremail = 'test@test.com'
+        const returnUrl = 'http://127.0.0.1:5173' + '/'
+        const payViewType = 'popup'
+        const popupurl = 'http://127.0.0.1:5173' + `/buy`
+        const closeUrl = ''
+
+        const dataset = {
+          version : version,
+          gopaymethod : gopaymethod,
+          mid: mid,
+          signature: signature,
+          mKey: mKey,
+          price: price,
+          oid: oid,
+          timestamp: timestamp,
+          currency: currency,
+          goodname: goodname,
+          buyername: buyername,
+          buyertel: buyertel,
+          buyeremail: buyeremail,
+          returnUrl: returnUrl,
+          closeUrl: closeUrl
+        }
+        axios.post('/inicis/pay/page', dataset)
+        console.log('-----------------')
+        console.log('-----------------')
+        // console.log(timestamp)
+        // console.log(mid)
+        // console.log(mKey)
+        // console.log(price)
+        // console.log('aaaa')
+      }catch (error: Error | any){
+        console.log(error)
       }
     }
   }

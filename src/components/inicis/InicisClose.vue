@@ -1,0 +1,3 @@
+<template>
+    <p>결제가 취소되었습니다</p>
+</template>
