@@ -113,7 +113,7 @@ const router = createRouter({
     {
       path: '/inicis/pay/after',
       name: '/inicis/pay/after',
-      component: ()=> import('../components/inicis/InicisReturn.vue')
+      component: () => import('../components/inicis/InicisReturn.vue')
     },
     {
       path: '/inicis/pay/page',

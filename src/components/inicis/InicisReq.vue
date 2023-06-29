@@ -55,14 +55,15 @@ const goodname = bbb.products[0].goodname
 const buyername = bbb.products[0].buyername
 const buyertel = bbb.products[0].buyertel
 const buyeremail = bbb.products[0].buyeremail
-const returnUrl = 'https://www.finebay.co.kr/inicis/pay/after'
-const closeUrl = 'https://www.finebay.co.kr/inicis/pay/close'
+const returnUrl = 'http://127.0.0.1:5173/inicis/pay/after'
+const closeUrl = 'http://127.0.0.1:5173/inicis/pay/close'
+// const returnUrl = 'https://www.finebay.co.kr/inicis/pay/after'
+// const closeUrl = 'https://www.finebay.co.kr/inicis/pay/close'
 console.log(mid)
 
 async function paybtn(){
-    await window.INIStdPay.pay('sendPayForm_id').then((response)=>{
-        console.log(response)
-    })
+    await window.INIStdPay.pay('sendPayForm_id')
+    
 }
 
 </script>
