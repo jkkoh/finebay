@@ -59,8 +59,10 @@ const returnUrl = 'https://www.finebay.co.kr/inicis/pay/after'
 const closeUrl = 'https://www.finebay.co.kr/inicis/pay/close'
 console.log(mid)
 
-function paybtn(){
-    window.INIStdPay.pay('sendPayForm_id')
+async function paybtn(){
+    await window.INIStdPay.pay('sendPayForm_id').then((response)=>{
+        console.log(response)
+    })
 }
 
 </script>
