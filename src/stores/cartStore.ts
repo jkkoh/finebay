@@ -194,7 +194,6 @@ export const useInicisStore = defineStore('inicis',{
             })
 
         },
-        
         removeFromCart(){
             localStorage.removeItem('inicis')
         }

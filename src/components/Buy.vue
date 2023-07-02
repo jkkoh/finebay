@@ -234,7 +234,7 @@
                     </div>
                 </div>
                 <div class="buy">
-                    <span @click="buyEvent()">{{ total }}원 결제하기</span>
+                    <span @click="buyzzz()">{{ total }}원 결제하기</span>
                 </div>
             </div>
         </div>
@@ -250,6 +250,8 @@ import { storeToRefs } from 'pinia'
 import { onMounted, computed } from 'vue'
 import { type DisplayCart, type DisplayBuy} from '../types/interfaces'
 import { items } from '../assets/items'
+import { API, Auth } from 'aws-amplify'
+
 
 const authStore = useAuthStore()
 const router = useRouter()
@@ -427,12 +429,28 @@ async function buyEvent(){
     // alert('구매가 완료되었습니다')
     // router.replace({name: "home"})
 }
+async function buyzzz(){
+    // const user = await Auth.currentAuthenticatedUser()
+    // const token = user.signInUserSession.idToken.jwtToken
+    // console.log( { token })
+
+    // const requestInfo = {
+    //     headers : {
+    //         Authorization : token
+    //     }
+    // }
+
+    const data = await API.post('apic53634f6','/inicis/pay',{abc:'abc', bcd : 'bcd'})
+
+    console.log(data)
+}
 
 
 </script>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { request } from 'http';
 export default defineComponent({
     mounted() {
         let recaptchaScript = document.createElement('script')
