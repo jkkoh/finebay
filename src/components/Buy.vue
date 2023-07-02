@@ -234,7 +234,7 @@
                     </div>
                 </div>
                 <div class="buy">
-                    <span @click="buyzzz()">{{ total }}원 결제하기</span>
+                    <button @click="buyzzz()" class="buy_btn">{{ total }}원 결제하기</button>
                 </div>
             </div>
         </div>
@@ -836,5 +836,11 @@ export default defineComponent({
     cursor: pointer;
     width: 15px;
     margin-left: 3px;
+}
+.buy_btn{
+    width : 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-top: none;
 }
 </style>
