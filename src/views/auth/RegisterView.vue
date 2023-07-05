@@ -56,27 +56,30 @@
           <div>
             <p v-if="errorMessage" class="error-message text-danger mb-4">{{ errorMessage }}</p>
             <div class="m_inner_box">
-              <label for="email" class="form-label m_label_title">이메일</label>
+              <label for="email" class="form-label m_label_title">이메일 <span style="color:red;">*</span></label>
               <input v-model="registerData.email" type="email" class="form-control m_input" id="email" autocomplete="off" placeholder="" style="border: none;">
             </div>
             <div class="m_inner_box">
-              <label for="name" class="form-label m_label_title">이름</label>
+              <label for="name" class="form-label m_label_title">이름 <span style="color:red;">*</span></label>
               <input v-model="registerData.name" type="text" class="form-control m_input" id="first_name" autocomplete="off" placeholder="" style="border: none;">
             </div>
             <div class="m_inner_box">
-              <label for="password" class="form-label m_label_title">비밀번호</label>
+              <label for="password" class="form-label m_label_title">비밀번호 <span style="color:red;">*</span></label>
               <input v-model="registerData.password" type="password" class="form-control m_input" id="password" placeholder="" style="border: none;">
             </div>
             <div class="m_inner_box">
-              <label for="password_confirm" class="form-label m_label_title">비밀번호 확인</label>
+              <label for="password_confirm" class="form-label m_label_title">비밀번호 확인 <span style="color:red;">*</span></label>
               <input v-model="registerData.password_confirm" type="password" class="form-control m_input" id="password_confirm" placeholder="" style="border: none;">
             </div>
             <div class="m_inner_box">
-              <label for="postCode" class="form-label m_label_title">우편번호</label> <button class="m_search_btn" @click="sample4_execDaumPostcode()">검색</button>
-              <input v-model="registerData.postCode" type="postCode" class="form-control m_input" id="postCode" autocomplete="off" placeholder="" style="width: 40vw; border:none;" > 
+              <label for="postCode" class="form-label m_label_title">우편번호 <span style="color:red;">*</span></label>
+              <div style="display:flex">
+                <input v-model="registerData.postCode" type="postCode" class="form-control m_input" id="postCode" autocomplete="off" placeholder="" style="width: 40vw; border:none; paddingRight:none;" > 
+                <button class="m_search_btn" @click="sample4_execDaumPostcode()">검색</button>
+              </div>
             </div>
             <div class="m_inner_box">
-              <label for="address" class="form-label m_label_title">도로명 주소</label>
+              <label for="address" class="form-label m_label_title">도로명 주소 <span style="color:red;">*</span></label>
               <input v-model="registerData.address" type="address" class="form-control m_input" id="address" autocomplete="off" placeholder="" style="border: none;">
             </div>
             <div class="m_inner_box">
@@ -88,7 +91,7 @@
               <input v-model="registerData.address2" type="address2" class="form-control m_input" id="address2" autocomplete="off" style="border: none;">
             </div>
             <div class="m_inner_box">
-              <label for="address3" class="form-label m_label_title">참고항목</label>
+              <label for="address3" class="form-label m_label_title">참고항목 <span style="color:#202020; fontSize:0.8rem;">(동, 호, 수)</span></label>
               <input v-model="registerData.address3" type="address3" class="form-control m_input" id="address3" autocomplete="off" style="border: none;">
             </div>
             <button class="m_success_btn" @click="register()">Register</button>
@@ -220,7 +223,7 @@ export default defineComponent({
   justify-content: center;
 }
 .m_title{
-  font-size: 30px;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -234,7 +237,6 @@ export default defineComponent({
 }
 .m_search_btn{
   width: 15vw;
-  margin-left: 10px;
   border: 1px solid black;
   font-size: 0.8rem;
 }
