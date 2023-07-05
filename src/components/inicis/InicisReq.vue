@@ -30,6 +30,7 @@ import { storeToRefs } from 'pinia';
 import { useInicisStore } from '@/stores/cartStore'
 import { type DisplayInicis } from '@/types/interfaces';
 import { onMounted } from 'vue'
+import { API } from 'aws-amplify'
 const inicisStore = useInicisStore()
 const { displayInicis } = storeToRefs(inicisStore)
 

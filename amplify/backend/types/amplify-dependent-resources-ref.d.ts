@@ -1,18 +1,13 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "apic53634f6": {
+    "finebayRESTAPI": {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
-    },
-    "client": {
-      "GraphQLAPIEndpointOutput": "string",
-      "GraphQLAPIIdOutput": "string",
-      "GraphQLAPIKeyOutput": "string"
     }
   },
   "auth": {
-    "clientfad73db3": {
+    "finebayf3743436": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",
@@ -23,7 +18,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "clientde868479": {
+    "aaaa": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

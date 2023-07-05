@@ -12,6 +12,9 @@ See the License for the specific language governing permissions and limitations 
 const express = require('express')
 const bodyParser = require('body-parser')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const dayjs = require('dayjs');
+const CryptoJs = require('crypto-js');
+const querystring = require('querystring');
 
 // declare a new express app
 const app = express()
@@ -44,9 +47,33 @@ app.get('/inicis/*', function(req, res) {
 * Example post method *
 ****************************/
 
-app.post('/inicis', function(req, res) {
+app.post('/inicis', async function(req, res) {
   // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+  try{
+    const dataset = {
+      version : '1.0',
+      goapymethod : 'VBank',
+      mid : 'INIpayTest',
+      oid : '11213453252341251',
+      timestamp : dayjs().valueOf(),
+      price : req.price,
+      signature : CryptoJs.SHA256(`oid=`+ dataset.oid + `&price=` + dataset.price + `&timestamp=` + dataset.timestamp).toString(),
+      mKey : CryptoJs.SHA256('SU5JTElURV9UUklQTEVERVNfS0VZU1RS'),
+      currency : 'WON',
+      goodname : req.goodname,
+      buyername : req.buyername,
+      buyertel : req.buyertel,
+      buyeremail : req.buyeremail,
+      returnUrl : 'https://hc692t75rj.execute-api.ap-northeast-2.amazonaws.com/dev/return',
+      closeUrl : ''
+    }
+    res.render('w_inicis', { ...dataset });
+  }catch (error){
+    console.log('error : ', error);
+    return res.send({ status: 'error', data: 'error'});
+  }
+  
+  // res.json({success: 'post call succeed!', url: req.url, body: req.body})
 });
 
 app.post('/inicis/*', function(req, res) {

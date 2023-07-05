@@ -6,6 +6,5 @@ declare global {
         naver: any;
         Kakao: any;
         IMP: any;
-        INIStdPay: any;
     }
 }

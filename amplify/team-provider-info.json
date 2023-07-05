@@ -1,30 +1,28 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-client-dev-103339-authRole",
-      "UnauthRoleArn": "arn:aws:iam::871723070274:role/amplify-client-dev-103339-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::871723070274:role/amplify-client-dev-103339-authRole",
+      "AuthRoleName": "amplify-finebay-dev-75534-authRole",
+      "UnauthRoleArn": "arn:aws:iam::871723070274:role/amplify-finebay-dev-75534-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::871723070274:role/amplify-finebay-dev-75534-authRole",
       "Region": "ap-northeast-2",
-      "DeploymentBucketName": "amplify-client-dev-103339-deployment",
-      "UnauthRoleName": "amplify-client-dev-103339-unauthRole",
-      "StackName": "amplify-client-dev-103339",
-      "StackId": "arn:aws:cloudformation:ap-northeast-2:871723070274:stack/amplify-client-dev-103339/a67bee80-0fd3-11ee-baf4-0a8256e4bab6",
-      "AmplifyAppId": "d1ffgraujwt7dp",
-      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-client-dev-103339-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+      "DeploymentBucketName": "amplify-finebay-dev-75534-deployment",
+      "UnauthRoleName": "amplify-finebay-dev-75534-unauthRole",
+      "StackName": "amplify-finebay-dev-75534",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:871723070274:stack/amplify-finebay-dev-75534/b8148050-19f4-11ee-b666-0670e8262e50",
+      "AmplifyAppId": "d220i81z4jkg34"
     },
     "categories": {
       "auth": {
-        "clientfad73db3": {}
-      },
-      "api": {
-        "client": {},
-        "apic53634f6": {}
+        "finebayf3743436": {}
       },
       "function": {
-        "clientde868479": {
-          "deploymentBucketName": "amplify-client-dev-103339-deployment",
-          "s3Key": "amplify-builds/clientde868479-493336564f5667376163-build.zip"
+        "aaaa": {
+          "deploymentBucketName": "amplify-finebay-dev-75534-deployment",
+          "s3Key": "amplify-builds/aaaa-324e726f732f666d4f75-build.zip"
         }
+      },
+      "api": {
+        "finebayRESTAPI": {}
       }
     }
   }

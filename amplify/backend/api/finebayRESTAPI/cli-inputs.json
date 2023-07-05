@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/inicis": {
+      "name": "/inicis",
+      "lambdaFunction": "aaaa",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/health": {
+      "name": "/health",
+      "lambdaFunction": "aaaa",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

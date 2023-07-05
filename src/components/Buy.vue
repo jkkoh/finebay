@@ -251,6 +251,7 @@ import { onMounted, computed } from 'vue'
 import { type DisplayCart, type DisplayBuy} from '../types/interfaces'
 import { items } from '../assets/items'
 import { API, Auth } from 'aws-amplify'
+import axios from 'axios'
 
 
 const authStore = useAuthStore()
@@ -268,6 +269,7 @@ onMounted(()=>{
     buyStore.displayBuyLoad()
     inicisStore.loadInicisInstance()
 })
+
 
 function removeItem(id:number){
     cartStore.removeFromCart(id)
@@ -430,19 +432,65 @@ async function buyEvent(){
     // router.replace({name: "home"})
 }
 async function buyzzz(){
-    // const user = await Auth.currentAuthenticatedUser()
-    // const token = user.signInUserSession.idToken.jwtToken
-    // console.log( { token })
+    buyData.priceInfoFinalPrice = total.value
+    const sendPrice = total.value.toString()
+    let aitem = displayBuy.value as DisplayBuy[]
+    let i = 0;
+    for(i = 0; i < aitem.length; i++){
+        console.log(aitem[i].id)
+        console.log(items[aitem[i].id].text)
+        buyData.productInfo = buyData.productInfo + items[aitem[i].id].text + ' '
+        console.log(buyData.productInfo)
+    }
 
-    // const requestInfo = {
-    //     headers : {
-    //         Authorization : token
-    //     }
-    // }
-
-    const data = await API.post('apic53634f6','/inicis/pay',{abc:'abc', bcd : 'bcd'})
-
-    console.log(data)
+    if(buyData.deliveryEmail !== '' && buyData.deliveryPhoneNumber !== ''
+    && buyData.deliveryAddress !== '' && buyData.deliveryPostCode !== ''
+    && sendPrice !== '' && buyData.productInfo !== ''){
+        const IMP = window.IMP;
+        const aaa = Math.random()*10000000
+        const m_id = parseInt(aaa.toString()) 
+        console.log(m_id)
+        IMP.init("imp75261015");
+        await axios({
+            url: "https://pb52jtpjg2.execute-api.ap-northeast-2.amazonaws.com/payment/precheck",
+            method: "post",
+            headers: {"Content-Type": "application/json"},
+            data: {
+                merchant_uid: m_id,
+                amount : sendPrice
+            }
+        })
+        IMP.request_pay({
+            pg : "html5_inicis",
+            pay_method : "card",
+            merchant_uid : m_id,
+            name: buyData.productInfo,
+            amount : sendPrice,
+            buyer_email : buyData.deliveryEmail,
+            buyer_name : buyData.deliveryName,
+            buyer_tel: buyData.deliveryPhoneNumber,
+            buyer_addr: buyData.deliveryAddress,
+            buyer_postcode: buyData.deliveryPostCode
+        }, function (rsp){
+            if (rsp.success){
+                axios({
+                    url:"https://pb52jtpjg2.execute-api.ap-northeast-2.amazonaws.com/payment/check",
+                    method: "post",
+                    headers: {"Content-Type":"application/json"},
+                    data: {
+                        imp_uid : rsp.imp_uid,
+                        merchant_uid : rsp.merchant_uid,
+                    }
+                }).then((data)=> {
+                    console.log(data)
+                })
+            }else{
+                alert(`결제에 실패하였습니다. 에러네용 :  ${rsp.error_msg}`)
+            }
+        })
+    }else{
+        alert('모든 구매 항목을 확인해주세요')
+    }
 }
 
 

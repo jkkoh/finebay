@@ -3,10 +3,10 @@
 
 const awsmobile = {
     "aws_project_region": "ap-northeast-2",
-    "aws_cognito_identity_pool_id": "ap-northeast-2:1bba35fb-fcd7-4ed6-acb1-244aadfe8b49",
+    "aws_cognito_identity_pool_id": "ap-northeast-2:aba76370-944e-492b-a597-4db838b058c3",
     "aws_cognito_region": "ap-northeast-2",
-    "aws_user_pools_id": "ap-northeast-2_cf05SXkG7",
-    "aws_user_pools_web_client_id": "6m7gl55v2k07b9kg2gh6rnitu6",
+    "aws_user_pools_id": "ap-northeast-2_hHNB0uq20",
+    "aws_user_pools_web_client_id": "385v11hdns37mm2cn8j9rpsc4r",
     "oauth": {},
     "aws_cognito_username_attributes": [
         "EMAIL"
@@ -26,14 +26,10 @@ const awsmobile = {
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
     ],
-    "aws_appsync_graphqlEndpoint": "https://eumps3xyrnc4ddrhmg3mlbq27e.appsync-api.ap-northeast-2.amazonaws.com/graphql",
-    "aws_appsync_region": "ap-northeast-2",
-    "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-kri7cj7mmzhqbgy6aoetwo4f5u",
     "aws_cloud_logic_custom": [
         {
-            "name": "apic53634f6",
-            "endpoint": "https://ufeaeg4rh0.execute-api.ap-northeast-2.amazonaws.com/dev",
+            "name": "finebayRESTAPI",
+            "endpoint": "https://hc692t75rj.execute-api.ap-northeast-2.amazonaws.com/dev",
             "region": "ap-northeast-2"
         }
     ]

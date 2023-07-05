@@ -1,6 +1,6 @@
 {
   "api": {
-    "apic53634f6": {
+    "finebayRESTAPI": {
       "dependsOn": [
         {
           "attributes": [
@@ -8,31 +8,15 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "clientde868479"
+          "resourceName": "aaaa"
         }
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
-    },
-    "client": {
-      "dependsOn": [],
-      "output": {
-        "authConfig": {
-          "additionalAuthenticationProviders": [],
-          "defaultAuthentication": {
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
-            },
-            "authenticationType": "API_KEY"
-          }
-        }
-      },
-      "providerPlugin": "awscloudformation",
-      "service": "AppSync"
     }
   },
   "auth": {
-    "clientfad73db3": {
+    "finebayf3743436": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -60,26 +44,26 @@
     }
   },
   "function": {
-    "clientde868479": {
+    "aaaa": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_clientde868479_deploymentBucketName": {
+    "AMPLIFY_function_aaaa_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "clientde868479"
+          "resourceName": "aaaa"
         }
       ]
     },
-    "AMPLIFY_function_clientde868479_s3Key": {
+    "AMPLIFY_function_aaaa_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "clientde868479"
+          "resourceName": "aaaa"
         }
       ]
     }

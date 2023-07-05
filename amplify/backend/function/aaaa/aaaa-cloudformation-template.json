@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "clientde868479",
+            "aaaa",
             {
               "Fn::Join": [
                 "",
                 [
-                  "clientde868479",
+                  "aaaa",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "clientLambdaRole9f9d84c5",
+            "finebayLambdaRole96116890",
             {
               "Fn::Join": [
                 "",
                 [
-                  "clientLambdaRole9f9d84c5",
+                  "finebayLambdaRole96116890",
                   "-",
                   {
                     "Ref": "env"
