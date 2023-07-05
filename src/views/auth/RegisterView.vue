@@ -75,7 +75,7 @@
               <label for="postCode" class="form-label m_label_title">우편번호 <span style="color:red;">*</span></label>
               <div style="display:flex">
                 <input v-model="registerData.postCode" type="postCode" class="form-control m_input" id="postCode" autocomplete="off" placeholder="" style="width: 40vw; border:none; paddingRight:none;" > 
-                <button class="m_search_btn" @click="sample4_execDaumPostcode()">검색</button>
+                <span class="material-icons md-48 m_search_btn"  @click="sample4_execDaumPostcode()">search</span>
               </div>
             </div>
             <div class="m_inner_box">
@@ -236,9 +236,12 @@ export default defineComponent({
   font-size: 0.8rem;
 }
 .m_search_btn{
-  width: 15vw;
-  border: 1px solid black;
-  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: inherit;
+  cursor: pointer;
+  background-color: white;
 }
 .m_success_btn{
   width: 90vw;
