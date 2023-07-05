@@ -448,24 +448,27 @@ async function buyzzz(){
     && sendPrice !== '' && buyData.productInfo !== ''){
         const IMP = window.IMP;
         const aaa = Math.random()*10000000
-        const m_id = parseInt(aaa.toString()) 
+        const n_id = parseInt(aaa.toString()) 
+        const m_id = n_id.toString()
+        const priceToBePaid = parseInt(sendPrice)
         console.log(m_id)
         IMP.init("imp75261015");
-        await axios({
+        axios({
             url: "https://pb52jtpjg2.execute-api.ap-northeast-2.amazonaws.com/payment/precheck",
             method: "post",
             headers: {"Content-Type": "application/json"},
             data: {
                 merchant_uid: m_id,
-                amount : sendPrice
+                amount : priceToBePaid
             }
-        })
+        });
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         IMP.request_pay({
             pg : "html5_inicis",
             pay_method : "card",
             merchant_uid : m_id,
             name: buyData.productInfo,
-            amount : sendPrice,
+            amount : priceToBePaid,
             buyer_email : buyData.deliveryEmail,
             buyer_name : buyData.deliveryName,
             buyer_tel: buyData.deliveryPhoneNumber,
