@@ -260,6 +260,7 @@ export default defineComponent({
                         :modules="modules"
                         :slides-per-view="2"
                         :spaceBetween="20"
+                        :autoplay="{delay:4000, disableOnInteraction:false}"
                         :pagination="{ clickable: true }"
                         @swiper="onSwiper"
                         @slideChange="onSlideChange"
@@ -319,6 +320,12 @@ export default defineComponent({
                         </swiper-slide>
                     </swiper>
                 </div>
+            </div>
+            <div class="m_swim_banner">
+                <img src="../images/productInfo/FDSB001_BLUE_4.jpg" alt="" class="m_banner_img">
+            </div>
+            <div class="m_beach_banner">
+                <img src="../images//productInfo/FDSB002_YELLOW_1.jpg" alt=""  class="m_banner_img">
             </div>
         </div>
     </div>
@@ -552,6 +559,17 @@ export default defineComponent({
 }
 
 .mobile_swiper_img{
+    width: 100vw;
+}
+
+.m_swim_banner{
+    margin-top: 30px;
+}
+.m_beach_banner{
+    margin-top: 30px;
+}
+
+.m_banner_img{
     width: 100vw;
 }
 
