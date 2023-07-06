@@ -8,6 +8,7 @@ import { items } from '../assets/items'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 
+
 const router = useRouter()
 
 interface Item {
@@ -182,11 +183,26 @@ function buyNow(){
         alert('모든 사이즈를 선택하셨습니다. 확인 부탁드립니다')
     }
 }
+const onSwiper = (swiper)=>{
+    console.log(swiper)
+}
+const onSlideChange = ()=>{
+    console.log('slide change')
+}
+
+const modules = [Navigation, Pagination, Scrollbar, A11y, Autoplay]
 </script>
 
 <script lang="ts">
 import MobileDetect from 'mobile-detect'
 import ItemSlideShow from './ItemSlideShow.vue'
+
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules' 
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
 
 export default defineComponent({
     mounted(){
@@ -199,7 +215,9 @@ export default defineComponent({
         }
     },
     components:{
-        ItemSlideShow
+        ItemSlideShow,
+        Swiper,
+        SwiperSlide
     },
     unmounted() {
         window.removeEventListener("resize", this.myEventHandler);
@@ -425,7 +443,7 @@ export default defineComponent({
         <div class="m_wrap" v-if="mobileState">
             <div class="m_outer_a">
                 <div class="m_main_a">
-                    <div class="m_img_box">
+                    <!-- <div class="m_img_box">
                             <ItemSlideShow v-for="(data, index) in slideData"
                             :key="index"
                             :img="slideData[index].img"
@@ -435,7 +453,22 @@ export default defineComponent({
                             @direction="dir"
                             :startAnime="startAnime"
                             />
-                    </div> 
+                    </div>  -->
+                    <swiper
+                    :modules="modules"
+                    :slides-per-view="1"
+                    :autoplay="{delay:4000, disableOnInteraction:false}"
+                    :pagination="{ clickable: true }"
+                    @swiper="onSwiper"
+                    @slideChange="onSlideChange"
+                    >
+                        <swiper-slide><img :src="item.image[0]" alt="" style="width:100%"></swiper-slide>
+                        <swiper-slide><img :src="item.image[1]" alt="" style="width:100%"></swiper-slide>
+                        <swiper-slide><img :src="item.image[2]" alt="" style="width:100%"></swiper-slide>
+                        <swiper-slide><img :src="item.image[3]" alt="" style="width:100%"></swiper-slide>
+                        <swiper-slide><img :src="item.image[4]" alt="" style="width:100%"></swiper-slide>
+                        <swiper-slide><img :src="item.image[5]" alt="" style="width:100%"></swiper-slide>
+                    </swiper>
                     <div class="m_text_box">
                         <div class="m_top_text">
                             <div class="m_t_title">

@@ -260,7 +260,6 @@ export default defineComponent({
                         :modules="modules"
                         :slides-per-view="2"
                         :spaceBetween="20"
-                        :autoplay="{delay:4000, disableOnInteraction:false}"
                         :pagination="{ clickable: true }"
                         @swiper="onSwiper"
                         @slideChange="onSlideChange"
