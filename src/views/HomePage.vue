@@ -5,6 +5,13 @@ import { useRouter } from 'vue-router';
 import { items } from '../assets/items'
 import MobileDetect from 'mobile-detect'
 
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules' 
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+
 
 export default defineComponent({
     setup(){
@@ -12,10 +19,18 @@ export default defineComponent({
         const goToItem = (id: number) => {
             router.push({ path: `/item/${id}` })
         }
-        return { items, goToItem }
+        const onSwiper = (swiper) =>{
+            console.log(swiper)
+        }
+        const onSlideChange = ()=>{
+            console.log('slide change')
+        }
+        return { items, goToItem, onSwiper, onSlideChange, modules:[Navigation, Pagination, Scrollbar, A11y, Autoplay] }
     },
     components:{
-        SlideShow
+        SlideShow,
+        Swiper,
+        SwiperSlide
     },
     data:()=>{
         return{
@@ -37,6 +52,20 @@ export default defineComponent({
                     img: new URL("../images/banner/homebanner_4.jpg", import.meta.url).href
                 }
 
+            ],
+            mobile_slideData: [
+                {
+                    img: new URL("../images/productInfo/FDST001_BLUE_1.jpg", import.meta.url).href
+                },
+                {
+                    img: new URL("../images/productInfo/FDST001_GREEN_1.jpg", import.meta.url).href
+                },
+                {
+                    img: new URL("../images/productInfo/FDST001_YELLOW_1.jpg", import.meta.url).href
+                },
+                {
+                    img: new URL("../images/productInfo/FDSM001_BLUE_1.jpg", import.meta.url).href
+                },
             ]
         }
     },
@@ -186,7 +215,7 @@ export default defineComponent({
     </div>
     <div v-if="mobileState == true">
         <div>
-            <div class="m_slide_show">
+            <!-- <div class="m_slide_show">
                 <SlideShow v-for="(data, index) in slideData" 
                 :key="index"
                 :img="slideData[index].img"
@@ -196,7 +225,20 @@ export default defineComponent({
                 @direction="dir"
                 :startAnime="startAnime"
                 />
-            </div>
+            </div> -->
+            <swiper
+                :modules="modules"
+                :slides-per-view="1"
+                :autoplay="{delay:4000, disableOnInteraction:false}"
+                :pagination="{ clickable: true }"
+                @swiper="onSwiper"
+                @slideChange="onSlideChange"
+            >
+                <swiper-slide><img :src="mobile_slideData[0].img" alt="" class="mobile_swiper_img"></swiper-slide>
+                <swiper-slide><img :src="mobile_slideData[1].img" alt="" class="mobile_swiper_img"></swiper-slide>
+                <swiper-slide><img :src="mobile_slideData[2].img" alt="" class="mobile_swiper_img"></swiper-slide>
+                <swiper-slide><img :src="mobile_slideData[3].img" alt="" class="mobile_swiper_img"></swiper-slide>
+            </swiper>
             <div class="m_text_area">
                 <div class="m_inner_text_area">
                 <h2>Sustainable Swimwear</h2>
@@ -216,52 +258,69 @@ export default defineComponent({
                     <div class="m_best_top">
                         <h2>Best</h2>
                     </div>
-                    <div class="m_best_bot">
-                        <div class="m_best_bot_inner">
-                            <div class="m_best_bot_inner_inner">
-                                <div class="m_inner_img_box">
-                                    <img :src="items[14].image[0]" alt="" class="inner_img" @click="goToItem(14)">
-                                </div>
-                                <div class="m_inner_text_box">
-                                    <div class="m_botbot_top"> {{items[14].text}} </div>
-                                    <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[14].price}}</p><p>{{items[14].price * 0.95}}</p></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="m_best_bot_inner">
-                            <div class="m_best_bot_inner_inner">
-                                <div class="m_inner_img_box">
-                                    <img :src="items[0].image[0]" alt="" class="inner_img" @click="goToItem(0)">
-                                </div>
-                                <div class="m_inner_text_box">
-                                    <div class="m_botbot_top"> {{items[0].text}} </div>
-                                    <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[0].price}}</p><p>{{items[0].price * 0.95}}</p></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="m_best_bot_inner">
-                            <div class="m_best_bot_inner_inner">
-                                <div class="m_inner_img_box">
-                                    <img :src="items[7].image[0]" alt="" class="inner_img" @click="goToItem(7)">
-                                </div>
-                                <div class="m_inner_text_box">
-                                    <div class="m_botbot_top"> {{items[7].text}} </div>
-                                    <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[7].price}}</p><p>{{items[7].price * 0.95}}</p></span>
+                    <swiper
+                        :modules="modules"
+                        :slides-per-view="2"
+                        :spaceBetween="20"
+                        navigation
+                        :pagination="{ clickable: true }"
+                        @swiper="onSwiper"
+                        @slideChange="onSlideChange"
+                        style="width:90vw"
+                    >
+                        <swiper-slide>
+                            <div class="m_best_bot_inner">
+                                <div class="m_best_bot_inner_inner">
+                                    <div class="m_inner_img_box">
+                                        <img :src="items[14].image[0]" alt="" class="inner_img" @click="goToItem(14)">
+                                    </div>
+                                    <div class="m_inner_text_box">
+                                        <div class="m_botbot_top"> {{items[14].text}} </div>
+                                        <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[14].price}}</p><p>{{items[14].price * 0.95}}</p></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="m_best_bot_inner">
-                            <div class="m_best_bot_inner_inner">
-                                <div class="m_inner_img_box">
-                                    <img :src="items[9].image[0]" alt="" class="inner_img" @click="goToItem(14)">
-                                </div>
-                                <div class="m_inner_text_box">
-                                    <div class="m_botbot_top"> {{items[9].text}} </div>
-                                    <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[9].price}}</p><p>{{items[9].price * 0.95}}</p></span>
+                        </swiper-slide>
+                        <swiper-slide>
+                            <div class="m_best_bot_inner">
+                                <div class="m_best_bot_inner_inner">
+                                    <div class="m_inner_img_box">
+                                        <img :src="items[0].image[0]" alt="" class="inner_img" @click="goToItem(0)">
+                                    </div>
+                                    <div class="m_inner_text_box">
+                                        <div class="m_botbot_top"> {{items[0].text}} </div>
+                                        <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[0].price}}</p><p>{{items[0].price * 0.95}}</p></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </swiper-slide>
+                        <swiper-slide>
+                            <div class="m_best_bot_inner">
+                                <div class="m_best_bot_inner_inner">
+                                    <div class="m_inner_img_box">
+                                        <img :src="items[7].image[0]" alt="" class="inner_img" @click="goToItem(7)">
+                                    </div>
+                                    <div class="m_inner_text_box">
+                                        <div class="m_botbot_top"> {{items[7].text}} </div>
+                                        <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[7].price}}</p><p>{{items[7].price * 0.95}}</p></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </swiper-slide>
+                        <swiper-slide>
+                            <div class="m_best_bot_inner">
+                                <div class="m_best_bot_inner_inner">
+                                    <div class="m_inner_img_box">
+                                        <img :src="items[9].image[0]" alt="" class="inner_img" @click="goToItem(14)">
+                                    </div>
+                                    <div class="m_inner_text_box">
+                                        <div class="m_botbot_top"> {{items[9].text}} </div>
+                                        <span class="m_botbot_bot"><p style="color:#555; textDecorationLine : line-through;">{{items[9].price}}</p><p>{{items[9].price * 0.95}}</p></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </swiper-slide>
+                    </swiper>
                 </div>
             </div>
         </div>
@@ -493,6 +552,10 @@ export default defineComponent({
 }
 .m_botbot_bot > p{
     margin-right: 10px;
+}
+
+.mobile_swiper_img{
+    width: 100vw;
 }
 
 /*mobile end*/
