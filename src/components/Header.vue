@@ -112,7 +112,7 @@
         <div class="m_main_menu">
           <div class="m_main_margin_m">
             <div class="m_top_main_menu">
-              <HeaderLink to="/"><span class="m_main_header" @click="m_menu_hide()">Finebay</span></HeaderLink>
+              <HeaderLink to="/"><span class="m_main_header" @click="m_menu_hide()"><img src="../images/logo/logo.png" alt="" style="width:70%"></span></HeaderLink>
             </div>
             <div class="m_mid_main_menu">
               <div class="m_mid_btn_main">
@@ -215,7 +215,7 @@
           </div>
         </div>
         <div class="m_main_close_bar">
-          <img src="@/images/etc/button_delete.gif" alt="" class="m_delete_btn" @click="m_menu_hide()">
+          <span class="material-icons md-20" @click="m_menu_hide()" style="fontSize:30px">close</span>
         </div>
       </div>  
     </div>
@@ -587,13 +587,12 @@ margin-right: 10px;
 width: 100vw;
 min-width: 280px;
 height: 60px;
-background-color: green;
 }
 .m_menu_mid{
 width: 100%;
 height: 100%;
 position: relative;
-background-color: antiquewhite;
+background-color: rgba(255,255,255,0.5);;
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -676,9 +675,8 @@ height: 100%;
 position: absolute;
 width: 30px;
 height: 30px;
-left: 70%;
+left: 62%;
 top: 0;
-background-color: black;
 z-index: 80;
 }
 .m_delete_btn{

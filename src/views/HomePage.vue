@@ -242,13 +242,11 @@ export default defineComponent({
             <div class="m_text_area">
                 <div class="m_inner_text_area">
                 <h2>Sustainable Swimwear</h2>
-                <h2></h2>
+                <br>
                 <br>
                 <p>아름다운 바다를 위한 fine 스윔웨어 Fine Bay.</p>
-                <br>
                 <p>산업 폐기물을 재활용한 리사이를 소재를 중심으로</p>
                 <p>사람과 자연에 편안한 스윔웨어를 만듭니다.</p>
-                <br>
                 <p>원자재부터 포장재까지 친환경 제품을 사용하며</p>
                 <p>자연과 함께 더불어 지속가능한 패션을 추구합니다.</p>
                 </div>
@@ -351,7 +349,7 @@ export default defineComponent({
     box-sizing: border-box;
 }
 .inner_text_area{
-    width: 50%;
+    width: 80%;
     min-width: 800px;
     height: 40vh;
     position: absolute;
@@ -510,10 +508,10 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
 }
 .m_inner_text_area > p{
-    font-size: 0.6rem;
+    font-size: 0.8rem;
 } 
 .m_best_area {
     width: 100%;
