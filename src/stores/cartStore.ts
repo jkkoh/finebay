@@ -77,7 +77,7 @@ export const useCartStore = defineStore('cart',{
         loadCartInstance()
         {
             const cs = localStorage.getItem('cart')
-            if(!cs)
+            if(!cs || undefined)
             this.cart = {}
             else
             this.cart = JSON.parse(cs)
@@ -128,13 +128,18 @@ export const useCartStore = defineStore('cart',{
                 }
         },
         displayCartLoad(){
-            this.displayCart = (this.cart as Cart).products.map(ci => {
-                const requiredProduct = items.filter(p => p.id == ci.id)
-                // if(requiredProduct[0].stock >= ci.qty)
-                return {
-                    id: ci.id, name: requiredProduct[0].text, price: requiredProduct[0].price, quantity: ci.quantity, size: ci.size, color: requiredProduct[0].color,
-                    inStock: requiredProduct[0].stock, image: requiredProduct[0].image[0] }
-            })
+            const cs = localStorage.getItem('cart')
+            if(!cs){
+                return {}
+            }else{
+                this.displayCart = (this.cart as Cart).products.map(ci => {
+                    const requiredProduct = items.filter(p => p.id == ci.id)
+                    // if(requiredProduct[0].stock >= ci.qty)
+                    return {
+                        id: ci.id, name: requiredProduct[0].text, price: requiredProduct[0].price, quantity: ci.quantity, size: ci.size, color: requiredProduct[0].color,
+                        inStock: requiredProduct[0].stock, image: requiredProduct[0].image[0] }
+                })
+            }
 
         }
 
