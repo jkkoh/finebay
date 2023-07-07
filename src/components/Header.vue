@@ -100,7 +100,7 @@
           </div>
           <div class="m_menu_inner_right">
             <div class="m_menu_right_inner_inner">
-              <HeaderLink to="/cart"><span class="material-icons md-20">shopping_cart</span></HeaderLink>
+              <HeaderLink to="/cart"><span class="material-icons md-20" style="fontSize:20px">shopping_cart</span></HeaderLink>
             </div>
           </div>
         </div>
@@ -598,9 +598,8 @@ justify-content: space-between;
 align-items: center;
 }
 .m_menu_inner_left{
-width: 50px;
-height: 50px;
-margin-left: 20px;
+width: 60px;
+height: 60px;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -630,9 +629,8 @@ align-items: center;
 width: 40vw;
 }
 .m_menu_inner_right{
-width: 50px;
-height: 50px;
-margin-right: 20px;
+width: 60px;
+height: 60px;
 display: flex;
 align-items: center;
 justify-content: center;
@@ -643,6 +641,9 @@ height: 20px;
 display: flex;
 align-items: center;
 justify-content: center;
+}
+.m_menu_right_inner_inner > div > a {
+  height: 20px;
 }
 .material-icons.md-16{
 font-size: 16px;
