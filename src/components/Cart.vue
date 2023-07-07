@@ -187,7 +187,18 @@
                     </div>
                 </div>
                 <div class="m_outer_bot">
-
+                    <div class="m_outer_bot_top_text_box">
+                        <p>*쿠폰 및 할인 적용은 구매페이지에서 가능합니다</p>
+                    </div>
+                    <div class="m_outer_bot_mid_text_box">
+                        <p>상품 구매금액 {{ total }} + 배송비 : 0 (무료)</p>
+                    </div>
+                    <div class="m_outer_bot_mid_text_box">
+                        <p>합계 : ￦ {{ total }}</p>
+                    </div>
+                    <div class="m_buy_box">
+                        <span class="m_buy_btn" @click="buyingItem()">구입하기</span>
+                    </div>
                 </div>
 
             </div>
@@ -509,7 +520,7 @@ export default defineComponent({
     justify-content: center;
 }
 .m_top_inner{
-    width: 30vw;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -630,9 +641,38 @@ export default defineComponent({
 
 /* mobile outer mid end*/
 .m_outer_bot{
-    width: 100vw;
+    width: 90vw;
     height: 100vw;
-    background-color: yellow;
+    margin-left: 5vw;
+}
+
+.m_outer_bot_top_text_box{
+    margin-top: 2vw;
+    font-size: 0.8rem;
+    color: grey;
+    padding-left: 3vw;
+}
+.m_outer_bot_mid_text_box{
+    font-size: 0.8rem;
+    padding-left: 3vw;
+}
+.m_buy_box{
+    width: 90vw;
+    height: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.m_buy_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vw;
+    width: 40vw;
+    background-color: black;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
 }
 /* mobile page end*/
 </style>
