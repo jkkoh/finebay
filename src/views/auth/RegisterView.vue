@@ -141,7 +141,7 @@ async function resendConfirmationCode(){
     await Auth.resendSignUp(username);
     alert(`${username} 으로 코드가 다시 보내졌습니다`)
     console.log('code resent successful')
-  } catch (errr){
+  } catch (error){
     console.log('error has occured while executing resendConfirmationCode : ' ,error)
   }
 }
