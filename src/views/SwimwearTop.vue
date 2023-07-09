@@ -80,21 +80,21 @@ export default defineComponent({
             v-for="(item, i) in items" 
             :key="i"
             >
-            <div class="mainB" v-if="item.part === 'Top'">
-                <div class="mainC">
-                    <div class="subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
-                        <div class="discount_box">-{{ item.discount }}%</div>
-                        <div v-if="mouse[i]"><img :src="item.image[4]" class="subImage"/></div>
-                        <div v-else><img :src="item.image[0]" class="subImage"/></div>
-                    </div>
-                    <div class="subB">
-                        <p class="subTextA">{{ item.text }}</p>
-                        <div class="subC">
-                            <p class="subTextB crossed">{{ item.price }}원 </p>  <p class="subTextB" style="color: #d44511;">{{ item.price * 0.95 }}원 </p>
+                <div class="mainB" v-if="item.part === 'Top' && item.category === 'Swimwear'">
+                    <div class="mainC">
+                        <div class="subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
+                            <div class="discount_box"  v-if="item.discount !==0 ">-{{ item.discount }}%</div>
+                            <div v-if="mouse[i]"><img :src="item.image[4]" class="subImage"/></div>
+                            <div v-else><img :src="item.image[0]" class="subImage"/></div>
+                        </div>
+                        <div class="subB">
+                            <p class="subTextA">{{ item.text }}</p>
+                            <div class="subC">
+                                <p class="subTextB crossed">{{ item.price }}원 </p>  <p class="subTextB" style="color: #d44511;">{{ item.price * 0.95 }}원 </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
         <div class="m_mainA" v-if="mobileState">
@@ -102,10 +102,10 @@ export default defineComponent({
             v-for="(item, i) in items" 
             :key="i"
             >
-                <div class="m_mainB" v-if="item.part === 'Top'">
+                <div class="m_mainB" v-if="item.part === 'Top' && item.category ==='Swimwear'">
                     <div class="m_mainC">
                         <div class="m_subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
-                            <div class="m_discount_box">-{{ item.discount }}%</div>
+                            <div class="m_discount_box"  v-if="item.discount !==0 ">-{{ item.discount }}%</div>
                             <div><img :src="item.image[0]" class="m_subImage"/></div>
                         </div>
                         <div class="m_subB">

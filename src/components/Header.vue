@@ -55,8 +55,10 @@
                   <p class="top_m">Beachwear</p>
                 </HeaderLink>
                 <ul v-if="bot_menu_hover_1" class="menu_c">
-                  <li class="top_b">Top</li>
-                  <li class="top_b">Bottom</li>
+                  <div class="menu_e">
+                    <HeaderLink to="/beachwearTop"><li class="top_b">Top</li></HeaderLink>
+                    <HeaderLink to="/beachwearBot"><li class="top_b">Bottom</li></HeaderLink>
+                  </div>
                 </ul>
               </li>
             </ul>
@@ -169,9 +171,6 @@
                       </div>
                       <div class="m_bot_main_menu_sub_bot_catList_innest_in">
                         <HeaderLink to="/beachwearBot" @click="m_menu_hide()">BOTTOM</HeaderLink>
-                      </div>
-                      <div class="m_bot_main_menu_sub_bot_catList_innest_in">
-                        <HeaderLink to="/beachwearMono" @click="m_menu_hide()">MONOKINI</HeaderLink>
                       </div>
                     </div>                  
                   </ul>

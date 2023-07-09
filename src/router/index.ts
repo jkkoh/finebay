@@ -91,6 +91,16 @@ const router = createRouter({
       component: () => import('../views/BeachwearAll.vue')
     },
     {
+      path: '/beachwearTop',
+      name: 'beachwearTop',
+      component: () => import('../views/BeachwearTop.vue')
+    },
+    {
+      path: '/beachwearBot',
+      name: 'beachwearBot',
+      component: () => import('../views/BeachwearBot.vue')
+    },
+    {
       path: '/sizeGuide',
       name: 'sizeGuide',
       component: () => import('../views/SizeGuide.vue')

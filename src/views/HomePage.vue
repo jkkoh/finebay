@@ -55,16 +55,16 @@ export default defineComponent({
             ],
             mobile_slideData: [
                 {
-                    img: new URL("../images/productInfo/FDST001_BLUE_1.jpg", import.meta.url).href
+                    img: new URL("../images/banner/mobilebanner_1.jpg", import.meta.url).href
                 },
                 {
-                    img: new URL("../images/productInfo/FDST001_GREEN_1.jpg", import.meta.url).href
+                    img: new URL("../images/banner/mobilebanner_2.jpg", import.meta.url).href
                 },
                 {
-                    img: new URL("../images/productInfo/FDST001_YELLOW_1.jpg", import.meta.url).href
+                    img: new URL("../images/banner/mobilebanner_3.jpg", import.meta.url).href
                 },
                 {
-                    img: new URL("../images/productInfo/FDSM001_BLUE_1.jpg", import.meta.url).href
+                    img: new URL("../images/banner/mobilebanner_4.jpg", import.meta.url).href
                 },
             ]
         }
@@ -321,10 +321,10 @@ export default defineComponent({
                 </div>
             </div>
             <div class="m_swim_banner">
-                <img src="../images/productInfo/FDSB001_BLUE_4.jpg" alt="" class="m_banner_img">
+                <img src="../images/banner/m_swimwear_banner.jpg" alt="" class="m_banner_img" @click="toSwimwear()">
             </div>
             <div class="m_beach_banner">
-                <img src="../images//productInfo/FDSB002_YELLOW_1.jpg" alt=""  class="m_banner_img">
+                <img src="../images/banner/m_beachwear_banner.jpg" alt=""  class="m_banner_img" @click="toBeachwear()">
             </div>
         </div>
     </div>

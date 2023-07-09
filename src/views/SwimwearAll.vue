@@ -77,13 +77,13 @@ export default defineComponent({
     <div>
         <div class="mainA" v-if="!mobileState">
             <div 
-            class="mainB"
             v-for="(item, i) in items" 
             :key="i"
             >
+            <div class="mainB" v-if="item.category === 'Swimwear' ">
                 <div class="mainC">
                     <div class="subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
-                        <div class="discount_box">-{{ item.discount }}%</div>
+                        <div class="discount_box"  v-if="item.discount !==0 ">-{{ item.discount }}%</div>
                         <div v-if="mouse[i]"><img :src="item.image[4]" class="subImage"/></div>
                         <div v-else><img :src="item.image[0]" class="subImage"/></div>
                     </div>
@@ -95,22 +95,24 @@ export default defineComponent({
                     </div>
                 </div>
             </div>
+            </div>
         </div>
         <div class="m_mainA" v-if="mobileState">
             <div 
-            class="m_mainB"
             v-for="(item, i) in items" 
             :key="i"
             >
-                <div class="m_mainC">
-                    <div class="m_subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
-                        <div class="m_discount_box">-{{ item.discount }}%</div>
-                        <div><img :src="item.image[0]" class="m_subImage"/></div>
-                    </div>
-                    <div class="m_subB">
-                        <p class="m_subTextA">{{ item.text }}</p>
-                        <div class="m_subC">
-                            <p class="m_subTextB crossed">{{ item.price }}원 </p>  <p class="m_subTextB" style="color: #d44511;">{{ item.price * 0.95 }}원 </p>
+                <div class="m_mainB" v-if="item.category === 'Swimwear' ">
+                    <div class="m_mainC">
+                        <div class="m_subA clickable" @click="goToItem(i)" @mouseover="mouseTrue(i,mouse[i])" @mouseleave="mouseFalse(i,mouse[i])">
+                            <div class="m_discount_box"  v-if="item.discount !==0 ">-{{ item.discount }}%</div>
+                            <div><img :src="item.image[0]" class="m_subImage"/></div>
+                        </div>
+                        <div class="m_subB">
+                            <p class="m_subTextA">{{ item.text }}</p>
+                            <div class="m_subC">
+                                <p class="m_subTextB crossed">{{ item.price }}원 </p>  <p class="m_subTextB" style="color: #d44511;">{{ item.price * 0.95 }}원 </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,15 +168,15 @@ export default defineComponent({
     min-height: 100px;
     
 }
-.subTextA {
-    margin-top: 7px;
-    font-family: "Open_Sans";
-    font-size: 22px;
-}
 .subC{
     width : 100%;
     display: flex;
 
+}
+.subTextA {
+    margin-top: 7px;
+    font-family: "Open_Sans";
+    font-size: 22px;
 }
 .subTextB{
     font-family: "Open_Sans";
@@ -237,7 +239,6 @@ export default defineComponent({
 .m_subC{
     width : 100%;
     display: flex;
-
 }
 .m_subTextB{
     font-family: "Open_Sans";
