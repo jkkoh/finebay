@@ -664,7 +664,7 @@ top: 0;
 width: 70vw;
 min-width: calc(350px * 0.7);
 height: 100vh;
-background-color: aliceblue;
+background-color: white;
 z-index: 80;
 }
 .m_main_margin_m{
