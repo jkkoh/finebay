@@ -118,10 +118,10 @@
             </div>
             <div class="m_mid_main_menu">
               <div class="m_mid_btn_main">
-                <HeaderLink to="/login"><span class="m_lc_btn" @click="m_menu_hide()">LOGIN</span></HeaderLink>
+                <HeaderLink to="/login"><span class="m_lc_btn" @click="m_menu_hide()">로그인</span></HeaderLink>
               </div>
               <div class="m_mid_btn_main">
-                <HeaderLink to="/register"><span class="m_lc_btn" style="backgroundColor : yellow" @click="m_menu_hide()">CREATE ACCOUNT</span></HeaderLink>
+                <HeaderLink to="/register"><span class="m_lc_btn" @click="m_menu_hide()">회원가입</span></HeaderLink>
                 
               </div>
             </div>
@@ -712,14 +712,14 @@ justify-content: center;
 }
 .m_mid_main_menu{
 width: 100%;
-height: 75px;
-background-color: aqua;
+height: 50px;
 display: flex;
+justify-content: space-evenly;
 }
 .m_mid_btn_main{
-width: 50%;
+width: 49%;
 height: 100%;
-background-color: gold;
+background-color: #0d0c22;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -737,11 +737,12 @@ height: 100%;
 display: block;
 width: 100%;
 height: 100%;
-background-color: grey;
 display: flex;
 align-items: center;
 justify-content: center;
 font-size: 13px;
+font-weight: 700;
+color: white;
 cursor: pointer;
 }
 .m_bot_main_menu{

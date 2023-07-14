@@ -1,240 +1,302 @@
 <template>
-    <div class="wrap">
-        <div class="main_wrap">
-            <div class="inner_wrap">
-                <div class="customer_info">
-                    <div class="top">
-                        <span class="inner_top">주문정보</span>
-                    </div>
-                    <div class="customer_bot">
-                        <div class="reglar_size_box">
-                            <div class="customer_bot_left">
-                                <span>주문자</span>
-                            </div>
-                            <div class="customer_bot_right">
-                                <input type="text" class="regular_input" v-model="buyData['customerName']">
-                            </div>
+    <div>
+        <div class="wrap" v-if="!mobileState">
+            <div class="main_wrap">
+                <div class="inner_wrap">
+                    <div class="customer_info">
+                        <div class="top">
+                            <span class="inner_top">주문정보</span>
                         </div>
-                        <div class="reglar_size_box">
-                            <div class="customer_bot_left">
-                                <span>이메일</span>
+                        <div class="customer_bot">
+                            <div class="reglar_size_box">
+                                <div class="customer_bot_left">
+                                    <span>주문자</span>
+                                </div>
+                                <div class="customer_bot_right">
+                                    <input type="text" class="regular_input" v-model="buyData['customerName']">
+                                </div>
                             </div>
-                            <div class="customer_bot_right">
-                                <input type="text" class="regular_input" v-model="buyData['customerEmail']">
+                            <div class="reglar_size_box">
+                                <div class="customer_bot_left">
+                                    <span>이메일</span>
+                                </div>
+                                <div class="customer_bot_right">
+                                    <input type="text" class="regular_input" v-model="buyData['customerEmail']">
+                                </div>
                             </div>
-                        </div>
-                        <div class="phone_size_box">
-                            <div class="customer_bot_left">
-                                <span>전화번호</span>
+                            <div class="phone_size_box">
+                                <div class="customer_bot_left">
+                                    <span>전화번호</span>
+                                </div>
+                                <div class="phone_number_bot_right">
+                                    <input type="tel" class="phone" pattern="[0-9]" v-model="buyData['customerPhoneNumber']">
+                                </div>
                             </div>
-                            <div class="phone_number_bot_right">
-                                <input type="tel" class="phone" pattern="[0-9]" v-model="buyData['customerPhoneNumber']">
-                            </div>
-                        </div>
-                        <div class="large_size_box">
-                            <div class="customer_bot_left">
-                                <span>주소</span>
-                            </div>
-                            <div class="address_bot_right">
-                                <div class="top_address_box">
-                                    <div class="post_code_box">
-                                        <input type="text" placeholder="우편번호" class="address_1" v-model="buyData['customerPostCode']">
+                            <div class="large_size_box">
+                                <div class="customer_bot_left">
+                                    <span>주소</span>
+                                </div>
+                                <div class="address_bot_right">
+                                    <div class="top_address_box">
+                                        <div class="post_code_box">
+                                            <input type="text" placeholder="우편번호" class="address_1" v-model="buyData['customerPostCode']">
+                                        </div>
+                                        <div class="address_search_box">
+                                            <span class="search_btn" @click="execDaumPostcode()">주소검색</span>
+                                        </div>
                                     </div>
-                                    <div class="address_search_box">
-                                        <span class="search_btn" @click="execDaumPostcode()">주소검색</span>
+                                    <div class="mid_address_box">
+                                        <input type="text" placeholder="기본 주소" class="address_2" v-model="buyData['customerAddress']">
                                     </div>
-                                </div>
-                                <div class="mid_address_box">
-                                    <input type="text" placeholder="기본 주소" class="address_2" v-model="buyData['customerAddress']">
-                                </div>
-                                <div class="bot_address_box">
-                                    <input type="text" placeholder="나머지 주소" class="address_2" v-model="buyData['customerAddress1']">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="delivery_info">
-                    <div class="top">
-                        <span class="inner_top">배송지</span>
-                    </div>
-                    <div class="delivery_bot">
-                        <div class="regular_size_box">
-                            <div class="delivery_check">
-                                <div class="checked1">
-                                    <input type="radio" name="check" @click="deliveryCheck()" v-model="deliveryChecked">
-                                    <span>주문자 정보와 동일</span>
-                                </div>
-                                <div class="checked2">
-                                    <input type="radio" name="check" @click="deliveryCheck1()" v-model="deliveryChecked1">
-                                    <span>새로운 배송지</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="reglar_size_box">
-                            <div class="customer_bot_left">
-                                <span>받는사람</span>
-                            </div>
-                            <div class="customer_bot_right">
-                                <input type="text" class="regular_input" v-model="buyData['deliveryName']">
-                            </div>
-                        </div>
-                        <div class="large_size_box">
-                            <div class="customer_bot_left">
-                                <span>주소</span>
-                            </div>
-                            <div class="address_bot_right">
-                                <div class="top_address_box">
-                                    <div class="post_code_box">
-                                        <input type="text" placeholder="우편번호" class="address_1" v-model="buyData['deliveryPostCode']">
-                                    </div>
-                                    <div class="address_search_box">
-                                        <span class="search_btn" @click="execDaumPostcode1()">주소검색</span>
+                                    <div class="bot_address_box">
+                                        <input type="text" placeholder="나머지 주소" class="address_2" v-model="buyData['customerAddress1']">
                                     </div>
                                 </div>
-                                <div class="mid_address_box">
-                                    <input type="text" placeholder="기본 주소" class="address_2" v-model="buyData['deliveryAddress']">
-                                </div>
-                                <div class="bot_address_box">
-                                    <input type="text" placeholder="나머지 주소" class="address_2" v-model="buyData['deliveryAddress1']">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="phone_size_box">
-                            <div class="customer_bot_left">
-                                <span>전화번호</span>
-                            </div>
-                            <div class="phone_number_bot_right">
-                                <input type="tel" class="phone" pattern="[0-9]" v-model="buyData['deliveryPhoneNumber']">
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="product_info">
-                    <div class="top">
-                        <span class="inner_top">주문상품</span>
+                    <div class="delivery_info">
+                        <div class="top">
+                            <span class="inner_top">배송지</span>
+                        </div>
+                        <div class="delivery_bot">
+                            <div class="regular_size_box">
+                                <div class="delivery_check">
+                                    <div class="checked1">
+                                        <input type="radio" name="check" @click="deliveryCheck()" v-model="deliveryChecked">
+                                        <span>주문자 정보와 동일</span>
+                                    </div>
+                                    <div class="checked2">
+                                        <input type="radio" name="check" @click="deliveryCheck1()" v-model="deliveryChecked1">
+                                        <span>새로운 배송지</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reglar_size_box">
+                                <div class="customer_bot_left">
+                                    <span>받는사람</span>
+                                </div>
+                                <div class="customer_bot_right">
+                                    <input type="text" class="regular_input" v-model="buyData['deliveryName']">
+                                </div>
+                            </div>
+                            <div class="large_size_box">
+                                <div class="customer_bot_left">
+                                    <span>주소</span>
+                                </div>
+                                <div class="address_bot_right">
+                                    <div class="top_address_box">
+                                        <div class="post_code_box">
+                                            <input type="text" placeholder="우편번호" class="address_1" v-model="buyData['deliveryPostCode']">
+                                        </div>
+                                        <div class="address_search_box">
+                                            <span class="search_btn" @click="execDaumPostcode1()">주소검색</span>
+                                        </div>
+                                    </div>
+                                    <div class="mid_address_box">
+                                        <input type="text" placeholder="기본 주소" class="address_2" v-model="buyData['deliveryAddress']">
+                                    </div>
+                                    <div class="bot_address_box">
+                                        <input type="text" placeholder="나머지 주소" class="address_2" v-model="buyData['deliveryAddress1']">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="phone_size_box">
+                                <div class="customer_bot_left">
+                                    <span>전화번호</span>
+                                </div>
+                                <div class="phone_number_bot_right">
+                                    <input type="tel" class="phone" pattern="[0-9]" v-model="buyData['deliveryPhoneNumber']">
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="product_bot">
-                        <div v-for="(item, index) in displayCart" :key="index" >
-                            <div v-for="(aitem, aindex) in displayBuy" :key="aindex">
-                                <div v-if="item['id'] == aitem['id'] && item['size'][0] == aitem['size']">
-                                    <div v-if="item['quantity'][0]" class="for_box">
-                                        <div class="for_pos_box">
-                                            <div class="img_box">
-                                                <img :src="item['image']" alt="" class="item_image">
+                    <div class="product_info">
+                        <div class="top">
+                            <span class="inner_top">주문상품</span>
+                        </div>
+                        <div class="product_bot">
+                            <div v-for="(item, index) in displayCart" :key="index" >
+                                <div v-for="(aitem, aindex) in displayBuy" :key="aindex">
+                                    <div v-if="item['id'] == aitem['id'] && item['size'][0] == aitem['size']">
+                                        <div v-if="item['quantity'][0]" class="for_box">
+                                            <div class="for_pos_box">
+                                                <div class="img_box">
+                                                    <img :src="item['image']" alt="" class="item_image">
+                                                </div>
+                                                <div class="info_box">
+                                                    <span> 상품명 : {{item['name']}}</span>
+                                                    <span> 사이즈 : {{item['size'][0]}}</span>
+                                                    <span> 수량 : {{item['quantity'][0]}}</span>
+                                                    <div> <span>가격 :</span> <span class="crossed"> {{ item['price'] }} </span> <span>-5% 할인 =></span> <span>{{ item['price'] * 0.95 }}</span> </div>
+                                                </div>
+                                                <div class="deletea_box">
+                                                    <span>삭제</span>
+                                                    <span @click="removeItem(item['id'])">X</span>
+                                                </div>
                                             </div>
-                                            <div class="info_box">
-                                                <span> 상품명 : {{item['name']}}</span>
-                                                <span> 사이즈 : {{item['size'][0]}}</span>
-                                                <span> 수량 : {{item['quantity'][0]}}</span>
-                                                <div> <span>가격 :</span> <span class="crossed"> {{ item['price'] }} </span> <span>-5% 할인 =></span> <span>{{ item['price'] * 0.95 }}</span> </div>
-                                            </div>
-                                            <div class="deletea_box">
-                                                <span>삭제</span>
-                                                <span @click="removeItem(item['id'])">X</span>
+                                        </div>
+                                    </div>
+                                    <div v-if="item['id'] == aitem['id'] && item['size'][1] == aitem['size']">
+                                        <div v-if="item['quantity'][1]" class="for_box">
+                                            <div class="for_pos_box">
+                                                <div class="img_box">
+                                                    <img :src="item['image']" alt="" class="item_image">
+                                                </div>
+                                                <div class="info_box">
+                                                    <span> 상품명 : {{item['name']}}</span>
+                                                    <span> 사이즈 : {{item['size'][1]}}</span>
+                                                    <span> 수량 : {{item['quantity'][1]}}</span>
+                                                    <div> <span>가격 :</span> <span class="crossed"> {{ item['price'] }} </span> <span>-5% 할인 =></span> <span>{{ item['price'] * 0.95 }}</span> </div>
+                                                </div>
+                                                <div class="deletea_box">
+                                                    <span>삭제</span>
+                                                    <img src="@/images/etc/button_delete.gif" alt="delete_item" @click="removeItem(item['id'])" class="delete_btn">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="item['id'] == aitem['id'] && item['size'][1] == aitem['size']">
-                                    <div v-if="item['quantity'][1]" class="for_box">
-                                        <div class="for_pos_box">
-                                            <div class="img_box">
-                                                <img :src="item['image']" alt="" class="item_image">
-                                            </div>
-                                            <div class="info_box">
-                                                <span> 상품명 : {{item['name']}}</span>
-                                                <span> 사이즈 : {{item['size'][1]}}</span>
-                                                <span> 수량 : {{item['quantity'][1]}}</span>
-                                                <div> <span>가격 :</span> <span class="crossed"> {{ item['price'] }} </span> <span>-5% 할인 =></span> <span>{{ item['price'] * 0.95 }}</span> </div>
-                                            </div>
-                                            <div class="deletea_box">
-                                                <span>삭제</span>
-                                                <img src="@/images/etc/button_delete.gif" alt="delete_item" @click="removeItem(item['id'])" class="delete_btn">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sales_info">
+                        <div class="top">
+                            <span class="inner_top">할인정보</span>
+                        </div>
+                        <div class="sales_bot">
+                            <div class="customer_bot_left">
+                                <span>할인코드</span>
+                            </div>
+                            <div class="sales_bot_right">
+                                <input type="text" class="sales_input_box"><button class="apply_btn">적용</button>
+                            </div>
+                        </div>
+                        <div class="sales_applied">
+                            <div class="customer_bot_left">
+                                <span>적용금액</span>
+                            </div>
+                            <div class="discounted_price_box">
+                                <span class="red_discounted">-0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price_info">
+                        <div class="top">
+                            <span class="inner_top">결제정보</span>
+                        </div>
+                        <div class="price_info_bot">
+                            <div class="price_info_bot_left">
+                                <div class="inner_info_bot_left">
+                                    <span class="price_info_left1">주문상품</span>
+                                    <span class="price_info_left1">배송비</span>
+                                    <span class="price_info_left1">기본할인</span>
+                                    <span class="price_info_left1">추가할인</span>
+                                </div>
+                                <span class="price_info_left2">최종 결제 금액</span>
+                            </div>
+                            <div class="price_info_bot_right">
+                                <div class="inner_info_bot_right">
+                                    <div class="cart_addition_box">
+                                        <div v-for="(item, index) in displayCart" :key="index">
+                                            <div v-for="(aitem, aindex) in displayBuy" :key="aindex">
+                                                <div v-if="item['id'] == aitem['id'] && item['size'][0] == aitem['size']">
+                                                    <span class="price_info_right1"> {{ item['price'] * item['quantity'][0] }} </span>
+                                                </div>
+                                                <div v-if="item['id'] == aitem['id'] && item['size'][1] == aitem['size']">
+                                                    <span class="price_info_right1"> {{ item['price'] * item['quantity'][1] }} </span>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <span class="price_info_right1">무료</span>
+                                    <span class="price_info_right1">-5%</span>
+                                </div>
+                                <div class="inner_info_final_price">
+                                    <span class="price_info_right2">{{ total1 }} - {{ total2 }} = {{ total }}</span>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment_info">
+                        <div class="top">
+                            <span class="inner_top">결제수단</span>
+                        </div>
+                        <div class="payment_info_bot">
+                            <div class="payment_card">
+                                <input type="radio" class="card_checked" name="payment">
+                                <span>카드 결제</span>
+                            </div>
+                            <div class="payment_kakao">
+                                <input type="radio" class="kakao_checked" name="payment">
+                                <span>카카오페이</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buy">
+                        <button @click="buyzzz()" class="buy_btn">{{ total }}원 결제하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="mobileState" class="m_wrap">
+            <div class="m_main_wrap">
+                <div class="m_inner_wrap">
+                    <div class="m_customer_info">
+                        <div class="m_top">
+                            <span class="m_inner_top">주문정보</span>
+                        </div>
+                        <div class="m_customer_bot">
+                            <div class="m_reglar_size_box">
+                                <div class="m_customer_bot_left">
+                                    <span>주문자</span>
+                                </div>
+                                <div class="m_customer_bot_right">
+                                    <input type="text" class="m_regular_input" v-model="buyData['customerName']">
+                                </div>
+                            </div>
+                            <div class="m_reglar_size_box">
+                                <div class="m_customer_bot_left">
+                                    <span>이메일</span>
+                                </div>
+                                <div class="m_customer_bot_right">
+                                    <input type="text" class="m_regular_input" v-model="buyData['customerEmail']">
+                                </div>
+                            </div>
+                            <div class="m_phone_size_box">
+                                <div class="m_customer_bot_left">
+                                    <span>전화번호</span>
+                                </div>
+                                <div class="m_phone_number_bot_right">
+                                    <input type="tel" class="m_phone" pattern="[0-9]" v-model="buyData['customerPhoneNumber']" placeholder="-제외">
+                                </div>
+                            </div>
+                            <div class="m_large_size_box">
+                                <div class="m_add_pos_box">
+                                    <div class="m_add_bot_left">
+                                        <span>주소</span>
+                                    </div>
+                                </div>
+                                <div class="m_address_bot_right">
+                                    <div class="m_top_address_box">
+                                        <div class="m_post_code_box">
+                                            <input type="text" placeholder="우편번호" class="m_address_1" v-model="buyData['customerPostCode']">
+                                        </div>
+                                        <div class="m_address_search_box">
+                                            <span class="material-icons md-20 m_search_btn"  @click="execDaumPostcode()">search</span>
+                                        </div>
+                                    </div>
+                                    <div class="m_mid_address_box">
+                                        <input type="text" placeholder="기본 주소" class="m_address_2" v-model="buyData['customerAddress']">
+                                    </div>
+                                    <div class="m_bot_address_box">
+                                        <input type="text" placeholder="나머지 주소" class="m_address_2" v-model="buyData['customerAddress1']">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="sales_info">
-                    <div class="top">
-                        <span class="inner_top">할인정보</span>
-                    </div>
-                    <div class="sales_bot">
-                        <div class="customer_bot_left">
-                            <span>할인코드</span>
-                        </div>
-                        <div class="sales_bot_right">
-                            <input type="text" class="sales_input_box"><button class="apply_btn">적용</button>
-                        </div>
-                    </div>
-                    <div class="sales_applied">
-                        <div class="customer_bot_left">
-                            <span>적용금액</span>
-                        </div>
-                        <div class="discounted_price_box">
-                            <span class="red_discounted">-0</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="price_info">
-                    <div class="top">
-                        <span class="inner_top">결제정보</span>
-                    </div>
-                    <div class="price_info_bot">
-                        <div class="price_info_bot_left">
-                            <div class="inner_info_bot_left">
-                                <span class="price_info_left1">주문상품</span>
-                                <span class="price_info_left1">배송비</span>
-                                <span class="price_info_left1">기본할인</span>
-                                <span class="price_info_left1">추가할인</span>
-                            </div>
-                            <span class="price_info_left2">최종 결제 금액</span>
-                        </div>
-                        <div class="price_info_bot_right">
-                            <div class="inner_info_bot_right">
-                                <div class="cart_addition_box">
-                                    <div v-for="(item, index) in displayCart" :key="index">
-                                        <div v-for="(aitem, aindex) in displayBuy" :key="aindex">
-                                            <div v-if="item['id'] == aitem['id'] && item['size'][0] == aitem['size']">
-                                                <span class="price_info_right1"> {{ item['price'] * item['quantity'][0] }} </span>
-                                            </div>
-                                            <div v-if="item['id'] == aitem['id'] && item['size'][1] == aitem['size']">
-                                                <span class="price_info_right1"> {{ item['price'] * item['quantity'][1] }} </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <span class="price_info_right1">무료</span>
-                                <span class="price_info_right1">-5%</span>
-                            </div>
-                            <div class="inner_info_final_price">
-                                <span class="price_info_right2">{{ total1 }} - {{ total2 }} = {{ total }}</span>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="payment_info">
-                    <div class="top">
-                        <span class="inner_top">결제수단</span>
-                    </div>
-                    <div class="payment_info_bot">
-                        <div class="payment_card">
-                            <input type="radio" class="card_checked" name="payment">
-                            <span>카드 결제</span>
-                        </div>
-                        <div class="payment_kakao">
-                            <input type="radio" class="kakao_checked" name="payment">
-                            <span>카카오페이</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="buy">
-                    <button @click="buyzzz()" class="buy_btn">{{ total }}원 결제하기</button>
                 </div>
             </div>
         </div>
@@ -501,12 +563,37 @@ async function buyzzz(){
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { request } from 'http';
+import MobileDetect from 'mobile-detect';
 export default defineComponent({
     mounted() {
         let recaptchaScript = document.createElement('script')
         recaptchaScript.setAttribute('src', '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js')
         document.head.appendChild(recaptchaScript)
+        window.addEventListener("resize", this.myEventHandler);
+        const md = new MobileDetect(window.navigator.userAgent)
+        if(window.innerWidth < 800   || md.mobile() || md.tablet()){
+        this.mobileState = true;
+        }else if(window.innerWidth >= 800){
+            this.mobileState = false;
+        }
+    },
+    unmounted(){
+        window.removeEventListener("resize", this.myEventHandler);
+    },
+    data:()=>{
+        return{
+            mobileState : false,
+        }
+    },
+    methods:{
+        myEventHandler(){
+            const mobile = 800
+            if(window.innerWidth < mobile ){
+                this.mobileState = true;
+            }else if(window.innerWidth >= mobile){
+                this.mobileState = false;
+            }
+        }
     }
 })
 </script>
@@ -894,4 +981,137 @@ export default defineComponent({
     border: 1px solid black;
     border-top: none;
 }
+
+/*mobile start*/
+.m_customer_info{
+}
+.m_top{
+    background-color: #595959;
+    color: white;
+    font-weight: 550;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+}
+.m_customer_bot{
+    width: 95%;
+    margin-left: 2.5%;
+}
+.m_customer_bot_left{
+    width: 25%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 400;
+}
+.m_customer_bot_right{
+    width: 75%;
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+.m_regular_input{
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
+    font-size: 14px;
+}
+.m_reglar_size_box{
+    width:100%;
+    display: flex;
+    height: 55px;
+    align-items: center;
+}
+.m_phone_size_box{
+    width: 100%;
+    display: flex;
+    height: 55px;
+    align-items: center;
+}
+.m_phone_number_bot_right{
+    width: 75%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+.m_phone{
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
+    font-size: 14px;
+}
+.m_large_size_box{
+    width: 100%;
+    display: flex;
+}
+.m_address_bot_right{
+    width: 75%;
+}
+.m_add_pos_box{
+    width: 25%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 400;
+}
+.m_add_bot_left{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 400;
+}
+.m_top_address_box{
+    width: 100%;
+    display: flex;
+    height: 55px;
+    align-items: center;
+}
+.m_post_code_box{
+    width: calc(100% - 40px);
+    height: 40px;
+}
+.m_address_search_box{
+    width: 40px;
+    height: 40px;
+}
+.m_address_1{
+    width: 100%;
+    height: 100%;
+    padding-left: 10px;
+    font-size: 14px;
+}
+.m_search_btn{
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.m_mid_address_box{
+    width: 100%;
+    display: flex;
+    height: 55px;
+    align-items: center;
+}
+.m_address_2{
+    width: 100%;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 14px;
+}
+.m_bot_address_box{
+    width: 100%;
+    display: flex;
+    height: 55px;
+    align-items: center;
+}
+/*mobile end*/
 </style>

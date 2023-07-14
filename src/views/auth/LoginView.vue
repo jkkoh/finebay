@@ -37,9 +37,6 @@
                 </div>
               </div>
               <div class="mob_log_bot">
-                <div class="mobile_register" @click="toRegister()">
-                  <span>회원가입</span>
-                </div>
                 <div class="mobile_submit" @click="submit()">
                   <span>로그인</span>
                 </div>
