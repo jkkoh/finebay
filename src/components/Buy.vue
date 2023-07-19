@@ -1204,6 +1204,7 @@ export default defineComponent({
     height: 100%;
     border: 1px solid black;
     border-top: none;
+    background-color: #595959;
     color: white;
 }
 
