@@ -401,8 +401,8 @@
                                                     <div v-if="item['discount'] == 0">
                                                         <span>￦</span>{{ item['price'] }}
                                                     </div>
-                                                    <div v-if="selectedCoupon.discount !== any" style="color:red;">
-                                                        <p>쿠폰가: ￦{{ (item['price'] * ((100 - item['discount']) / 100)) * (1 - (selectedCoupon.discount / 100)) }}</p>
+                                                    <div v-if="selectedCoupon['discount']" style="color:red;">
+                                                        <p>쿠폰가: ￦{{ (item['price'] * ((100 - item['discount']) / 100)) * (1 - (selectedCoupon['discount'] / 100)) }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="m_deletea_box">
