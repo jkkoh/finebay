@@ -128,7 +128,8 @@
                                                     <span> 상품명 : {{item['name']}}</span>
                                                     <span> 사이즈 : {{item['size'][0]}}</span>
                                                     <span> 수량 : {{item['quantity'][0]}}</span>
-                                                    <div> <span>가격 :</span> <span class="crossed"> {{ item['price'] }} </span> <span>-5% 할인 =></span> <span>{{ item['price'] * 0.95 }}</span> </div>
+                                                    <div v-if="item['discount'] !== 0 "> <span>가격 :</span> <span class="crossed"> {{ item['price'] }} </span> <span>-{{ item['discount'] }}% 할인 =></span> <span>{{ item['price'] * ((100 - item['discount']) / 100) }}</span> </div>
+                                                    <div v-if="item['discount'] == 0 "> <span>가격 :</span><span>{{ item['price'] }}</span></div>
                                                 </div>
                                                 <div class="deletea_box">
                                                     <span>삭제</span>
@@ -147,7 +148,8 @@
                                                     <span> 상품명 : {{item['name']}}</span>
                                                     <span> 사이즈 : {{item['size'][1]}}</span>
                                                     <span> 수량 : {{item['quantity'][1]}}</span>
-                                                    <div> <span>가격 :</span> <span class="crossed"> {{ item['price'] }} </span> <span>-5% 할인 =></span> <span>{{ item['price'] * 0.95 }}</span> </div>
+                                                    <div v-if="item['discount'] !== 0 "> <span>가격 :</span> <span class="crossed"> {{ item['price'] }} </span> <span>-{{ item['discount'] }}% 할인 =></span> <span>{{ item['price'] * ((100 - item['discount']) / 100) }}</span> </div>
+                                                    <div v-if="item['discount'] == 0 "> <span>가격 :</span><span>{{ item['price'] }}</span></div>
                                                 </div>
                                                 <div class="deletea_box">
                                                     <span>삭제</span>
@@ -244,8 +246,8 @@
             <div class="m_main_wrap">
                 <div class="m_inner_wrap">
                     <div class="m_customer_info">
-                        <div class="m_top">
-                            <span class="m_inner_top">주문정보</span>
+                        <div class="mo_top">
+                            <span class="m_inner_top">주문자 정보</span>
                         </div>
                         <div class="m_customer_bot">
                             <div class="m_reglar_size_box">
@@ -297,6 +299,156 @@
                             </div>
                         </div>
                     </div>
+                    <div class="m_delivery_info">
+                        <div class="mo_top">
+                            <span class="m_inner_top">배송지</span>
+                        </div>
+                        <div class="m_delivery_bot">
+                            <div class="m_regular_size_box">
+                                <div class="m_delivery_check">
+                                    <div class="m_checked1">
+                                        <input type="radio" name="check" @click="deliveryCheck()" v-model="deliveryChecked">
+                                        <span>주문자 정보와 동일</span>
+                                    </div>
+                                    <div class="m_checked2">
+                                        <input type="radio" name="check" @click="deliveryCheck1()" v-model="deliveryChecked1">
+                                        <span>새로운 배송지</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m_reglar_size_box">
+                                <div class="m_customer_bot_left">
+                                    <span>받는사람</span>
+                                </div>
+                                <div class="m_customer_bot_right">
+                                    <input type="text" class="m_regular_input" v-model="buyData['deliveryName']">
+                                </div>
+                            </div>
+                            <div class="m_phone_size_box">
+                                <div class="m_customer_bot_left">
+                                    <span>전화번호</span>
+                                </div>
+                                <div class="m_phone_number_bot_right">
+                                    <input type="tel" class="m_phone" pattern="[0-9]" v-model="buyData['deliveryPhoneNumber']"  placeholder="-제외">
+                                </div>
+                            </div>
+                            <div class="m_large_size_box">
+                                <div class="m_add_pos_box">
+                                    <div class="m_add_bot_left">
+                                        <span>주소</span>
+                                    </div>
+                                </div>
+                                <div class="m_address_bot_right">
+                                    <div class="m_top_address_box">
+                                        <div class="m_post_code_box">
+                                            <input type="text" placeholder="우편번호" class="m_address_1" v-model="buyData['deliveryPostCode']">
+                                        </div>
+                                        <div class="m_address_search_box">
+                                            <span class="material-icons md-20 m_search_btn"  @click="execDaumPostcode1()">search</span>
+                                        </div>
+                                    </div>
+                                    <div class="m_mid_address_box">
+                                        <input type="text" placeholder="기본 주소" class="m_address_2" v-model="buyData['deliveryAddress']">
+                                    </div>
+                                    <div class="m_bot_address_box">
+                                        <input type="text" placeholder="나머지 주소" class="m_address_2" v-model="buyData['deliveryAddress1']">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m_product_info">
+                        <div class="mo_top">
+                            <span class="m_inner_top">주문상품</span>
+                        </div>
+                        <div class="m_product_bot">
+                            <div v-for="(item, index) in displayCart" :key="index" >
+                                <div v-for="(aitem, aindex) in displayBuy" :key="aindex">
+                                    <div v-if="item['id'] == aitem['id'] && item['size'][0] == aitem['size']">
+                                        <div v-if="item['quantity'][0]" class="m_for_box">
+                                            <div class="m_for_pos_box">
+                                                <div class="m_img_box">
+                                                    <img :src="item['image']" alt="" class="m_item_image">
+                                                </div>
+                                                <div class="m_info_box">
+                                                    <span> 상품명 : {{item['name']}}</span>
+                                                    <span> 사이즈 : {{item['size'][0]}}</span>
+                                                    <span> 수량 : {{item['quantity'][0]}}</span>
+                                                    <div v-if="item['discount'] !== 0"> <span>￦</span> <span class="crossed"> {{ item['price'] }} </span> <span>-{{ item['discount'] }}% </span> <span>￦ </span> <span>{{ item['price'] * ((100 - item['discount']) / 100) }}</span> </div>
+                                                    <div v-if="item['discount'] == 0"> <span>￦</span>{{ item['price'] }}</div>
+                                                </div>
+                                                <div class="m_deletea_box">
+                                                    <span class="material-icons md-20" @click="removeItem(item['id'])" style="fontSize:30px">close</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-if="item['id'] == aitem['id'] && item['size'][1] == aitem['size']">
+                                        <div v-if="item['quantity'][1]" class="m_for_box">
+                                            <div class="m_for_pos_box">
+                                                <div class="m_img_box">
+                                                    <img :src="item['image']" alt="" class="m_item_image">
+                                                </div>
+                                                <div class="m_info_box">
+                                                    <span>{{item['name']}}</span>
+                                                    <span>{{item['size'][1]}}</span>
+                                                    <span> 수량 : {{item['quantity'][1]}}</span>
+                                                    <div v-if="item['discount'] !== 0" style="color:red;"> 
+                                                        <span>[{{ item['discount'] }}%] </span>
+                                                        <span>￦</span>
+                                                        <span>{{ item['price'] * ((100 - item['discount']) / 100) }}</span> 
+                                                    </div>
+                                                    <div v-if="item['discount'] == 0">
+                                                        <span>￦</span>{{ item['price'] }}
+                                                    </div>
+                                                    <div v-if="selectedCoupon.discount !== any" style="color:red;">
+                                                        <p>쿠폰가: ￦{{ (item['price'] * ((100 - item['discount']) / 100)) * (1 - (selectedCoupon.discount / 100)) }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="m_deletea_box">
+                                                    <span class="material-icons md-20" @click="removeItem(item['id'])" style="fontSize:30px">close</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m_sales_info">
+                        <div class="mo_top">
+                            <span class="m_inner_top">쿠폰/포인트</span>
+                        </div>
+                        <div class="m_sales_bot" >
+                            <div class="m_reglar_size_box">
+                                <div class="m_customer_bot_left">
+                                    <span>쿠폰</span>
+                                </div>
+                                <div v-if="userCouponState.length !== 0 " class="m_customer_bot_right">
+                                    <select v-model="selectedCoupon" class="m_coupon_select">
+                                        <option value="">선택 안함</option>
+                                        <option v-for="(option , index) in userCouponState" :value="{'discount': option.discount, 'maximum' : option.maximum}" :key="index">
+                                            {{ option.description }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div v-if="userCouponState.length == 0 ">
+    
+                                </div>
+                            </div>
+                            <!-- <div class="m_reglar_size_box">
+                                <div class="m_customer_bot_left">
+                                    <span>할인률</span>
+                                </div>
+                                <div class="m_sales_bot_right">
+                                    <span>{{ selectedCoupon.discount }}% </span>
+                                    <input type="text" class="m_sales_input_box"><button class="apply_btn" @click="aaaaa()">적용</button>
+                                    <input type="text" class="m_sales_input_box"><button class="apply_btn" @click="bbbbb()">만들기</button>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -314,6 +466,7 @@ import { type DisplayCart, type DisplayBuy} from '../types/interfaces'
 import { items } from '../assets/items'
 import { API, Auth } from 'aws-amplify'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 
 const authStore = useAuthStore()
@@ -330,6 +483,7 @@ onMounted(()=>{
     buyStore.loadBuyInstance()
     buyStore.displayBuyLoad()
     inicisStore.loadInicisInstance()
+    aaaaa()
 })
 
 
@@ -359,8 +513,19 @@ const buyData = reactive<BuyData>({
     priceInfoFinalPrice:0,
     paymentInfoType:""
 })
+interface CouponType {
+    code : string
+    description : string
+    discount : number
+    maximum : number
+    used : boolean
+    expires : string
+}
+const userCouponState = ref<Array<CouponType>>([])
 let deliveryChecked = false;
 let deliveryChecked1 = false;
+const selectedCoupon = ref({})
+const couponForNum = ref(1)
 
 function deliveryCheck(){
     console.log('abc')
@@ -416,6 +581,64 @@ function execDaumPostcode1() {
   }).open(); 
 }
 
+async function aaaaa(){
+    const aaa = await Auth.currentUserInfo().then(res=>{
+        const userCoupon = res.attributes['custom:coupon']
+        console.log('without jsonparse : ',userCoupon)
+        console.log('with jsonparse : ', JSON.parse(userCoupon))
+        return JSON.parse(userCoupon)
+    })
+    console.log('userCouponState before change is ', userCouponState.value)
+    console.log('userCouponState type before change is ', typeof(userCouponState.value))
+    console.log('current aaaa is : ', aaa)
+    userCouponState.value = aaa
+    // let i = 0;
+    // for(i = 0; i < aaa.length; i++){
+    //     console.log(i)
+    //     console.log('the aaa value is : ', aaa[i])
+    // }
+}
+async function bbbbb(){
+    let user = await Auth.currentAuthenticatedUser();
+    console.log(user)
+    const currentTime = dayjs()
+    console.log('current time is : ', currentTime.format("YYYY.MM.DD HH:mm:ss"))
+    const addedTime = currentTime.add(6, "M")
+    console.log('added time is : ',addedTime.format("YYYY.MM.DD HH:mm:ss"))
+    const qwert = [{
+        code : 'abcdefgh',
+        description : 'WebPage Open 20% coupon',
+        discount : 20,
+        maximum : 50000,
+        used : false,
+        expires : addedTime.format("YYYY.MM.DD HH:mm:ss")
+    },
+    {
+        code : 'wwwwwwwwwww',
+        description : 'ddddddddddddddd Open 20% coupon',
+        discount : 20,
+        maximum : 50000,
+        used : false,
+        expires : addedTime.format("YYYY.MM.DD HH:mm:ss")
+    },
+    {
+        code : 'ssssssssssssssssssss',
+        description : 'eeeeeeeeeee Open 20% coupon',
+        discount : 20,
+        maximum : 50000,
+        used : false,
+        expires : addedTime.format("YYYY.MM.DD HH:mm:ss")
+    }]
+    console.log('the type of qwert is : ', typeof(qwert))
+    console.log(qwert)
+    const wert = JSON.stringify(qwert)
+    console.log('the type of wert is : ', typeof(wert))
+    console.log(wert)
+    Auth.updateUserAttributes(user,{
+        'custom:coupon': wert
+    })
+}
+
 const total = computed(()=>{
 
     let sum = (displayCart.value as DisplayCart[]).reduce((initialSum: number, item:DisplayCart)=>{
@@ -462,10 +685,10 @@ let sum = (displayCart.value as DisplayCart[]).reduce((initialSum: number, item:
 
     for(i = 0; i < aitem.length; i++){
             if(aitem[i].id == item.id && item.size[0] == 'small'){
-            initialSum =  initialSum + (item.price * item.quantity[0] * 0.05)
+            initialSum =  initialSum + (item.price * item.quantity[0] * (1 - (item.discount / 100)))
         }
         else if(aitem[i].id == item.id && item.size[1] == 'medium'){
-            initialSum =  initialSum + (item.price * item.quantity[1] * 0.05)
+            initialSum =  initialSum + (item.price * item.quantity[1] * (1 - (item.discount / 100)))
         }
     }
     return initialSum   
@@ -526,7 +749,7 @@ async function buyzzz(){
         });
         console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
         IMP.request_pay({
-            pg : "html5_inicis",
+            pg : "html5_inicis.INIpayTest",
             pay_method : "card",
             merchant_uid : m_id,
             name: buyData.productInfo,
@@ -538,6 +761,7 @@ async function buyzzz(){
             buyer_postcode: buyData.deliveryPostCode
         }, function (rsp){
             if (rsp.success){
+                console.log('success')
                 axios({
                     url:"https://pb52jtpjg2.execute-api.ap-northeast-2.amazonaws.com/payment/check",
                     method: "post",
@@ -652,7 +876,6 @@ export default defineComponent({
 .buy{
     width: 100%;
     height: 100px;
-    background-color: indianred;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -661,10 +884,11 @@ export default defineComponent({
 }
 .top{
     width: 100%;
-    height: 100px;
-    background-color: indianred;
+    height: 70px;
+    background-color: #595959;
     display: flex;
     align-items: center;
+    color: white;
 }
 .inner_top{
     font-size: 24px;
@@ -980,21 +1204,24 @@ export default defineComponent({
     height: 100%;
     border: 1px solid black;
     border-top: none;
+    color: white;
 }
 
 /*mobile start*/
 .m_customer_info{
 }
-.m_top{
-    background-color: #595959;
-    color: white;
+.mo_top{
+    color: black;
     font-weight: 550;
-    font-size: 20px;
+    font-size: 18px;
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
-    height: 50px;
+    height: 65px;
+    box-sizing: border-box;
+    border-top: 2px solid black;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.5);
+    padding-left: 10px;
 }
 .m_customer_bot{
     width: 95%;
@@ -1112,6 +1339,84 @@ export default defineComponent({
     display: flex;
     height: 55px;
     align-items: center;
+}
+.m_delivery_info{
+    margin-top: 10px;
+}
+.m_delivery_bot{
+    width:95%;
+    margin-left: 2.5%;
+}
+.m_delivery_check{
+    display: flex;
+    margin-top:10px;
+}
+.m_checked2{
+    margin-left: 10px;
+}
+.m_product_info{
+    width: 100%;
+    margin-top: 10px;
+}
+.m_for_box{
+    width: 100%;
+    margin-top: 10px;
+}
+.m_for_pos_box{
+    width: 95%;
+    margin-left: 2.5%;
+    display: flex;
+}
+.m_img_box{
+    width: 40%;
+}
+.m_info_box{
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    justify-content: space-evenly;
+    padding-left: 5px;
+}
+.m_deletea_box{
+    width: 10%;
+    display: flex;
+    justify-content: end;
+}
+.m_item_image{
+    width:100%;
+}
+.mo_bot{
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.m_sales_info{
+    width: 100%;
+    margin-top: 10px;
+}
+.m_sales_bot{
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 10px;
+}
+.m_sales_bot_add_delete_box{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.m_coupon_select{
+    width: 100%;
+    height: 100%;
+}
+.m_sales_bot_right{
+    width: 75%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
 /*mobile end*/
 </style>

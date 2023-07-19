@@ -24,8 +24,9 @@ export interface DisplayCart {
     inStock: boolean,
     id: number,
     color: string,
-    size: string[]
-    image: string
+    size: string[],
+    image: string,
+    discount: number
 }
 
 export interface DisplayBuy {

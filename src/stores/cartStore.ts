@@ -137,7 +137,7 @@ export const useCartStore = defineStore('cart',{
                     // if(requiredProduct[0].stock >= ci.qty)
                     return {
                         id: ci.id, name: requiredProduct[0].text, price: requiredProduct[0].price, quantity: ci.quantity, size: ci.size, color: requiredProduct[0].color,
-                        inStock: requiredProduct[0].stock, image: requiredProduct[0].image[0] }
+                        inStock: requiredProduct[0].stock, image: requiredProduct[0].image[0], discount: requiredProduct[0].discount }
                 })
             }
 
