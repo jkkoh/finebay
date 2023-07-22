@@ -736,6 +736,7 @@ async function buyzzz(){
         const n_id = parseInt(aaa.toString()) 
         const m_id = n_id.toString()
         const priceToBePaid = parseInt(sendPrice)
+        const tAddress = `${buyData.deliveryAddress} ${buyData.deliveryAddress1}`
         console.log(m_id)
         IMP.init("imp75261015");
         axios({
@@ -757,7 +758,7 @@ async function buyzzz(){
             buyer_email : buyData.deliveryEmail,
             buyer_name : buyData.deliveryName,
             buyer_tel: buyData.deliveryPhoneNumber,
-            buyer_addr: buyData.deliveryAddress,
+            buyer_addr: tAddress,
             buyer_postcode: buyData.deliveryPostCode
         }, function (rsp){
             if (rsp.success){
@@ -771,6 +772,7 @@ async function buyzzz(){
                         merchant_uid : rsp.merchant_uid,
                     }
                 }).then((data)=> {
+                    console.log('eeeeeeeeeeeeeee')
                     console.log(data)
                 })
             }else{
