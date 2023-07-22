@@ -8,7 +8,7 @@
                             <span class="inner_top">주문정보</span>
                         </div>
                         <div class="customer_bot">
-                            <div class="reglar_size_box">
+                            <div class="regular_size_box">
                                 <div class="customer_bot_left">
                                     <span>주문자</span>
                                 </div>
@@ -16,7 +16,7 @@
                                     <input type="text" class="regular_input" v-model="buyData['customerName']">
                                 </div>
                             </div>
-                            <div class="reglar_size_box">
+                            <div class="regular_size_box">
                                 <div class="customer_bot_left">
                                     <span>이메일</span>
                                 </div>
@@ -28,7 +28,7 @@
                                 <div class="customer_bot_left">
                                     <span>전화번호</span>
                                 </div>
-                                <div class="phone_number_bot_right">
+                                <div class="customer_bot_right">
                                     <input type="tel" class="phone" pattern="[0-9]" v-model="buyData['customerPhoneNumber']">
                                 </div>
                             </div>
@@ -72,12 +72,28 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="reglar_size_box">
+                            <div class="regular_size_box">
                                 <div class="customer_bot_left">
                                     <span>받는사람</span>
                                 </div>
                                 <div class="customer_bot_right">
                                     <input type="text" class="regular_input" v-model="buyData['deliveryName']">
+                                </div>
+                            </div>
+                            <div class="regular_size_box">
+                                <div class="customer_bot_left">
+                                    <span>이메일</span>
+                                </div>
+                                <div class="customer_bot_right">
+                                    <input type="text" class="regular_input" v-model="buyData['deliveryEmail']">
+                                </div>
+                            </div>
+                            <div class="phone_size_box">
+                                <div class="customer_bot_left">
+                                    <span>전화번호</span>
+                                </div>
+                                <div class="customer_bot_right">
+                                    <input type="tel" class="phone" pattern="[0-9]" v-model="buyData['deliveryPhoneNumber']">
                                 </div>
                             </div>
                             <div class="large_size_box">
@@ -101,14 +117,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="phone_size_box">
-                                <div class="customer_bot_left">
-                                    <span>전화번호</span>
-                                </div>
-                                <div class="phone_number_bot_right">
-                                    <input type="tel" class="phone" pattern="[0-9]" v-model="buyData['deliveryPhoneNumber']">
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="product_info">
@@ -727,6 +736,12 @@ async function buyzzz(){
         buyData.productInfo = buyData.productInfo + items[aitem[i].id].text + ' '
         console.log(buyData.productInfo)
     }
+    console.log('buyData.deliveryEmail is : ',buyData.deliveryEmail)
+    console.log('buyData.deliveryPhoneNumber is : ', buyData.deliveryPhoneNumber)
+    console.log('buyData.deliveryAddress is : ', buyData.deliveryAddress)
+    console.log('buyData.deliveryPostCode is : ', buyData.deliveryPostCode)
+    console.log('sendPrice is : ', sendPrice)
+    console.log('buyData.productInfo is :', buyData.productInfo)
 
     if(buyData.deliveryEmail !== '' && buyData.deliveryPhoneNumber !== ''
     && buyData.deliveryAddress !== '' && buyData.deliveryPostCode !== ''
@@ -780,7 +795,7 @@ async function buyzzz(){
             }
         })
     }else{
-        alert('모든 구매 항목을 확인해주세요')
+        alert('주문정보/배송지의 모든항목을 입력해주세요')
     }
 }
 
@@ -824,13 +839,16 @@ export default defineComponent({
 })
 </script>
 <style>
+.main_wrap{
+    display: flex;
+    justify-content: center;
+}
 .inner_wrap{
     width:1000px;
     margin-top: 50px;
 }
 .customer_info{
     width: 100%;
-    height: 600px;
     box-sizing: border-box;
     border-left: 1px solid black;
     border-right: 1px solid black;
@@ -838,7 +856,6 @@ export default defineComponent({
 }
 .delivery_info{
     width: 100%;
-    height: 600px;
     box-sizing: border-box;
     border-left: 1px solid black;
     border-right: 1px solid black;
@@ -853,7 +870,6 @@ export default defineComponent({
 }
 .sales_info{
     width: 100%;
-    height: 600px;
     box-sizing: border-box;
     border-left: 1px solid black;
     border-right: 1px solid black;
@@ -861,7 +877,6 @@ export default defineComponent({
 }
 .price_info{
     width: 100%;
-    height: 600px;
     box-sizing: border-box;
     border-left: 1px solid black;
     border-right: 1px solid black;
@@ -869,7 +884,6 @@ export default defineComponent({
 }
 .payment_info{
     width: 100%;
-    height: 600px;
     box-sizing: border-box;
     border-left: 1px solid black;
     border-right: 1px solid black;
@@ -901,10 +915,12 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
 }
-.reglar_size_box{
+.regular_size_box{
     width: 100%;
-    height: 100px;
     display: flex;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 .large_size_box{
     width: 100%;
@@ -927,12 +943,21 @@ export default defineComponent({
 }
 .regular_input{
     margin-left: 2.5%;
-    font-size: 40px;
+    font-size: 20px;
     border-radius: 10px;
     border: 0.2px solid rgba(100, 100, 100, 0.5);
     width: 95%;
-    height: 50%;
-    padding-left: 20px;
+    height: 50px;
+    padding-left: 10px;
+}
+.phone{
+    margin-left: 2.5%;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 0.2px solid rgba(100, 100, 100, 0.5);
+    width: 30%;
+    height: 50px;
+    padding-left: 10px;
 }
 .left_phone{
     width: 100px;
@@ -953,6 +978,7 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     display: flex;
+    align-items: center;
 }
 .phone_number_bot_right{
     width: 80%;
@@ -1039,10 +1065,12 @@ export default defineComponent({
     width: 100%;
     font-size: 20px;
     border-radius: 10px;
+    padding-left: 10px;
     border: 0.2px solid rgba(100, 100, 100, 0.5);
 }
 .address_2{
     height: 50px;
+    padding-left: 10px;
     width: 100%;
     font-size: 20px;
     border-radius: 10px;
